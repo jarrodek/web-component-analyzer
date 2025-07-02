@@ -1,4 +1,5 @@
-import { customElement, LitElement } from "lit-element";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { customElement, LitElement, property } from "lit-element";
 
 @customElement("my-element")
 export class MyElement extends LitElement {

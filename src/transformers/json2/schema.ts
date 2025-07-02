@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 /**
  * This file comes from the following PR with a proposed JSON schema:
  * https://github.com/webcomponents/custom-elements-json/pull/9

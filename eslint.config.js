@@ -43,4 +43,18 @@ export default [
 		},
 	},
 	prettier,
+	{
+		ignores: [
+			'node_modules',
+			'lib',
+			'coverage',
+			'**/*.d.ts',
+			'**/*.test.{js,ts}',
+			'**/*.spec.{js,ts}',
+			'**/dist',
+			'**/build',
+			'**/out',
+			'**/temp',
+		]
+	}
 ];

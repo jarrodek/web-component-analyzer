@@ -1,8 +1,0 @@
-node_modules
-out
-lib
-dist
-dev
-*.min.js
-coverage
-.nyc_output

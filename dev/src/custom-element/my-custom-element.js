@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-undef */
 /**
  * @attr {Boolean} disabled - Disables this element
  * @fires change - Dispatched when this element changes

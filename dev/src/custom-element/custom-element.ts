@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export class MySuperSuperClass extends HTMLElement {
 	/**
 	 * My description
