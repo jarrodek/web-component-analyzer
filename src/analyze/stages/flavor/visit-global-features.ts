@@ -1,7 +1,7 @@
-import { Node } from "typescript";
-import { arrayDefined } from "../../../util/array-util";
-import { AnalyzerVisitContext } from "../../analyzer-visit-context";
-import { VisitFeatureEmitMap, visitFeaturesWithVisitMaps } from "./visit-features";
+import { Node } from 'typescript'
+import { arrayDefined } from '../../../util/array-util'
+import { AnalyzerVisitContext } from '../../analyzer-visit-context'
+import { VisitFeatureEmitMap, visitFeaturesWithVisitMaps } from './visit-features'
 
 /**
  * Uses flavors to find global features
@@ -9,8 +9,12 @@ import { VisitFeatureEmitMap, visitFeaturesWithVisitMaps } from "./visit-feature
  * @param context
  * @param emitMap
  */
-export function visitGlobalFeatures(node: Node, context: AnalyzerVisitContext, emitMap: Partial<VisitFeatureEmitMap>): void {
-	const visitMaps = arrayDefined(context.flavors.map(flavor => flavor.discoverGlobalFeatures));
+export function visitGlobalFeatures(
+  node: Node,
+  context: AnalyzerVisitContext,
+  emitMap: Partial<VisitFeatureEmitMap>
+): void {
+  const visitMaps = arrayDefined(context.flavors.map((flavor) => flavor.discoverGlobalFeatures))
 
-	visitFeaturesWithVisitMaps(node, context, visitMaps, emitMap);
+  visitFeaturesWithVisitMaps(node, context, visitMaps, emitMap)
 }

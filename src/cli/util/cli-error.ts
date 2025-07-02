@@ -1,4 +1,4 @@
-const ERROR_NAME = "CLIError";
+const ERROR_NAME = 'CLIError'
 
 /**
  * Make an error of kind "CLIError"
@@ -6,9 +6,9 @@ const ERROR_NAME = "CLIError";
  * @param message
  */
 export function makeCliError(message: string): Error {
-	const error = new Error(message);
-	error.name = ERROR_NAME;
-	return error;
+  const error = new Error(message)
+  error.name = ERROR_NAME
+  return error
 }
 
 /**
@@ -16,5 +16,5 @@ export function makeCliError(message: string): Error {
  * @param error
  */
 export function isCliError(error: unknown): error is Error {
-	return error instanceof Error && error.name === ERROR_NAME;
+  return error instanceof Error && error.name === ERROR_NAME
 }

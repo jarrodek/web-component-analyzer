@@ -3,5 +3,5 @@
  * @param set
  */
 export function getFirst<T>(set: Set<T>): T | undefined {
-	return set.values().next().value;
+  return set.values().next().value
 }

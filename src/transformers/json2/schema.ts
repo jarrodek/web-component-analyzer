@@ -13,31 +13,31 @@
  * included once in the "canonical" module that they're exported from.
  */
 export interface PackageDoc {
-	version: string;
+  version: string
 
-	/**
-	 * An array of the modules this package contains.
-	 */
-	modules: Array<ModuleDoc>;
+  /**
+   * An array of the modules this package contains.
+   */
+  modules: Array<ModuleDoc>
 }
 
 export interface ModuleDoc {
-	path: string;
+  path: string
 
-	/**
-	 * A markdown summary suitable for display in a listing.
-	 */
-	summary?: string;
+  /**
+   * A markdown summary suitable for display in a listing.
+   */
+  summary?: string
 
-	/**
-	 * A markdown description of the module.
-	 */
-	description?: string;
+  /**
+   * A markdown description of the module.
+   */
+  description?: string
 
-	exports?: Array<ExportDoc>;
+  exports?: Array<ExportDoc>
 }
 
-export type ExportDoc = ClassDoc | FunctionDoc | VariableDoc | CustomElementDefinitionDoc;
+export type ExportDoc = ClassDoc | FunctionDoc | VariableDoc | CustomElementDefinitionDoc
 
 /**
  * A reference to an export of a module.
@@ -46,201 +46,201 @@ export type ExportDoc = ClassDoc | FunctionDoc | VariableDoc | CustomElementDefi
  * representation of a refernce it the export it's available from.
  */
 export interface Reference {
-	name: string;
-	package?: string;
-	module?: string;
+  name: string
+  package?: string
+  module?: string
 }
 
 export interface CustomElementDoc extends ClassDoc {
-	tagName: string;
-	/**
-	 * The attributes that this element is known to understand.
-	 */
-	attributes?: AttributeDoc[];
+  tagName: string
+  /**
+   * The attributes that this element is known to understand.
+   */
+  attributes?: AttributeDoc[]
 
-	/** The events that this element fires. */
-	events?: EventDoc[];
+  /** The events that this element fires. */
+  events?: EventDoc[]
 
-	/**
-	 * The shadow dom content slots that this element accepts.
-	 */
-	slots?: SlotDoc[];
+  /**
+   * The shadow dom content slots that this element accepts.
+   */
+  slots?: SlotDoc[]
 
-	cssProperties?: CSSPropertyDoc[];
+  cssProperties?: CSSPropertyDoc[]
 
-	cssParts?: CSSPartDoc[];
+  cssParts?: CSSPartDoc[]
 
-	demos?: Demo[];
+  demos?: Demo[]
 }
 
 export interface CustomElementDefinitionDoc {
-	kind: "definition";
+  kind: 'definition'
 
-	name: string;
+  name: string
 
-	declaration: Reference;
+  declaration: Reference
 }
 
 export interface AttributeDoc {
-	name: string;
+  name: string
 
-	/**
-	 * A markdown description for the attribute.
-	 */
-	description?: string;
+  /**
+   * A markdown description for the attribute.
+   */
+  description?: string
 
-	/**
-	 * The type that the attribute will be serialized/deserialized as.
-	 */
-	type?: string;
+  /**
+   * The type that the attribute will be serialized/deserialized as.
+   */
+  type?: string
 
-	/**
-	 * The default value of the attribute, if any.
-	 *
-	 * As attributes are always strings, this is the actual value, not a human
-	 * readable description.
-	 */
-	defaultValue?: string;
+  /**
+   * The default value of the attribute, if any.
+   *
+   * As attributes are always strings, this is the actual value, not a human
+   * readable description.
+   */
+  defaultValue?: string
 
-	/**
-	 * The name of the field this attribute is associated with, if any.
-	 */
-	fieldName?: string;
+  /**
+   * The name of the field this attribute is associated with, if any.
+   */
+  fieldName?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface EventDoc {
-	name: string;
+  name: string
 
-	/**
-	 * A markdown description of the event.
-	 */
-	description?: string;
+  /**
+   * A markdown description of the event.
+   */
+  description?: string
 
-	/**
-	 * The type of the event object that's fired.
-	 *
-	 * If the event type is built-in, this is a string, e.g. `Event`,
-	 * `CustomEvent`, `KeyboardEvent`. If the event type is an event class defined
-	 * in a module, the reference to it.
-	 */
-	type?: Reference | string;
+  /**
+   * The type of the event object that's fired.
+   *
+   * If the event type is built-in, this is a string, e.g. `Event`,
+   * `CustomEvent`, `KeyboardEvent`. If the event type is an event class defined
+   * in a module, the reference to it.
+   */
+  type?: Reference | string
 
-	/**
-	 * If the event is a CustomEvent, the type of `detail` field.
-	 */
-	detailType?: string;
+  /**
+   * If the event is a CustomEvent, the type of `detail` field.
+   */
+  detailType?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface SlotDoc {
-	/**
-	 * The slot name, or the empty string for an unnamed slot.
-	 */
-	name: string;
+  /**
+   * The slot name, or the empty string for an unnamed slot.
+   */
+  name: string
 
-	/**
-	 * A markdown description of the slot.
-	 */
-	description?: string;
+  /**
+   * A markdown description of the slot.
+   */
+  description?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface CSSPropertyDoc {
-	name: string;
-	description?: string;
-	type?: string;
-	default?: string;
+  name: string
+  description?: string
+  type?: string
+  default?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface CSSPartDoc {
-	name: string;
-	description?: string;
+  name: string
+  description?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface ClassDoc {
-	kind: "class";
+  kind: 'class'
 
-	/**
-	 * The class name, or `undefined` if the class is anonymous.
-	 */
-	name?: string;
+  /**
+   * The class name, or `undefined` if the class is anonymous.
+   */
+  name?: string
 
-	/**
-	 * A markdown summary suitable for display in a listing.
-	 * TODO: restrictions on markdown/markup. ie, no headings, only inline
-	 *       formatting?
-	 */
-	summary?: string;
+  /**
+   * A markdown summary suitable for display in a listing.
+   * TODO: restrictions on markdown/markup. ie, no headings, only inline
+   *       formatting?
+   */
+  summary?: string
 
-	/**
-	 * A markdown description of the class.
-	 */
-	description?: string;
-	superclass?: Reference;
-	mixins?: Array<Reference>;
-	members?: Array<ClassMember>;
+  /**
+   * A markdown description of the class.
+   */
+  description?: string
+  superclass?: Reference
+  mixins?: Array<Reference>
+  members?: Array<ClassMember>
 }
 
-export type ClassMember = FieldDoc | MethodDoc;
+export type ClassMember = FieldDoc | MethodDoc
 
 export interface FieldDoc {
-	kind: "field";
-	name: string;
-	static?: boolean;
+  kind: 'field'
+  name: string
+  static?: boolean
 
-	/**
-	 * A markdown summary suitable for display in a listing.
-	 * TODO: restrictions on markdown/markup. ie, no headings, only inline
-	 *       formatting?
-	 */
-	summary?: string;
+  /**
+   * A markdown summary suitable for display in a listing.
+   * TODO: restrictions on markdown/markup. ie, no headings, only inline
+   *       formatting?
+   */
+  summary?: string
 
-	/**
-	 * A markdown description of the field.
-	 */
-	description?: string;
-	default?: string; // TODO: make this a Type type or a Reference
-	privacy?: Privacy;
-	type?: string;
+  /**
+   * A markdown description of the field.
+   */
+  description?: string
+  default?: string // TODO: make this a Type type or a Reference
+  privacy?: Privacy
+  type?: string
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 export interface MethodDoc extends FunctionLike {
-	kind: "method";
+  kind: 'method'
 
-	static?: boolean;
+  static?: boolean
 
-	/**
-	 * A reference to the class or mixin that declared this property.
-	 */
-	inheritedFrom?: Reference;
+  /**
+   * A reference to the class or mixin that declared this property.
+   */
+  inheritedFrom?: Reference
 }
 
 /**
@@ -252,67 +252,67 @@ export interface MethodDoc extends FunctionLike {
 export interface MixinDoc extends ClassDoc {}
 
 export interface VariableDoc {
-	kind: "variable";
+  kind: 'variable'
 
-	name: string;
+  name: string
 
-	/**
-	 * A markdown summary suitable for display in a listing.
-	 */
-	summary?: string;
+  /**
+   * A markdown summary suitable for display in a listing.
+   */
+  summary?: string
 
-	/**
-	 * A markdown description of the class.
-	 */
-	description?: string;
-	type?: string;
+  /**
+   * A markdown description of the class.
+   */
+  description?: string
+  type?: string
 }
 
 export interface FunctionDoc extends FunctionLike {
-	kind: "function";
+  kind: 'function'
 }
 
 export interface Parameter {
-	name: string;
-	type?: string;
-	description?: string;
+  name: string
+  type?: string
+  description?: string
 }
 
 export interface FunctionLike {
-	name: string;
+  name: string
 
-	/**
-	 * A markdown summary suitable for display in a listing.
-	 */
-	summary?: string;
+  /**
+   * A markdown summary suitable for display in a listing.
+   */
+  summary?: string
 
-	/**
-	 * A markdown description of the class.
-	 */
-	description?: string;
+  /**
+   * A markdown description of the class.
+   */
+  description?: string
 
-	parameters?: Array<Parameter>;
+  parameters?: Array<Parameter>
 
-	return?: {
-		type?: string;
-		description?: string;
-	};
+  return?: {
+    type?: string
+    description?: string
+  }
 
-	privacy?: Privacy;
-	type?: string;
+  privacy?: Privacy
+  type?: string
 }
 
-export type Privacy = "public" | "private" | "protected";
+export type Privacy = 'public' | 'private' | 'protected'
 
 export interface Demo {
-	/**
-	 * A markdown description of the demo.
-	 */
-	description?: string;
+  /**
+   * A markdown description of the demo.
+   */
+  description?: string
 
-	/**
-	 * Relative URL of the demo if it's published with the package. Absolute URL
-	 * if it's hosted.
-	 */
-	url: string;
+  /**
+   * Relative URL of the demo if it's published with the package. Absolute URL
+   * if it's hosted.
+   */
+  url: string
 }

@@ -1,7 +1,7 @@
-import { Node } from "typescript";
-import { AnalyzerVisitContext } from "../../analyzer-visit-context";
-import { DefinitionNodeResult } from "../../flavors/analyzer-flavor";
-import { executeFunctionsUntilMatch } from "../../util/execute-functions-until-match";
+import { Node } from 'typescript'
+import { AnalyzerVisitContext } from '../../analyzer-visit-context'
+import { DefinitionNodeResult } from '../../flavors/analyzer-flavor'
+import { executeFunctionsUntilMatch } from '../../util/execute-functions-until-match'
 
 /**
  * Uses flavors to visit definitions
@@ -9,17 +9,21 @@ import { executeFunctionsUntilMatch } from "../../util/execute-functions-until-m
  * @param context
  * @param emit
  */
-export function visitDefinitions(node: Node, context: AnalyzerVisitContext, emit: (results: DefinitionNodeResult[]) => void): void {
-	const result = executeFunctionsUntilMatch(context.flavors, "discoverDefinitions", node, context);
+export function visitDefinitions(
+  node: Node,
+  context: AnalyzerVisitContext,
+  emit: (results: DefinitionNodeResult[]) => void
+): void {
+  const result = executeFunctionsUntilMatch(context.flavors, 'discoverDefinitions', node, context)
 
-	if (result != null) {
-		emit(result.value);
+  if (result != null) {
+    emit(result.value)
 
-		if (!result.shouldContinue) return;
-	}
+    if (!result.shouldContinue) return
+  }
 
-	// Visit child nodes
-	node.forEachChild(child => {
-		visitDefinitions(child, context, emit);
-	});
+  // Visit child nodes
+  node.forEachChild((child) => {
+    visitDefinitions(child, context, emit)
+  })
 }

@@ -1,3 +1,3 @@
-import { AnalyzerCliConfig } from "./analyzer-cli-config";
+import { AnalyzerCliConfig } from './analyzer-cli-config'
 
-export type CliCommand = (config: AnalyzerCliConfig) => Promise<void> | void;
+export type CliCommand = (config: AnalyzerCliConfig) => Promise<void> | void

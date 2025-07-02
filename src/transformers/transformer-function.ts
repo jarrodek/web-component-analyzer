@@ -1,5 +1,5 @@
-import { Program } from "typescript";
-import { AnalyzerResult } from "../analyze/types/analyzer-result";
-import { TransformerConfig } from "./transformer-config";
+import { Program } from 'typescript'
+import { AnalyzerResult } from '../analyze/types/analyzer-result'
+import { TransformerConfig } from './transformer-config'
 
-export type TransformerFunction = (results: AnalyzerResult[], program: Program, config: TransformerConfig) => string;
+export type TransformerFunction = (results: AnalyzerResult[], program: Program, config: TransformerConfig) => string

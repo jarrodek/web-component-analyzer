@@ -1,12 +1,12 @@
-import { Node, SourceFile } from "typescript";
-import { ComponentDeclaration } from "./component-declaration";
+import { Node, SourceFile } from 'typescript'
+import { ComponentDeclaration } from './component-declaration'
 
 export interface ComponentDefinition {
-	sourceFile: SourceFile;
+  sourceFile: SourceFile
 
-	identifierNodes: Set<Node>;
-	tagNameNodes: Set<Node>;
+  identifierNodes: Set<Node>
+  tagNameNodes: Set<Node>
 
-	tagName: string;
-	declaration?: ComponentDeclaration;
+  tagName: string
+  declaration?: ComponentDeclaration
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { AnalyzerCliConfig } from "../analyzer-cli-config";
+import { AnalyzerCliConfig } from '../analyzer-cli-config'
 
 /**
  * Logs to the console with a specific level.
@@ -8,30 +8,33 @@ import { AnalyzerCliConfig } from "../analyzer-cli-config";
  * @param config
  * @param level
  */
-export function log(text: unknown | (() => string), config: AnalyzerCliConfig, level: "normal" | "verbose" = "normal"): void {
-	// Never log if silent
-	if (config.silent) {
-		return;
-	}
+export function log(
+  text: unknown | (() => string),
+  config: AnalyzerCliConfig,
+  level: 'normal' | 'verbose' = 'normal'
+): void {
+  // Never log if silent
+  if (config.silent) {
+    return
+  }
 
-	// Never log verbose if verbose is not on
-	if (level === "verbose" && !config.verbose) {
-		return;
-	}
+  // Never log verbose if verbose is not on
+  if (level === 'verbose' && !config.verbose) {
+    return
+  }
 
-	// "unpack" function
-	if (typeof text === "function") {
-		text = text();
-	}
+  // "unpack" function
+  if (typeof text === 'function') {
+    text = text()
+  }
 
-	 
-	if (typeof text === "object") {
-		// eslint-disable-next-line no-console
-		console.dir(text, { depth: 10 });
-	} else {
-		// eslint-disable-next-line no-console
-		console.log(text);
-	}
+  if (typeof text === 'object') {
+    // eslint-disable-next-line no-console
+    console.dir(text, { depth: 10 })
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(text)
+  }
 }
 
 /**
@@ -40,5 +43,5 @@ export function log(text: unknown | (() => string), config: AnalyzerCliConfig, l
  * @param config
  */
 export function logVerbose(text: () => unknown, config: AnalyzerCliConfig): void {
-	log(text, config, "verbose");
+  log(text, config, 'verbose')
 }

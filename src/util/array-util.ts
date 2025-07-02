@@ -4,21 +4,21 @@
  * @param items
  */
 export function arrayFlat<T>(items: (T[] | T)[]): T[] {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	if ("flat" in (items as any)) {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return (items as any).flat();
-	}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ('flat' in (items as any)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (items as any).flat()
+  }
 
-	const flattenArray: T[] = [];
-	for (const item of items) {
-		if (Array.isArray(item)) {
-			flattenArray.push(...item);
-		} else {
-			flattenArray.push(item);
-		}
-	}
-	return flattenArray;
+  const flattenArray: T[] = []
+  for (const item of items) {
+    if (Array.isArray(item)) {
+      flattenArray.push(...item)
+    } else {
+      flattenArray.push(item)
+    }
+  }
+  return flattenArray
 }
 
 /**
@@ -26,7 +26,7 @@ export function arrayFlat<T>(items: (T[] | T)[]): T[] {
  * @param array
  */
 export function arrayDefined<T>(array: (T | undefined)[]): T[] {
-	return array.filter((item): item is NonNullable<typeof item> => item != null);
+  return array.filter((item): item is NonNullable<typeof item> => item != null)
 }
 
 /**
@@ -34,13 +34,13 @@ export function arrayDefined<T>(array: (T | undefined)[]): T[] {
  * @param array
  */
 export function arrayDedupe<T>(array: T[]): T[] {
-	const uniqueItems: T[] = [];
+  const uniqueItems: T[] = []
 
-	for (const item of array) {
-		if (uniqueItems.indexOf(item) === -1) {
-			uniqueItems.push(item);
-		}
-	}
+  for (const item of array) {
+    if (uniqueItems.indexOf(item) === -1) {
+      uniqueItems.push(item)
+    }
+  }
 
-	return uniqueItems;
+  return uniqueItems
 }

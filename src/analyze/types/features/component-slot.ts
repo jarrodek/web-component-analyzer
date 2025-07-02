@@ -1,6 +1,6 @@
-import { ComponentFeatureBase } from "./component-feature";
+import { ComponentFeatureBase } from './component-feature'
 
 export interface ComponentSlot extends ComponentFeatureBase {
-	name?: string;
-	permittedTagNames?: string[];
+  name?: string
+  permittedTagNames?: string[]
 }

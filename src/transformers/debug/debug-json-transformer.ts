@@ -1,10 +1,9 @@
- 
-import { Program } from "typescript";
-import { AnalyzerResult } from "../../analyze/types/analyzer-result";
-import { arrayFlat } from "../../util/array-util";
-import { stripTypescriptValues } from "../../util/strip-typescript-values";
-import { TransformerConfig } from "../transformer-config";
-import { TransformerFunction } from "../transformer-function";
+import { Program } from 'typescript'
+import { AnalyzerResult } from '../../analyze/types/analyzer-result'
+import { arrayFlat } from '../../util/array-util'
+import { stripTypescriptValues } from '../../util/strip-typescript-values'
+import { TransformerConfig } from '../transformer-config'
+import { TransformerFunction } from '../transformer-function'
 
 /**
  * Transforms results to json.
@@ -12,7 +11,11 @@ import { TransformerFunction } from "../transformer-function";
  * @param program
  * @param _config
  */
-export const debugJsonTransformer: TransformerFunction = (results: AnalyzerResult[], program: Program, _config: TransformerConfig): string => {
-	const definitions = arrayFlat(results.map(res => res.componentDefinitions));
-	return JSON.stringify(stripTypescriptValues(definitions, program.getTypeChecker()), null, 2);
-};
+export const debugJsonTransformer: TransformerFunction = (
+  results: AnalyzerResult[],
+  program: Program,
+  _config: TransformerConfig
+): string => {
+  const definitions = arrayFlat(results.map((res) => res.componentDefinitions))
+  return JSON.stringify(stripTypescriptValues(definitions, program.getTypeChecker()), null, 2)
+}

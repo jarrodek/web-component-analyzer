@@ -1,10 +1,10 @@
-import { ComponentDeclaration } from "../analyze/types/component-declaration";
-import { JsDocTag } from "../analyze/types/js-doc";
+import { ComponentDeclaration } from '../analyze/types/component-declaration'
+import { JsDocTag } from '../analyze/types/js-doc'
 
 export interface Example {
-	lang?: string;
-	code: string;
-	description?: string;
+  lang?: string
+  code: string
+  description?: string
 }
 
 /**
@@ -12,8 +12,8 @@ export interface Example {
  * @param declaration
  */
 export function getExamplesFromComponent(declaration: ComponentDeclaration): Example[] {
-	const examples = declaration.jsDoc?.tags?.filter(tag => tag.tag === "example" || tag.tag === "demo") || [];
-	return examples.map(exampleFromJsDocTag);
+  const examples = declaration.jsDoc?.tags?.filter((tag) => tag.tag === 'example' || tag.tag === 'demo') || []
+  return examples.map(exampleFromJsDocTag)
 }
 
 /**
@@ -21,13 +21,13 @@ export function getExamplesFromComponent(declaration: ComponentDeclaration): Exa
  * @param tag
  */
 function exampleFromJsDocTag(tag: JsDocTag): Example {
-	const { code, lang, description } = discoverCodeFromExampleText(tag.comment || "");
+  const { code, lang, description } = discoverCodeFromExampleText(tag.comment || '')
 
-	return {
-		lang,
-		description,
-		code
-	};
+  return {
+    lang,
+    description,
+    code,
+  }
 }
 
 /**
@@ -35,19 +35,19 @@ function exampleFromJsDocTag(tag: JsDocTag): Example {
  * @param text
  */
 function discoverCodeFromExampleText(text: string): { code: string; lang?: string; description?: string } {
-	// Check if there is a code example already like this: ```code here ```
-	const escapedCodeMatch = text.match(/([\s\S]*)```(\S*)([\s\S]+)```/);
+  // Check if there is a code example already like this: ```code here ```
+  const escapedCodeMatch = text.match(/([\s\S]*)```(\S*)([\s\S]+)```/)
 
-	if (escapedCodeMatch != null) {
-		return {
-			description: (escapedCodeMatch[1] || "").trim() || undefined,
-			lang: (escapedCodeMatch[2] as string) || undefined,
-			code: (escapedCodeMatch[3] || "").trim()
-		};
-	}
+  if (escapedCodeMatch != null) {
+    return {
+      description: (escapedCodeMatch[1] || '').trim() || undefined,
+      lang: (escapedCodeMatch[2] as string) || undefined,
+      code: (escapedCodeMatch[3] || '').trim(),
+    }
+  }
 
-	// Else, assume that the text is the code
-	return { code: text.trim(), lang: discoverLanguageFromExampleText(text) };
+  // Else, assume that the text is the code
+  return { code: text.trim(), lang: discoverLanguageFromExampleText(text) }
 }
 
 /**
@@ -55,13 +55,13 @@ function discoverCodeFromExampleText(text: string): { code: string; lang?: strin
  * @param code
  */
 function discoverLanguageFromExampleText(code: string): string {
-	if (code.includes("html`")) {
-		return "javascript";
-	}
+  if (code.includes('html`')) {
+    return 'javascript'
+  }
 
-	if (code.match(/<\S/)) {
-		return "html";
-	}
+  if (code.match(/<\S/)) {
+    return 'html'
+  }
 
-	return "javascript";
+  return 'javascript'
 }
