@@ -1,3 +1,4 @@
+ 
 import { basename, relative } from "path";
 import { isSimpleType, toSimpleType } from "ts-simple-type";
 import * as tsModule from "typescript";
@@ -104,10 +105,10 @@ function getExportsDocsFromAnalyzerResult(result: AnalyzerResult, context: Trans
 
 /**
  * Returns FunctionDocs in an analyzer result
- * @param result
- * @param context
+ * @param _result
+ * @param _context
  */
-function getFunctionDocsFromAnalyzerResult(result: AnalyzerResult, context: TransformerContext): FunctionDoc[] {
+function getFunctionDocsFromAnalyzerResult(_result: AnalyzerResult, _context: TransformerContext): FunctionDoc[] {
 	// TODO: support function exports
 	return [];
 }

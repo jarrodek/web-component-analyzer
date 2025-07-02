@@ -1,3 +1,4 @@
+ 
 import { isAssignableToSimpleTypeKind, isSimpleType, SimpleType, toSimpleType, typeToString } from "ts-simple-type";
 import { Program, Type, TypeChecker } from "typescript";
 import { AnalyzerResult } from "../../analyze/types/analyzer-result";
@@ -15,9 +16,9 @@ import { HtmlDataAttr, HtmlDataAttrValue, HtmlDataTag, VscodeHtmlData } from "./
  * Vscode json output format transformer.
  * @param results
  * @param program
- * @param config
+ * @param _config
  */
-export const vscodeTransformer: TransformerFunction = (results: AnalyzerResult[], program: Program, config: TransformerConfig): string => {
+export const vscodeTransformer: TransformerFunction = (results: AnalyzerResult[], program: Program, _config: TransformerConfig): string => {
 	const checker = program.getTypeChecker();
 
 	// Grab all definitions

@@ -100,7 +100,7 @@ async function expandGlobs(globs: string | string[], config: AnalyzerCliConfig):
 							followSymbolicLinks: false
 						});
 					}
-				} catch (e) {
+				} catch {
 					// the glob wasn't a directory
 				}
 

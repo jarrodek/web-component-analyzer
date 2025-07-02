@@ -49,4 +49,5 @@ export function discoverDefinitions(node: Node, context: AnalyzerVisitContext): 
 	node.forEachChild(child => {
 		discoverDefinitions(child, context);
 	});
+	return undefined
 }

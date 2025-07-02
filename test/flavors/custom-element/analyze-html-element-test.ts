@@ -1,7 +1,7 @@
 import { join } from "path";
-import { analyzeHTMLElement } from "../../../src/analyze/analyze-html-element";
-import { ComponentHeritageClause } from "../../../src/analyze/types/component-declaration";
-import { getCurrentTsModule, getCurrentTsModuleDirectory, tsTest } from "../../helpers/ts-test";
+import { analyzeHTMLElement } from "../../../src/analyze/analyze-html-element.js";
+import { ComponentHeritageClause } from "../../../src/analyze/types/component-declaration.js";
+import { getCurrentTsModule, getCurrentTsModuleDirectory, tsTest } from "../../helpers/ts-test.js";
 import { getComponentProp } from "../../helpers/util";
 
 tsTest("analyzeHTMLElement returns correct result", t => {

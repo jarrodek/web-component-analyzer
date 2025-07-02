@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import { AnalyzerVisitContext } from "../../analyzer-visit-context";
 import { ComponentMember, ComponentMemberReflectKind } from "../../types/features/component-member";
 import { JsDoc } from "../../types/js-doc";

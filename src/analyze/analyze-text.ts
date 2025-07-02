@@ -1,5 +1,7 @@
 import { existsSync, readFileSync } from "fs";
 import { dirname, join } from "path";
+import { createRequire } from "module";
+import { fileURLToPath } from "url";
 import * as tsModule from "typescript";
 import { CompilerOptions, Program, ScriptKind, ScriptTarget, SourceFile, System, TypeChecker } from "typescript";
 //import * as ts from "typescript";
@@ -7,6 +9,10 @@ import { arrayDefined } from "../util/array-util";
 import { analyzeSourceFile } from "./analyze-source-file";
 import { AnalyzerOptions } from "./types/analyzer-options";
 import { AnalyzerResult } from "./types/analyzer-result";
+
+// Create a require function for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const require = createRequire(__filename);
 
 export interface IVirtualSourceFile {
 	fileName: string;

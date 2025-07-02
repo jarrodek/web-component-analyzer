@@ -6,7 +6,7 @@ import { ComponentDeclaration } from "../../types/component-declaration";
  * @param declaration
  * @param context
  */
-export function refineDeclaration(declaration: ComponentDeclaration, context: AnalyzerVisitContext): ComponentDeclaration | undefined {
+export function refineDeclaration(declaration: ComponentDeclaration, _context: AnalyzerVisitContext): ComponentDeclaration | undefined {
 	if (declaration.jsDoc == null || declaration.jsDoc.tags == null) {
 		return undefined;
 	}

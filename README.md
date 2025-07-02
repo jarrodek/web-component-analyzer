@@ -1,10 +1,10 @@
 <h1 align="center">web-component-analyzer</h1>
 
 <p align="center">
-	<a href="https://npmcharts.com/compare/web-component-analyzer?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/web-component-analyzer.svg" height="20"/></a>
-	<a href="https://www.npmjs.com/package/web-component-analyzer"><img alt="NPM Version" src="https://img.shields.io/npm/v/web-component-analyzer.svg" height="20"/></a>
-	<a href="https://david-dm.org/runem/web-component-analyzer"><img alt="Dependencies" src="https://img.shields.io/david/runem/web-component-analyzer.svg" height="20"/></a>
-	<a href="https://github.com/runem/web-component-analyzer/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/runem/web-component-analyzer.svg" height="20"/></a>
+ <a href="https://npmcharts.com/compare/web-component-analyzer?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/web-component-analyzer.svg" height="20"/></a>
+ <a href="https://www.npmjs.com/package/web-component-analyzer"><img alt="NPM Version" src="https://img.shields.io/npm/v/web-component-analyzer.svg" height="20"/></a>
+ <a href="https://github.com/jarrodek/web-component-analyzer/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/jarrodek/web-component-analyzer.svg" height="20"/></a>
+ <a href="https://github.com/jarrodek/web-component-analyzer/actions"><img alt="CI Status" src="https://github.com/jarrodek/web-component-analyzer/workflows/CI/badge.svg" height="20"/></a>
 </p>
 
 <p align="center">
@@ -29,14 +29,14 @@ In addition to [vanilla web components](https://developer.mozilla.org/en-US/docs
 
 <!-- prettier-ignore -->
 ```bash
-$ npm install -g web-component-analyzer
+npm install -g web-component-analyzer
 ```
 
 **or**
 
 <!-- prettier-ignore -->
 ```bash
-$ npx web-component-analyzer src
+npx web-component-analyzer src
 ```
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#usage)
@@ -45,11 +45,11 @@ $ npx web-component-analyzer src
 
 <!-- prettier-ignore -->
 ```bash
-$ wca analyze
-$ wca analyze src --format markdown
-$ wca analyze "src/**/*.{js,ts}" --outDir components
-$ wca analyze my-element.js --outFile custom-elements.json
-$ wca analyze --outFiles {dir}/custom-element.json
+wca analyze
+wca analyze src --format markdown
+wca analyze "src/**/*.{js,ts}" --outDir components
+wca analyze my-element.js --outFile custom-elements.json
+wca analyze --outFiles {dir}/custom-element.json
 ```
 
 <img src="https://user-images.githubusercontent.com/5372940/54445420-02fd9700-4745-11e9-9305-47d6ec3c6307.gif" />
@@ -84,8 +84,8 @@ Try the online playground [here](https://runem.github.io/web-component-analyzer?
 
 This json format is for experimental and demo purposes, and is still being actively discussed. You can expect changes to this format. Please follow and contribute to the discussion at:
 
-- https://github.com/webcomponents/custom-elements-json
-- https://github.com/w3c/webcomponents/issues/776
+- <https://github.com/webcomponents/custom-elements-json>
+- <https://github.com/w3c/webcomponents/issues/776>
 
 ### markdown
 

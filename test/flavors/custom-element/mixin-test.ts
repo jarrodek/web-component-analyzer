@@ -1,6 +1,6 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module";
-import { tsTest } from "../../helpers/ts-test";
-import { assertHasMembers, getAttributeNames, getComponentProp, getPropertyNames } from "../../helpers/util";
+import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
+import { tsTest } from "../../helpers/ts-test.js";
+import { assertHasMembers, getAttributeNames, getComponentProp, getPropertyNames } from "../../helpers/util.js";
 
 tsTest("Handles circular inheritance", t => {
 	const {

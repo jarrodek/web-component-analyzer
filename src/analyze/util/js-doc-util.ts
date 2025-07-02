@@ -264,6 +264,7 @@ export function getJsDocType(jsDoc: JsDoc, context: { program: Program; ts: type
 			}
 		}
 	}
+	return undefined
 }
 
 const JSDOC_TAGS_WITH_REQUIRED_NAME: string[] = ["param", "fires", "@element", "@customElement"];
@@ -336,6 +337,7 @@ function parseJsDocTagString(str: string): JsDocTagParsed {
 			moveStr(tagResult[1]);
 			jsDocTag.tag = tagResult[2];
 		}
+		return undefined
 	};
 
 	const matchType = () => {

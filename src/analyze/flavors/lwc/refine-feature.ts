@@ -40,6 +40,7 @@ function findClassDeclaration(node: Node | undefined, { ts }: AnalyzerVisitConte
 		}
 		node = node.parent;
 	}
+	return undefined;
 }
 
 function isLWCComponent(component: ComponentFeatureBase, context: AnalyzerVisitContext) {

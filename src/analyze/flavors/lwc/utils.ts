@@ -75,7 +75,7 @@ function _isLwcComponent(node: Node, context: AnalyzerVisitContext): ComponentRe
 	const v = parseJsDocForNode(
 		node,
 		["lwcelement"],
-		(tagNode, { name }) => {
+		(_tagNode, { name }) => {
 			return { tagName: name || tagName };
 		},
 		context
@@ -83,6 +83,7 @@ function _isLwcComponent(node: Node, context: AnalyzerVisitContext): ComponentRe
 	if (v && v.length === 1) {
 		return v[0] as ComponentRef;
 	}
+	return undefined;
 }
 
 // Check if the Class inherits from lighning

@@ -1,8 +1,12 @@
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module";
-import { tsTest } from "../../helpers/ts-test";
+import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
+import { tsTest } from "../../helpers/ts-test.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // To run the test:
 //    yarn ava --ext ts test/flavors/lwc/discover-test.ts

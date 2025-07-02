@@ -28,4 +28,5 @@ export function discoverDefinitions(node: Node, context: AnalyzerVisitContext): 
 			context
 		);
 	}
+	return undefined;
 }

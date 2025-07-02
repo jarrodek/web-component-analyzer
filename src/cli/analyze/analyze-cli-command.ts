@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { writeFileSync } from "fs";
 import { basename, dirname, extname, relative, resolve } from "path";
 import { Program } from "typescript";
@@ -62,7 +63,7 @@ Please follow and contribute to the discussion at:
 		willAnalyzeFiles(filePaths: string[]): void {
 			log(`Web Component Analyzer analyzing ${filePaths.length} file${filePaths.length === 1 ? "" : "s"}...`, config);
 		},
-		emitAnalyzedFile(file, result, { program }): Promise<void> | void {
+		emitAnalyzedFile(_file, result, { program }): Promise<void> | void {
 			// Emit the transformed results as soon as possible if "outConsole" is on
 			if (outStrategy === "console_stream") {
 				if (result.componentDefinitions.length > 0) {
@@ -95,6 +96,7 @@ Please follow and contribute to the discussion at:
 			if (outputPath != null) {
 				if (config.dry) {
 					const tagNames = arrayFlat(results.map(result => result.componentDefinitions.map(d => d.tagName)));
+					 
 					log(`[dry] Intending to write ${tagNames} to ./${relative(process.cwd(), outputPath)}`, config);
 				} else {
 					const content = transformResults(results, program, { ...config, cwd: config.cwd || dirname(outputPath) });
@@ -172,7 +174,7 @@ async function distributeResultsIntoFiles(results: AnalyzerResult[], config: Ana
 	// Output all results into a single file
 	else if (config.outFile != null) {
 		// Guess format based on outFile extension
-		// eslint-disable-next-line require-atomic-updates
+		 
 		config.format = config.format || extensionToFormat(config.outFile);
 
 		const path = resolve(process.cwd(), config.outFile);
@@ -185,7 +187,7 @@ async function distributeResultsIntoFiles(results: AnalyzerResult[], config: Ana
 	// Output all results into multiple files
 	else if (config.outFiles != null) {
 		// Guess format based on outFile extension
-		// eslint-disable-next-line require-atomic-updates
+		 
 		config.format = config.format || extensionToFormat(config.outFiles);
 
 		for (const result of results) {

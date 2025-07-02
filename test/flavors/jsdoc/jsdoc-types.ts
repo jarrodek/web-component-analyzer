@@ -1,7 +1,7 @@
 import test from "ava";
 import { SimpleType } from "ts-simple-type";
-import { parseSimpleJsDocTypeExpression } from "../../../src/analyze/util/js-doc-util";
-import { getCurrentTsModule } from "../../helpers/ts-test";
+import { parseSimpleJsDocTypeExpression } from "../../../src/analyze/util/js-doc-util.js";
+import { getCurrentTsModule } from "../../helpers/ts-test.js";
 
 test("Parse required and union", t => {
 	const ts = getCurrentTsModule();

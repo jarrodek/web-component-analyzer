@@ -1,60 +1,52 @@
-name: Main Workflow
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  run:
-    name: Run
+  test:
+    name: Test
 
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        node: [18, 20]
+        node: [18, 20, 22]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          cache: 'npm'
 
-      - name: Cache
-        uses: actions/cache@v1
-        id: cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}
-
-      - name: Install
-        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install dependencies
         run: npm ci
 
       - name: Lint
         run: npm run lint
 
+      - name: Type check
+        run: npx tsc --noEmit
+
       - name: Prettier
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '22'
         run: npm run prettier:check
 
-      - name: Cache Dev
-        uses: actions/cache@v1
-        id: cache-dev
-        with:
-          path: ./dev/node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/dev/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}
-
-      - name: Install Dev
-        if: steps.cache-dev.outputs.cache-hit != 'true'
+      - name: Install dev dependencies
         run: npm ci
         working-directory: "dev"
 
       - name: Test
         run: npm run test:all
+
+      - name: Build
+        run: npm run build
+      
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

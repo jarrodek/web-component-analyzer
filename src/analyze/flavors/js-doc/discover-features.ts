@@ -18,24 +18,26 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 			return parseJsDocForNode(
 				node,
 				["csspart"],
-				(tagNode, { name, description }) => {
+				(_tagNode, { name, description }) => {
 					if (name != null && name.length > 0) {
 						return {
 							name: name,
 							jsDoc: description != null ? { description } : undefined
 						};
 					}
+					return undefined;
 				},
 				context
 			);
 		}
+		return undefined;
 	},
 	cssproperty: (node: Node, context: AnalyzerVisitContext): ComponentCssProperty[] | undefined => {
 		if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
 			return parseJsDocForNode(
 				node,
 				["cssprop", "cssproperty", "cssvar", "cssvariable"],
-				(tagNode, { name, description, type, default: def }) => {
+				(_tagNode, { name, description, type, default: def }) => {
 					if (name != null && name.length > 0) {
 						return {
 							name: name,
@@ -44,10 +46,12 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 							default: def
 						};
 					}
+					return undefined;
 				},
 				context
 			);
 		}
+		return undefined;
 	},
 	event: (node: Node, context: AnalyzerVisitContext): ComponentEvent[] | undefined => {
 		if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
@@ -64,17 +68,19 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 							node: tagNode
 						};
 					}
+					return undefined;
 				},
 				context
 			);
 		}
+		return undefined;
 	},
 	slot: (node: Node, context: AnalyzerVisitContext): ComponentSlot[] | undefined => {
 		if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
 			return parseJsDocForNode(
 				node,
 				["slot"],
-				(tagNode, { name, type, description }) => {
+				(_tagNode, { name, type, description }) => {
 					// Treat "-" as unnamed slot
 					if (name === "-") {
 						name = undefined;
@@ -109,6 +115,7 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 				context
 			);
 		}
+		return undefined;
 	},
 	member: (node: Node, context: AnalyzerVisitContext): ComponentMember[] | undefined => {
 		if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
@@ -134,6 +141,7 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 							deprecated: undefined
 						} as ComponentMemberProperty;
 					}
+					return undefined;
 				},
 				context
 			);
@@ -158,6 +166,7 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 							deprecated: undefined
 						} as ComponentMemberAttribute;
 					}
+					return undefined;
 				},
 				context
 			);
@@ -168,5 +177,6 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
 
 			return undefined;
 		}
+		return undefined;
 	}
 };

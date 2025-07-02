@@ -1,31 +1,32 @@
 {
-	"name": "web-component-analyzer",
-	"version": "2.0.0",
+	"name": "@jarrodek/web-component-analyzer",
+	"version": "3.0.0",
 	"description": "CLI that analyzes web components",
-	"main": "lib/cjs/api.js",
-	"module": "lib/esm/api.js",
-	"typings": "lib/cjs/api.d.ts",
+	"type": "module",
+	"main": "lib/api.js",
+	"module": "lib/api.js",
+	"typings": "lib/api.d.ts",
 	"files": [
 		"/lib/",
 		"cli.js"
 	],
 	"exports": {
-		"import": "./lib/esm/api.js",
-		"require": "./lib/cjs/api.js"
+		"import": "./lib/api.js"
 	},
 	"scripts": {
 		"clean": "rimraf lib",
-		"prepare": "npm run build && husky install",
-		"build": "npm run clean & rollup -c",
+		"prepare": "npm run build && husky",
+		"build": "npm run clean && rollup -c",
 		"watch": "rollup -c --watch",
 		"pretest": "cd dev && npm i",
-		"test": "cross-env TS_MODULE=current ava",
-		"test:all": "ava",
-		"lint": "eslint . --ext ts --ext js",
+		"test": "ava",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"test:update": "ava --update-snapshots",
 		"test:watch": "ava --watch",
 		"prettier:check": "prettier --check \"src/**/*.{ts,tsx}\"",
-		"prettier:write": "prettier --write \"src/**/*.{ts,tsx}\""
+		"prettier:write": "prettier --write \"src/**/*.{ts,tsx}\"",
+		"type-check": "tsc --noEmit"
 	},
 	"repository": {
 		"type": "git",
@@ -49,50 +50,51 @@
 		"url": "https://github.com/runem/web-component-analyzer/issues"
 	},
 	"homepage": "https://github.com/runem/web-component-analyzer#readme",
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"dependencies": {
-		"fast-glob": "^3.2.2",
+		"fast-glob": "^3.3.2",
 		"ts-simple-type": "2.0.0-next.0",
-		"typescript": "~5.2.0",
+		"typescript": "~5.8.0",
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@rollup/plugin-replace": "^5.0.3",
-		"@rollup/plugin-typescript": "^11.1.5",
-		"@types/node": "^18.0.13",
-		"@types/yargs": "^17.0.28",
-		"@typescript-eslint/eslint-plugin": "^6.7.5",
-		"@typescript-eslint/parser": "^6.7.5",
-		"ava": "^3.15.0",
-		"cross-env": "^7.0.2",
-		"eslint": "^8.51.0",
-		"eslint-config-prettier": "^9.0.0",
-		"husky": "^8.0.0",
-		"lint-staged": "^14.0.1",
-		"prettier": "^3.0.3",
-		"rimraf": "^3.0.2",
-		"rollup": "^4.0.2",
-		"rollup-plugin-copy": "^3.5.0",
-		"ts-node": "^10.9.1",
-		"tslib": "^2.6.2",
-		"typescript-4.8": "npm:typescript@~4.8.0",
-		"typescript-4.9": "npm:typescript@~4.9.0",
-		"typescript-5.0": "npm:typescript@~5.0.0",
-		"typescript-5.1": "npm:typescript@~5.1.0"
+		"@rollup/plugin-node-resolve": "^15.3.0",
+		"@rollup/plugin-replace": "^6.0.1",
+		"@rollup/plugin-typescript": "^12.1.0",
+		"@types/node": "^22.10.0",
+		"@types/yargs": "^17.0.32",
+		"@typescript-eslint/eslint-plugin": "^8.15.0",
+		"@typescript-eslint/parser": "^8.15.0",
+		"ava": "^6.1.3",
+		"eslint": "^9.15.0",
+		"eslint-config-prettier": "^9.1.0",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
+		"prettier": "^3.3.3",
+		"rimraf": "^6.0.1",
+		"rollup": "^4.24.4",
+		"ts-node": "^10.9.2",
+		"tslib": "^2.8.1"
 	},
 	"ava": {
 		"snapshotDir": "test/snapshots/results",
-		"extensions": [
-			"ts"
-		],
-		"require": [
-			"ts-node/register"
+		"extensions": {
+			"ts": "module"
+		},
+		"nodeArguments": [
+			"--loader=ts-node/esm"
 		],
 		"files": [
 			"test/**/*.ts",
 			"!test/{helpers,snapshots}/**/*"
 		],
 		"timeout": "2m"
+	},
+	"volta": {
+		"node": "22.12.0",
+		"npm": "10.9.0"
 	},
 	"bin": {
 		"wca": "cli.js",

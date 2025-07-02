@@ -9,7 +9,7 @@ import { InheritanceResult } from "../../flavors/analyzer-flavor";
  * @param emit
  * @param visitSet
  */
-export function visitInheritance(node: Node, context: AnalyzerVisitContext, emit: (result: InheritanceResult) => void, visitSet?: Set<Node>): void {
+export function visitInheritance(node: Node, context: AnalyzerVisitContext, emit: (result: InheritanceResult) => void): void {
 	for (const flavor of context.flavors) {
 		const result = flavor.discoverInheritance?.(node, context);
 		if (result != null) {

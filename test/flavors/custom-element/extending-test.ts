@@ -1,6 +1,6 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module";
-import { tsTest } from "../../helpers/ts-test";
-import { getComponentProp } from "../../helpers/util";
+import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
+import { tsTest } from "../../helpers/ts-test.js";
+import { getComponentProp } from "../../helpers/util.js";
 
 tsTest("Correctly extends interface with interface from different file", t => {
 	const {

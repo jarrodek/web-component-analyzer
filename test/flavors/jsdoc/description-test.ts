@@ -1,5 +1,5 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module";
-import { tsTest } from "../../helpers/ts-test";
+import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
+import { tsTest } from "../../helpers/ts-test.js";
 import { inspect } from "util";
 
 tsTest("jsdoc: Correctly discovers the description in the jsdoc", t => {

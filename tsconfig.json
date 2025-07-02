@@ -1,21 +1,35 @@
 {
 	"include": ["./src/**/*"],
 	"compilerOptions": {
-		"target": "es2019",
+		"target": "ES2022",
 		"importHelpers": false,
-		"module": "commonjs",
+		"module": "ES2022",
 		"moduleResolution": "node",
-		"lib": ["esnext", "dom"],
-		"outDir": "./lib/esm",
+		"lib": ["ES2022", "dom"],
+		"outDir": "./lib",
 		"downlevelIteration": true,
 		"strict": true,
 		"noImplicitAny": true,
 		"allowUnusedLabels": false,
 		"allowUnreachableCode": false,
 		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": false,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
 		"pretty": true,
 		"declaration": true,
 		"declarationMap": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true
+	},
+	"ts-node": {
+		"esm": true,
+		"experimentalSpecifierResolution": "node",
+		"transpileOnly": true
 	}
 }

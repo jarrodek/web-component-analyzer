@@ -1,4 +1,6 @@
-import * as yargs from "yargs";
+/* eslint-disable no-undef */
+import yargs from "yargs";
+import { hideBin } from 'yargs/helpers'; // Recommended for handling process.argv
 import { analyzeCliCommand } from "./analyze/analyze-cli-command";
 import { AnalyzerCliConfig } from "./analyzer-cli-config";
 import { isCliError } from "./util/cli-error";
@@ -8,7 +10,7 @@ import { log } from "./util/log";
  * The main function of the cli.
  */
 export function cli(): void {
-	const argv = yargs
+	const argv = yargs(hideBin(process.argv))
 		.usage("Usage: $0 <command> [glob..] [options]")
 		.command<AnalyzerCliConfig>({
 			command: ["analyze [glob..]", "$0"],

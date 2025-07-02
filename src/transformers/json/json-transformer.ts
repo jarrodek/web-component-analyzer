@@ -1,3 +1,4 @@
+ 
 import { relative } from "path";
 import { Program, TypeChecker } from "typescript";
 import { AnalyzerResult } from "../../analyze/types/analyzer-result";
@@ -94,7 +95,7 @@ function definitionToHtmlDataTag(definition: ComponentDefinition, checker: TypeC
 	};
 }
 
-function componentCssPropToHtmlCssProp(prop: ComponentCssProperty, checker: TypeChecker): HtmlDataCssProperty | undefined {
+function componentCssPropToHtmlCssProp(prop: ComponentCssProperty, _checker: TypeChecker): HtmlDataCssProperty | undefined {
 	return {
 		name: prop.name || "",
 		description: getDescriptionFromJsDoc(prop.jsDoc),
@@ -103,21 +104,21 @@ function componentCssPropToHtmlCssProp(prop: ComponentCssProperty, checker: Type
 	};
 }
 
-function componentCssPartToHtmlCssPart(part: ComponentCssPart, checker: TypeChecker): HtmlDataCssPart | undefined {
+function componentCssPartToHtmlCssPart(part: ComponentCssPart, _checker: TypeChecker): HtmlDataCssPart | undefined {
 	return {
 		name: part.name || "",
 		description: getDescriptionFromJsDoc(part.jsDoc)
 	};
 }
 
-function componentSlotToHtmlDataSlot(slot: ComponentSlot, checker: TypeChecker): HtmlDataSlot | undefined {
+function componentSlotToHtmlDataSlot(slot: ComponentSlot, _checker: TypeChecker): HtmlDataSlot | undefined {
 	return {
 		name: slot.name || "",
 		description: getDescriptionFromJsDoc(slot.jsDoc)
 	};
 }
 
-function componentEventToHtmlDataEvent(event: ComponentEvent, checker: TypeChecker): HtmlDataEvent | undefined {
+function componentEventToHtmlDataEvent(event: ComponentEvent, _checker: TypeChecker): HtmlDataEvent | undefined {
 	return {
 		name: event.name,
 		description: getDescriptionFromJsDoc(event.jsDoc),

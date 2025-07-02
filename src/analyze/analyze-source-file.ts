@@ -18,7 +18,7 @@ export function analyzeSourceFile(sourceFile: SourceFile, options: AnalyzerOptio
 	const context = makeContextFromConfig(options);
 
 	// Analyze all components
-	const componentDefinitions = discoverDefinitions(sourceFile, context, (definition, declarationNodes) =>
+	const componentDefinitions = discoverDefinitions(sourceFile, context, (_definition, declarationNodes) =>
 		// The component declaration is analyzed lazily
 		analyzeComponentDeclaration(declarationNodes, context)
 	);

@@ -30,12 +30,12 @@ export function markdownTable(rows: string[][], { removeEmptyColumns } = { remov
 		// Create a boolean array where each entry tells if a column is used or not (excluding the header)
 		const emptyColumns = Array(columnCount)
 			.fill(false)
-			.map((b, i) => i !== 0 && rows.slice(1).find(r => r[i] != null && r[i].length > 0) == null);
+			.map((_b, i) => i !== 0 && rows.slice(1).find(r => r[i] != null && r[i].length > 0) == null);
 
 		// Remove unused columns if necessary
 		if (emptyColumns.includes(true)) {
 			// Filter out the unused columns in each row
-			rows = rows.map(row => row.filter((column, i) => !emptyColumns[i]));
+			rows = rows.map(row => row.filter((_column, i) => !emptyColumns[i]));
 
 			// Adjust the column count
 			columnCount = Math.max(...rows.map(r => r.length));
@@ -49,7 +49,7 @@ export function markdownTable(rows: string[][], { removeEmptyColumns } = { remov
 	// This is done by taking the largest width of all cells in each column.
 	const columnWidths = Array(columnCount)
 		.fill(0)
-		.map((c, i) => Math.min(MAX_CELL_WIDTH, Math.max(MIN_CELL_WIDTH, ...rows.map(r => (r[i] || "").length)) + CELL_PADDING * 2));
+		.map((_c, i) => Math.min(MAX_CELL_WIDTH, Math.max(MIN_CELL_WIDTH, ...rows.map(r => (r[i] || "").length)) + CELL_PADDING * 2));
 
 	// Build up the table
 	return `
