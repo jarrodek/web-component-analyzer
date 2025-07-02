@@ -260,3 +260,7 @@ const output = transformAnalyzerResult(format, result, program);
 ## ➤ License
 
 Licensed under [MIT](https://opensource.org/licenses/MIT).
+
+## Maintained by Pawel Uchida-Psztyc
+
+It looks like authors abandoned the project. While I am not planning to add new features, I will be updating dependencies.
