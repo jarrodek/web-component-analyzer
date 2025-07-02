@@ -19,7 +19,7 @@ export class MyElement extends HTMLElement {
   static get observedAttributes() {
     return ["attr1", "attr2"];
   }
-	
+ 
   set value (val) {
   }
 }
@@ -62,11 +62,11 @@ declare global {
 export class MyElement extends LitElement {
 
   myProp = "myProp";
-	
+ 
   @property({type: String}) prop4 = "hello";
 
   @property({type: Boolean, attribute: "prop-5"}) prop5;
-	
+ 
   static get properties() {
     return {
       prop1: { type: String },
@@ -90,7 +90,7 @@ export class MyElement extends LitElement {
   myProp: string;
   prop4: string;
   prop5: string;
-	
+ 
   static get properties(): Object;
 }
 ```
@@ -221,7 +221,7 @@ export default class MyElement extends BaseComponent {
 export default class MyElement extends LightningElement {
 
   prop1 = "myProp";
-	
+ 
   @api prop2 = "hello";
 
   /**
