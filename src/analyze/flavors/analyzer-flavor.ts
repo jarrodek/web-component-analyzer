@@ -1,6 +1,10 @@
 import { Node, SourceFile } from 'typescript'
 import { AnalyzerVisitContext } from '../analyzer-visit-context.js'
-import { ComponentDeclaration, ComponentDeclarationKind, ComponentHeritageClause } from '../types/component-declaration.js'
+import {
+  ComponentDeclaration,
+  ComponentDeclarationKind,
+  ComponentHeritageClause,
+} from '../types/component-declaration.js'
 import { ComponentCssPart } from '../types/features/component-css-part.js'
 import { ComponentCssProperty } from '../types/features/component-css-property.js'
 import { ComponentEvent } from '../types/features/component-event.js'
