@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 
