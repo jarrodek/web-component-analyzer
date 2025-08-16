@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { AnalyzerCliConfig } from '../analyzer-cli-config'
+import { AnalyzerCliConfig } from '../analyzer-cli-config.js'
 
 /**
  * Logs to the console with a specific level.

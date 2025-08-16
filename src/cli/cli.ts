@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers' // Recommended for handling process.argv
-import { analyzeCliCommand } from './analyze/analyze-cli-command'
-import { AnalyzerCliConfig } from './analyzer-cli-config'
-import { isCliError } from './util/cli-error'
-import { log } from './util/log'
+import { analyzeCliCommand } from './analyze/analyze-cli-command.js'
+import { AnalyzerCliConfig } from './analyzer-cli-config.js'
+import { isCliError } from './util/cli-error.js'
+import { log } from './util/log.js'
 
 /**
  * The main function of the cli.

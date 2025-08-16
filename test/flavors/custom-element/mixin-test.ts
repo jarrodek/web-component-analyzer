@@ -62,7 +62,7 @@ tsTest("Handles mixin with variable declaration in TS declaration file", t => {
 		{
 			fileName: "main.js",
 			text: `
-		import { Mixin1 } from "./mixins";
+		import { Mixin1 } from './mixins.js';
 		/**
 		 * @element
 		 */

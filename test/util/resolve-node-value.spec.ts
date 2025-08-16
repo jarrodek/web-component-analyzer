@@ -1,8 +1,8 @@
 import test from "ava";
 import * as ts from "typescript";
-import { analyzeText } from "../../src/analyze/analyze-text";
-import { findChildren } from "../../src/analyze/util/ast-util";
-import { resolveNodeValue } from "../../src/analyze/util/resolve-node-value";
+import { analyzeText } from '../../src/analyze/analyze-text.js';
+import { findChildren } from '../../src/analyze/util/ast-util.js';
+import { resolveNodeValue } from '../../src/analyze/util/resolve-node-value.js';
 
 test("resolveNodeValue util returns correct values", t => {
 	const {

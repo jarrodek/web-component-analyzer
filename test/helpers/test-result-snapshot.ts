@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import test, { ExecutionContext } from "ava";
 import { Program } from "typescript";
-import { AnalyzerResult } from "../../src/analyze/types/analyzer-result";
-import { getExtendsHeritageClausesInChain, getMixinHeritageClausesInChain } from "../../src/analyze/util/component-declaration-util";
-import { analyzeGlobs } from "../../src/cli/util/analyze-globs";
-import { arrayFlat } from "../../src/util/array-util";
+import { AnalyzerResult } from '../../src/analyze/types/analyzer-result.js';
+import { getExtendsHeritageClausesInChain, getMixinHeritageClausesInChain } from '../../src/analyze/util/component-declaration-util.js';
+import { analyzeGlobs } from '../../src/cli/util/analyze-globs.js';
+import { arrayFlat } from '../../src/util/array-util.js';
 
 function testResult(
 	testName: string,
