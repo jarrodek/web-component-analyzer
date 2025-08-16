@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
-import { AnalyzerVisitContext } from '../../analyzer-visit-context'
-import { ComponentMember, ComponentMemberReflectKind } from '../../types/features/component-member'
-import { JsDoc } from '../../types/js-doc'
-import { VisibilityKind } from '../../types/visibility-kind'
-import { parseSimpleJsDocTypeExpression } from '../../util/js-doc-util'
-import { lazy } from '../../util/lazy'
-import { AnalyzerFlavor } from '../analyzer-flavor'
+import { AnalyzerVisitContext } from '../../analyzer-visit-context.js'
+import { ComponentMember, ComponentMemberReflectKind } from '../../types/features/component-member.js'
+import { JsDoc } from '../../types/js-doc.js'
+import { VisibilityKind } from '../../types/visibility-kind.js'
+import { parseSimpleJsDocTypeExpression } from '../../util/js-doc-util.js'
+import { lazy } from '../../util/lazy.js'
+import { AnalyzerFlavor } from '../analyzer-flavor.js'
 
 /**
  * Refines features by looking at the jsdoc tags on the feature

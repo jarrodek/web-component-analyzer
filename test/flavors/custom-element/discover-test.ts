@@ -116,7 +116,7 @@ tsTest("Discovers declaration in other file", t => {
 			analyze: true,
 			fileName: "def.ts",
 			text: `
-				import {MyElement} from "./decl";
+				import {MyElement} from './decl.js';
 				customElements.define("my-element", MyElement);
 			`
 		},

@@ -13,10 +13,10 @@ import type {
   SyntaxKind,
   TypeChecker,
 } from 'typescript'
-import { ModifierKind } from '../types/modifier-kind'
-import { VisibilityKind } from '../types/visibility-kind'
-import { resolveNodeValue } from './resolve-node-value'
-import { isNamePrivate } from './text-util'
+import { ModifierKind } from '../types/modifier-kind.js'
+import { VisibilityKind } from '../types/visibility-kind.js'
+import { resolveNodeValue } from './resolve-node-value.js'
+import { isNamePrivate } from './text-util.js'
 
 export interface AstContext {
   ts: typeof tsModule

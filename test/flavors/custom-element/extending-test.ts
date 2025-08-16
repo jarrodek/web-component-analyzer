@@ -17,7 +17,7 @@ export interface Checked {
 		{
 			fileName: "main.ts",
 			text: `
-import {Checked} from "./base";
+import {Checked} from './base.js';
 
 interface CheckableElement extends HTMLElement, Checked {
 }
@@ -54,7 +54,7 @@ export {Checked};
 		{
 			fileName: "main.ts",
 			text: `
-import {Checked} from "./base";
+import {Checked} from './base.js';
 
 interface CheckableElement extends HTMLElement, Checked {
 }
@@ -88,7 +88,7 @@ export class Checked {
 		{
 			fileName: "main.ts",
 			text: `
-import {Checked} from "./base";
+import {Checked} from './base.js';
 
 class CheckableElement extends Checked {
 }

@@ -4,7 +4,7 @@
 		"target": "ES2022",
 		"importHelpers": false,
 		"module": "ES2022",
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"lib": ["ES2022", "dom"],
 		"outDir": "./lib",
 		"downlevelIteration": true,
@@ -21,15 +21,12 @@
 		"pretty": true,
 		"declaration": true,
 		"declarationMap": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
 		"resolveJsonModule": true
 	},
 	"ts-node": {
 		"esm": true,
-		"experimentalSpecifierResolution": "node",
 		"transpileOnly": true
 	}
 }
