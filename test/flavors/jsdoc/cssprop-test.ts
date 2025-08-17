@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers css properties with @cssprop", t => {
+tsTest("jsdoc: Discovers css properties with @cssprop", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -15,12 +15,12 @@ tsTest("jsdoc: Discovers css properties with @cssprop", t => {
 
 	const { cssProperties = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(cssProperties.length, 1);
-	t.is(cssProperties[0].name, "--this-is-a-css-prop");
-	t.is(cssProperties[0].jsDoc!.description, "This is a comment");
+	assert.strictEqual(cssProperties.length, 1);
+	assert.strictEqual(cssProperties[0].name, "--this-is-a-css-prop");
+	assert.strictEqual(cssProperties[0].jsDoc!.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers css properties with @cssproperty", t => {
+tsTest("jsdoc: Discovers css properties with @cssproperty", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -34,12 +34,12 @@ tsTest("jsdoc: Discovers css properties with @cssproperty", t => {
 
 	const { cssProperties = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(cssProperties.length, 1);
-	t.is(cssProperties[0].name, "--this-is-a-css-prop");
-	t.is(cssProperties[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(cssProperties.length, 1);
+	assert.strictEqual(cssProperties[0].name, "--this-is-a-css-prop");
+	assert.strictEqual(cssProperties[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers css properties with @cssproperty and default", t => {
+tsTest("jsdoc: Discovers css properties with @cssproperty and default", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -53,8 +53,8 @@ tsTest("jsdoc: Discovers css properties with @cssproperty and default", t => {
 
 	const { cssProperties = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(cssProperties.length, 1);
-	t.is(cssProperties[0].name, "--element-color");
-	t.is(cssProperties[0].default, "red");
-	t.is(cssProperties[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(cssProperties.length, 1);
+	assert.strictEqual(cssProperties[0].name, "--element-color");
+	assert.strictEqual(cssProperties[0].default, "red");
+	assert.strictEqual(cssProperties[0].jsDoc?.description, "This is a comment");
 });

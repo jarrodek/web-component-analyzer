@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Discovers elements defined JSX.IntrinsicElements", t => {
+tsTest("Discovers elements defined JSX.IntrinsicElements", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -19,8 +19,8 @@ tsTest("Discovers elements defined JSX.IntrinsicElements", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 
 	const { members } = componentDefinitions[0].declaration!;
 
@@ -38,8 +38,7 @@ tsTest("Discovers elements defined JSX.IntrinsicElements", t => {
 				required: undefined,
 				typeHint: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

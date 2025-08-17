@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("LitElement: Discovers elements defined using @customElement decorator", t => {
+tsTest("LitElement: Discovers elements defined using @customElement decorator", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -12,12 +12,12 @@ tsTest("LitElement: Discovers elements defined using @customElement decorator", 
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
 let testName = "LitElement: Discovers @customElement(stringConstant)";
-tsTest(testName, t => {
+tsTest(testName, ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -29,12 +29,12 @@ tsTest(testName, t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "string-constant");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "string-constant");
 });
 
 testName = "LitElement: Doesn't discover @customElement(stringVariable)";
-tsTest(testName, t => {
+tsTest(testName, ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -47,5 +47,5 @@ tsTest(testName, t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 0);
+	assert.strictEqual(componentDefinitions.length, 0);
 });

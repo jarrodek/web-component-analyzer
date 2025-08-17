@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { ExecutionContext } from "ava";
+import { TestContext } from "@japa/runner";
 import { isAssignableToType, typeToString } from "ts-simple-type";
 import { TypeChecker } from "typescript";
 import { ComponentMember, ComponentMemberProperty } from "../../src/analyze/types/features/component-member.js";
@@ -8,19 +8,17 @@ import { arrayDefined } from "../../src/util/array-util.js";
 export function assertHasMembers(
 	actualMembers: ComponentMember[],
 	expectedMembers: Partial<ComponentMember>[],
-	t: ExecutionContext,
+	assert: TestContext["assert"],
 	checker?: TypeChecker
 ): void {
-	t.log(actualMembers);
-
-	t.is(actualMembers.length, expectedMembers.length);
+	assert.strictEqual(actualMembers.length, expectedMembers.length);
 
 	for (const expectedMember of expectedMembers) {
 		const matchedMembers = actualMembers.filter(
 			member => expectedMember.kind === member.kind && expectedMember.attrName === member.attrName && expectedMember.propName === member.propName
 		);
 
-		t.is(
+		assert.strictEqual(
 			matchedMembers.length,
 			1,
 			`Couldn't find a member with kind: ${expectedMember.kind}, attrName: ${expectedMember.attrName} and propName: ${expectedMember.propName}`
@@ -30,23 +28,23 @@ export function assertHasMembers(
 
 		const name = expectedMember.propName || expectedMember.attrName;
 
-		"attrName" in expectedMember && t.is(actualMember.attrName, expectedMember.attrName, `Attribute names are not the same`);
-		"propName" in expectedMember && t.is(actualMember.propName, expectedMember.propName, `Property names are not the same`);
-		"default" in expectedMember && t.deepEqual(actualMember.default, expectedMember.default, `Default value for ${name} doesn't match`);
-		"visibility" in expectedMember && t.is(actualMember.visibility, expectedMember.visibility, `Visibility for ${name} doesn't match`);
-		"reflect" in expectedMember && t.is(actualMember.reflect, expectedMember.reflect, `Reflect for ${name} doesn't match`);
-		"required" in expectedMember && t.is(actualMember.required, expectedMember.required, `Required for ${name} doesn't match`);
-		"deprecated" in expectedMember && t.is(actualMember.deprecated, expectedMember.deprecated, `Deprecated for ${name} doesn't match`);
-		"typeHint" in expectedMember && t.is(actualMember.typeHint, expectedMember.typeHint, `TypeHint for ${name} doesn't match`);
-		"jsDoc" in expectedMember && t.is(actualMember?.jsDoc?.description, expectedMember?.jsDoc?.description, `JSDoc for ${name} doesn't match`);
+		"attrName" in expectedMember && assert.strictEqual(actualMember.attrName, expectedMember.attrName, `Attribute names are not the same`);
+		"propName" in expectedMember && assert.strictEqual(actualMember.propName, expectedMember.propName, `Property names are not the same`);
+		"default" in expectedMember && assert.deepEqual(actualMember.default, expectedMember.default, `Default value for ${name} doesn't match`);
+		"visibility" in expectedMember && assert.strictEqual(actualMember.visibility, expectedMember.visibility, `Visibility for ${name} doesn't match`);
+		"reflect" in expectedMember && assert.strictEqual(actualMember.reflect, expectedMember.reflect, `Reflect for ${name} doesn't match`);
+		"required" in expectedMember && assert.strictEqual(actualMember.required, expectedMember.required, `Required for ${name} doesn't match`);
+		"deprecated" in expectedMember && assert.strictEqual(actualMember.deprecated, expectedMember.deprecated, `Deprecated for ${name} doesn't match`);
+		"typeHint" in expectedMember && assert.strictEqual(actualMember.typeHint, expectedMember.typeHint, `TypeHint for ${name} doesn't match`);
+		"jsDoc" in expectedMember && assert.strictEqual(actualMember?.jsDoc?.description, expectedMember?.jsDoc?.description, `JSDoc for ${name} doesn't match`);
 		if ("meta" in expectedMember) {
 			const metaWithoutNode = { ...(actualMember?.meta || {}) };
 			delete metaWithoutNode.node;
-			t.deepEqual(metaWithoutNode, expectedMember?.meta, `Meta for ${name} doesn't match`);
+			assert.deepEqual(metaWithoutNode, expectedMember?.meta, `Meta for ${name} doesn't match`);
 		}
 
 		if ("type" in expectedMember) {
-			t.is(typeof actualMember.type, typeof expectedMember.type);
+			assert.strictEqual(typeof actualMember.type, typeof expectedMember.type);
 
 			if (expectedMember.type != null && actualMember.type != null) {
 				if (checker == null) {
@@ -54,7 +52,7 @@ export function assertHasMembers(
 				}
 				const typeA = actualMember.type();
 				const typeB = expectedMember.type();
-				t.truthy(
+				assert.isTrue(
 					isAssignableToType(typeA, typeB, checker),
 					`Type for ${name} doesn't match: ${typeToString(typeA, checker)} === ${typeToString(typeB, checker)}`
 				);

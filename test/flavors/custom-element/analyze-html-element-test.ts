@@ -4,30 +4,30 @@ import { ComponentHeritageClause } from "../../../src/analyze/types/component-de
 import { getCurrentTsModule, getCurrentTsModuleDirectory, tsTest } from "../../helpers/ts-test.js";
 import { getComponentProp } from '../../helpers/util.js';
 
-tsTest("analyzeHTMLElement returns correct result", t => {
+tsTest("analyzeHTMLElement returns correct result", ({ assert }) => {
 	const tsModule = getCurrentTsModule();
 	const program = tsModule.createProgram([join(getCurrentTsModuleDirectory(), "lib.dom.d.ts")], {});
 	const result = analyzeHTMLElement(program, tsModule);
 
-	t.truthy(result);
+	assert.isDefined(result);
 
 	const ext = getAllInheritedNames(result!.heritageClauses);
 
 	// Test that the node extends some of the interfaces
 	if (!tsModule.version.startsWith("5.")) {
-		t.truthy(ext.has("DocumentAndElementEventHandlers"));
+		assert.isTrue(ext.has("DocumentAndElementEventHandlers"));
 	}
-	t.truthy(ext.has("GlobalEventHandlers"));
-	t.truthy(ext.has("EventTarget"));
-	t.truthy(ext.has("Node"));
-	t.truthy(ext.has("ElementContentEditable"));
+	assert.isTrue(ext.has("GlobalEventHandlers"));
+	assert.isTrue(ext.has("EventTarget"));
+	assert.isTrue(ext.has("Node"));
+	assert.isTrue(ext.has("ElementContentEditable"));
 
 	// From ElementContentEditable interface
-	t.truthy(getComponentProp(result!.members, "contentEditable"));
+	assert.isDefined(getComponentProp(result!.members, "contentEditable"));
 	// From Node interface
-	t.truthy(getComponentProp(result!.members, "baseURI"));
+	assert.isDefined(getComponentProp(result!.members, "baseURI"));
 	// From EventTarget interface
-	t.truthy(result!.methods.find(m => m.name === "addEventListener"));
+	assert.isDefined(result!.methods.find(m => m.name === "addEventListener"));
 });
 
 function getAllInheritedNames(heritageClauses: ComponentHeritageClause[], names: Set<string> = new Set()) {

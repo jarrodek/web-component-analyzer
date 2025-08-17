@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Readonly modifier is found", t => {
+tsTest("Readonly modifier is found", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -28,13 +28,12 @@ tsTest("Readonly modifier is found", t => {
 				propName: "myProp",
 				modifiers: new Set(["readonly"])
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Getter have readonly modifier", t => {
+tsTest("Getter have readonly modifier", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -62,13 +61,12 @@ tsTest("Getter have readonly modifier", t => {
 				propName: "myProp",
 				modifiers: new Set(["readonly"])
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Getter and setter become one property without readonly modifier", t => {
+tsTest("Getter and setter become one property without readonly modifier", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -97,8 +95,7 @@ tsTest("Getter and setter become one property without readonly modifier", t => {
 				modifiers: new Set(),
 				type: () => ({ kind: "STRING" })
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

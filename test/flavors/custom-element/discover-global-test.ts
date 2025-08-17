@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Discovers global members on HTMLElement", t => {
+tsTest("Discovers global members on HTMLElement", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -48,13 +48,12 @@ tsTest("Discovers global members on HTMLElement", t => {
 				kind: "attribute",
 				attrName: "anAttr"
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Discovers global events on HTMLElementEventMap and HTMLElement", t => {
+tsTest("Discovers global events on HTMLElementEventMap and HTMLElement", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(
@@ -78,7 +77,7 @@ tsTest("Discovers global events on HTMLElementEventMap and HTMLElement", t => {
 
 	const { globalFeatures } = result;
 
-	t.is(globalFeatures?.events.length, 2);
-	t.is(globalFeatures?.events[0].name, "update");
-	t.is(globalFeatures?.events[1].name, "change");
+	assert.strictEqual(globalFeatures?.events.length, 2);
+	assert.strictEqual(globalFeatures?.events[0].name, "update");
+	assert.strictEqual(globalFeatures?.events[1].name, "change");
 });

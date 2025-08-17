@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Property assignments in the constructor are picked up", t => {
+tsTest("Property assignments in the constructor are picked up", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -109,13 +109,12 @@ tsTest("Property assignments in the constructor are picked up", t => {
 				required: undefined,
 				typeHint: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Property assignments in the constructor are correctly merged", t => {
+tsTest("Property assignments in the constructor are correctly merged", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -163,13 +162,12 @@ tsTest("Property assignments in the constructor are correctly merged", t => {
 				required: undefined,
 				typeHint: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Property assignments in the constructor don't overwrite Typescript modifiers", t => {
+tsTest("Property assignments in the constructor don't overwrite Typescript modifiers", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -207,8 +205,7 @@ tsTest("Property assignments in the constructor don't overwrite Typescript modif
 				required: undefined,
 				typeHint: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

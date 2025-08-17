@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("LitElement: Discovers properties from 'static get properties'", t => {
+tsTest("LitElement: Discovers properties from 'static get properties'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -44,13 +44,12 @@ tsTest("LitElement: Discovers properties from 'static get properties'", t => {
 				deprecated: undefined,
 				required: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@property'", t => {
+tsTest("LitElement: Discovers properties from '@property'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -132,13 +131,12 @@ tsTest("LitElement: Discovers properties from '@property'", t => {
 					type: { kind: "NUMBER" }
 				}
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@internalProperty'", t => {
+tsTest("LitElement: Discovers properties from '@internalProperty'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -192,13 +190,12 @@ tsTest("LitElement: Discovers properties from '@internalProperty'", t => {
 					state: true
 				}
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@state'", t => {
+tsTest("LitElement: Discovers properties from '@state'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -252,8 +249,7 @@ tsTest("LitElement: Discovers properties from '@state'", t => {
 					state: true
 				}
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

@@ -3,7 +3,7 @@ import { getLibTypeWithName } from "../../../src/analyze/util/type-util.js";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { getCurrentTsModule, tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers custom events with @fires", t => {
+tsTest("jsdoc: Discovers custom events with @fires", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -17,12 +17,12 @@ tsTest("jsdoc: Discovers custom events with @fires", t => {
 
 	const { events } = result.componentDefinitions[0].declaration!;
 
-	t.is(events.length, 1);
-	t.is(events[0].name, "my-event");
-	t.is(events[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(events.length, 1);
+	assert.strictEqual(events[0].name, "my-event");
+	assert.strictEqual(events[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers the detail type of custom events with @fires", t => {
+tsTest("jsdoc: Discovers the detail type of custom events with @fires", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -38,11 +38,11 @@ tsTest("jsdoc: Discovers the detail type of custom events with @fires", t => {
 	const { events } = result.componentDefinitions[0].declaration!;
 	const myEvent = events.find(e => e.name === "my-event")!;
 	const mySecondEvent = events.find(e => e.name === "my-second-event")!;
-	t.truthy(isAssignableToSimpleTypeKind(myEvent.type!() as SimpleType, "STRING"));
-	t.truthy(isAssignableToSimpleTypeKind(mySecondEvent.type!() as SimpleType, "NUMBER"));
+	assert.isTrue(isAssignableToSimpleTypeKind(myEvent.type!() as SimpleType, "STRING"));
+	assert.isTrue(isAssignableToSimpleTypeKind(mySecondEvent.type!() as SimpleType, "NUMBER"));
 });
 
-tsTest("jsdoc: Discovers events declared with @fires that includes extra jsdoc information", t => {
+tsTest("jsdoc: Discovers events declared with @fires that includes extra jsdoc information", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -56,12 +56,12 @@ tsTest("jsdoc: Discovers events declared with @fires that includes extra jsdoc i
 
 	const { events } = result.componentDefinitions[0].declaration!;
 
-	t.is(events.length, 1);
-	t.is(events[0].name, "input-switch-check-changed");
-	t.is(events[0].jsDoc?.description, "Fires when check property changes");
+	assert.strictEqual(events.length, 1);
+	assert.strictEqual(events[0].name, "input-switch-check-changed");
+	assert.strictEqual(events[0].jsDoc?.description, "Fires when check property changes");
 });
 
-tsTest("jsdoc: Discovers and correctly parses event types", t => {
+tsTest("jsdoc: Discovers and correctly parses event types", ({ assert }) => {
 	const {
 		results: [result],
 		program
@@ -86,16 +86,16 @@ tsTest("jsdoc: Discovers and correctly parses event types", t => {
 	const assertEvent = (name: string, typeName: string, type: SimpleType) => {
 		const event = events.find(e => e.name === name);
 		if (event == null) {
-			t.fail(`Couldn't find event with name: ${name}`);
+			assert.fail(`Couldn't find event with name: ${name}`);
 			return;
 		}
 
 		//console.log(event.type());
-		t.is(typeToString(event.type!() as SimpleType, program.getTypeChecker()), typeName);
-		t.truthy(isAssignableToType(type, event.type!(), program));
+		assert.strictEqual(typeToString(event.type!() as SimpleType, program.getTypeChecker()), typeName);
+		assert.isTrue(isAssignableToType(type, event.type!(), program));
 	};
 
-	t.is(events.length, 4);
+	assert.strictEqual(events.length, 4);
 
 	assertEvent("mouse-move", "MouseEvent", getLibTypeWithName("MouseEvent", { ts: getCurrentTsModule(), program: program })!);
 	assertEvent("custom-event-1", "CustomEvent", getLibTypeWithName("CustomEvent", { ts: getCurrentTsModule(), program: program })!);

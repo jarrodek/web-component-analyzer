@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("jsdoc: Discovers properties with @prop", t => {
+tsTest("jsdoc: Discovers properties with @prop", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -65,13 +65,12 @@ tsTest("jsdoc: Discovers properties with @prop", t => {
 				deprecated: undefined,
 				required: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("jsdoc: Discovers attributes defined on getters with @attr", t => {
+tsTest("jsdoc: Discovers attributes defined on getters with @attr", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -110,8 +109,7 @@ tsTest("jsdoc: Discovers attributes defined on getters with @attr", t => {
 				deprecated: undefined,
 				required: undefined
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

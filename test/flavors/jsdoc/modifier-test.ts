@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("jsDoc: Handles @readonly on members", t => {
+tsTest("jsDoc: Handles @readonly on members", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -29,8 +29,7 @@ tsTest("jsDoc: Handles @readonly on members", t => {
 				modifiers: new Set(["readonly"]),
 				type: () => ({ kind: "STRING" })
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

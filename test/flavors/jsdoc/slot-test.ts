@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers slots with @slots", t => {
+tsTest("jsdoc: Discovers slots with @slots", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -15,12 +15,12 @@ tsTest("jsdoc: Discovers slots with @slots", t => {
 
 	const { slots } = result.componentDefinitions[0].declaration!;
 
-	t.is(slots.length, 1);
-	t.is(slots[0].name, "myslot");
-	t.is(slots[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(slots.length, 1);
+	assert.strictEqual(slots[0].name, "myslot");
+	assert.strictEqual(slots[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers unnamed slots with @slots", t => {
+tsTest("jsdoc: Discovers unnamed slots with @slots", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -34,13 +34,13 @@ tsTest("jsdoc: Discovers unnamed slots with @slots", t => {
 
 	const { slots } = result.componentDefinitions[0].declaration!;
 
-	t.is(slots.length, 1);
-	t.log(slots[0]);
-	t.is(slots[0].name, undefined);
-	t.is(slots[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(slots.length, 1);
+
+	assert.strictEqual(slots[0].name, undefined);
+	assert.strictEqual(slots[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers permitted tag names on @slot", t => {
+tsTest("jsdoc: Discovers permitted tag names on @slot", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -57,9 +57,9 @@ tsTest("jsdoc: Discovers permitted tag names on @slot", t => {
 		slots: [slot1, slot2]
 	} = result.componentDefinitions[0].declaration!;
 
-	t.is(slot1.permittedTagNames!.length, 2);
-	t.deepEqual(slot1.permittedTagNames, ["div", "span"]);
+	assert.strictEqual(slot1.permittedTagNames!.length, 2);
+	assert.deepEqual(slot1.permittedTagNames, ["div", "span"]);
 
-	t.is(slot2.permittedTagNames!.length, 1);
-	t.deepEqual(slot2.permittedTagNames, ["li"]);
+	assert.strictEqual(slot2.permittedTagNames!.length, 1);
+	assert.deepEqual(slot2.permittedTagNames, ["li"]);
 });

@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("Correctly finds method declarations on a class", t => {
+tsTest("Correctly finds method declarations on a class", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -16,11 +16,11 @@ tsTest("Correctly finds method declarations on a class", t => {
 
 	const { methods = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(methods.length, 1);
-	t.is(methods[0].name, "myMethod");
+	assert.strictEqual(methods.length, 1);
+	assert.strictEqual(methods[0].name, "myMethod");
 });
 
-tsTest("Doesn't pick up method declarations not on class declaration", t => {
+tsTest("Doesn't pick up method declarations not on class declaration", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -39,6 +39,6 @@ tsTest("Doesn't pick up method declarations not on class declaration", t => {
 
 	const { methods = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(methods.length, 1);
-	t.is(methods[0].name, "myMethod");
+	assert.strictEqual(methods.length, 1);
+	assert.strictEqual(methods[0].name, "myMethod");
 });

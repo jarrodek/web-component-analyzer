@@ -3,7 +3,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("Polymer components are correctly picked up", t => {
+tsTest("Polymer components are correctly picked up", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -28,21 +28,21 @@ tsTest("Polymer components are correctly picked up", t => {
 
 	const { members } = result.componentDefinitions[0].declaration!;
 
-	t.is(members.length, 3);
+	assert.strictEqual(members.length, 3);
 
 	const userProp = getComponentProp(members, "user");
-	t.truthy(userProp);
-	t.truthy(isAssignableToSimpleTypeKind(userProp!.type!(), "STRING", checker));
-	t.is(userProp!.attrName, "user");
+	assert.isDefined(userProp);
+	assert.isTrue(isAssignableToSimpleTypeKind(userProp!.type!(), "STRING", checker));
+	assert.strictEqual(userProp!.attrName, "user");
 
 	const isHappyProp = getComponentProp(members, "isHappy");
-	t.truthy(isHappyProp);
-	t.truthy(isAssignableToSimpleTypeKind(isHappyProp!.type!(), "BOOLEAN", checker));
-	t.is(isHappyProp!.attrName, "is-happy");
+	assert.isDefined(isHappyProp);
+	assert.isTrue(isAssignableToSimpleTypeKind(isHappyProp!.type!(), "BOOLEAN", checker));
+	assert.strictEqual(isHappyProp!.attrName, "is-happy");
 
 	const countProp = getComponentProp(members, "count");
-	t.truthy(countProp);
-	t.truthy(isAssignableToSimpleTypeKind(countProp!.type!(), "NUMBER", checker));
-	t.is(countProp!.attrName, "count");
-	t.is(countProp!.default, 10);
+	assert.isDefined(countProp);
+	assert.isTrue(isAssignableToSimpleTypeKind(countProp!.type!(), "NUMBER", checker));
+	assert.strictEqual(countProp!.attrName, "count");
+	assert.strictEqual(countProp!.default, 10);
 });

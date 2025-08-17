@@ -2,7 +2,7 @@ import { join } from "path";
 import { analyzeSourceFile } from "../../../src/analyze/analyze-source-file.js";
 import { getCurrentTsModule, getCurrentTsModuleDirectory, tsTest } from "../../helpers/ts-test.js";
 
-tsTest("analyzeSourceFile on lib.dom.ts returns correct result", t => {
+tsTest("analyzeSourceFile on lib.dom.ts returns correct result", ({ assert }) => {
 	const tsModule = getCurrentTsModule();
 	const program = tsModule.createProgram([join(getCurrentTsModuleDirectory(), "lib.dom.d.ts")], {});
 
@@ -26,13 +26,13 @@ tsTest("analyzeSourceFile on lib.dom.ts returns correct result", t => {
 		}
 	});
 
-	t.truthy(result);
+	assert.isDefined(result);
 
 	const scriptDefinition = result.componentDefinitions?.find(d => d.tagName === "script");
-	t.truthy(scriptDefinition);
+	assert.isDefined(scriptDefinition);
 
 	const srcProperty = scriptDefinition!.declaration?.members.find(m => m.kind === "property" && m.propName === "src");
 
-	t.truthy(srcProperty);
-	t.true(srcProperty!.visibility === undefined || srcProperty!.visibility === "public", `srcProperty!.visibility is "${srcProperty!.visibility}"`);
+	assert.isDefined(srcProperty);
+	assert.isTrue(srcProperty!.visibility === undefined || srcProperty!.visibility === "public", `srcProperty!.visibility is "${srcProperty!.visibility}"`);
 });

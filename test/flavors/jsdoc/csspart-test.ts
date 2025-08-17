@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers css parts with @csspart", t => {
+tsTest("jsdoc: Discovers css parts with @csspart", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -15,7 +15,7 @@ tsTest("jsdoc: Discovers css parts with @csspart", t => {
 
 	const { cssParts } = result.componentDefinitions[0].declaration!;
 
-	t.is(cssParts.length, 1);
-	t.is(cssParts[0].name, "thumb");
-	t.is(cssParts[0].jsDoc?.description, "This is a comment");
+	assert.strictEqual(cssParts.length, 1);
+	assert.strictEqual(cssParts[0].name, "thumb");
+	assert.strictEqual(cssParts[0].jsDoc?.description, "This is a comment");
 });

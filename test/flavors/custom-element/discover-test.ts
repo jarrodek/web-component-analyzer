@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("Discovers elements defined using customElements.define", t => {
+tsTest("Discovers elements defined using customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -13,11 +13,11 @@ tsTest("Discovers elements defined using customElements.define", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Discovers elements defined using window.customElements.define", t => {
+tsTest("Discovers elements defined using window.customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -29,11 +29,11 @@ tsTest("Discovers elements defined using window.customElements.define", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Discovers only one element defined using multiple customElements.define", t => {
+tsTest("Discovers only one element defined using multiple customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -54,11 +54,11 @@ tsTest("Discovers only one element defined using multiple customElements.define"
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Does not discover elements defined using custom define function", t => {
+tsTest("Does not discover elements defined using custom define function", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -72,10 +72,10 @@ tsTest("Does not discover elements defined using custom define function", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 0);
+	assert.strictEqual(componentDefinitions.length, 0);
 });
 
-tsTest("Discovers elements defined using customElements.define without string literal", t => {
+tsTest("Discovers elements defined using customElements.define without string literal", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -90,11 +90,11 @@ tsTest("Discovers elements defined using customElements.define without string li
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Doesn't crash when encountering component declaration nodes that can't be resolved", t => {
+tsTest("Doesn't crash when encountering component declaration nodes that can't be resolved", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -103,12 +103,12 @@ tsTest("Doesn't crash when encountering component declaration nodes that can't b
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
-	t.is(componentDefinitions[0].declaration, undefined);
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions[0].declaration, undefined);
 });
 
-tsTest("Discovers declaration in other file", t => {
+tsTest("Discovers declaration in other file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -134,12 +134,12 @@ tsTest("Discovers declaration in other file", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
-	t.is(componentDefinitions[0].declaration?.jsDoc?.description, "hello");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions[0].declaration?.jsDoc?.description, "hello");
 });
 
-tsTest("Correctly discovers multiple declarations", t => {
+tsTest("Correctly discovers multiple declarations", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -157,13 +157,13 @@ tsTest("Correctly discovers multiple declarations", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
-	t.is(componentDefinitions[0].declaration?.members?.some(m => m.propName === "prototype"), false);
-	t.is(componentDefinitions[0].declaration?.methods?.some(m => m.name === "new"), false);
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions[0].declaration?.members?.some(m => m.propName === "prototype"), false);
+	assert.strictEqual(componentDefinitions[0].declaration?.methods?.some(m => m.name === "new"), false);
 });
 
-tsTest("Discovers elements using typescript >=4.3 syntax", t => {
+tsTest("Discovers elements using typescript >=4.3 syntax", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -184,6 +184,6 @@ tsTest("Discovers elements using typescript >=4.3 syntax", t => {
 
 	const { componentDefinitions } = result;
 
-	t.is(componentDefinitions.length, 1);
-	t.is(componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(componentDefinitions.length, 1);
+	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });

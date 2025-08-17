@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Discovers global features on JSX.IntrinsicAttributes", t => {
+tsTest("Discovers global features on JSX.IntrinsicAttributes", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -34,8 +34,7 @@ tsTest("Discovers global features on JSX.IntrinsicAttributes", t => {
 				attrName: "bar",
 				type: () => ({ kind: "BOOLEAN" })
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { inspect } from "util";
 
-tsTest("jsdoc: Correctly discovers the description in the jsdoc", t => {
+tsTest("jsdoc: Correctly discovers the description in the jsdoc", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -45,5 +45,5 @@ This is an example`,
 \`\`\`
 This is an example`
 	]);
-	t.true(allowed.has(description), `Expected ${inspect(description)} to be one of ${inspect(allowed)}`);
+	assert.isTrue(allowed.has(description), `Expected ${inspect(description)} to be one of ${inspect(allowed)}`);
 });

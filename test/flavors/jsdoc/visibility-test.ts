@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("jsDoc: Handles visibility modifier on internal event", t => {
+tsTest("jsDoc: Handles visibility modifier on internal event", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -23,11 +23,11 @@ tsTest("jsDoc: Handles visibility modifier on internal event", t => {
 		events: [event]
 	} = result.componentDefinitions[0].declaration!;
 
-	t.truthy(event);
-	t.is(event.visibility, "private");
+	assert.isDefined(event);
+	assert.strictEqual(event.visibility, "private");
 });
 
-tsTest("jsDoc: Handles visibility modifier on constructor assignment", t => {
+tsTest("jsDoc: Handles visibility modifier on constructor assignment", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -52,6 +52,6 @@ tsTest("jsDoc: Handles visibility modifier on constructor assignment", t => {
 
 	const member = getComponentProp(members, "foo");
 
-	t.truthy(member);
-	t.is(member!.visibility, "protected");
+	assert.isDefined(member);
+	assert.strictEqual(member!.visibility, "protected");
 });

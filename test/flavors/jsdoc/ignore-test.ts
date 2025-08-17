@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsDoc: Handles @ignore jsdoc tag", t => {
+tsTest("jsDoc: Handles @ignore jsdoc tag", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -28,7 +28,7 @@ tsTest("jsDoc: Handles @ignore jsdoc tag", t => {
 
 	const { events, methods, members } = result.componentDefinitions[0].declaration!;
 
-	t.is(events.length, 0);
-	t.is(members.length, 0);
-	t.is(methods.length, 0);
+	assert.strictEqual(events.length, 0);
+	assert.strictEqual(members.length, 0);
+	assert.strictEqual(methods.length, 0);
 });

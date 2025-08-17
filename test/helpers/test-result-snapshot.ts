@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import test, { ExecutionContext } from "ava";
+import { test, TestContext } from "@japa/runner";
 import { Program } from "typescript";
 import { AnalyzerResult } from '../../src/analyze/types/analyzer-result.js';
 import { getExtendsHeritageClausesInChain, getMixinHeritageClausesInChain } from '../../src/analyze/util/component-declaration-util.js';
@@ -9,9 +9,9 @@ import { arrayFlat } from '../../src/util/array-util.js';
 function testResult(
 	testName: string,
 	globs: string[],
-	callback: (result: AnalyzerResult[], program: Program, t: ExecutionContext) => void
+	callback: (result: AnalyzerResult[], program: Program, context: TestContext) => void
 ): void {
-	test(testName, async t => {
+	test(testName, async (context) => {
 		const { results, program } = await analyzeGlobs(globs, {
 			discoverNodeModules: true,
 			analyzeGlobalFeatures: true
@@ -20,7 +20,7 @@ function testResult(
 		const nonEmptyResults = results.filter(result => result.componentDefinitions.length > 0);
 
 		if (nonEmptyResults.length === 0) {
-			t.fail("Didn't find any components");
+			context.assert.fail("Didn't find any components");
 		}
 
 		const sortedResults = nonEmptyResults
@@ -30,12 +30,12 @@ function testResult(
 				componentDefinitions: result.componentDefinitions.sort((a, b) => (a.tagName < b.tagName ? -1 : 1))
 			}));
 
-		callback(sortedResults, program, t);
+		callback(sortedResults, program, context);
 	});
 }
 
 export function testResultSnapshot(globs: string[]): void {
-	testResult(`Snapshot Test: ${globs.map(glob => `"${glob}"`).join(", ")}`, globs, (results, program, t) => {
+	testResult(`Snapshot Test: ${globs.map(glob => `"${glob}"`).join(", ")}`, globs, (results, program, { assert }) => {
 		const declarations = arrayFlat(results.map(result => result.componentDefinitions.map(def => def.declaration)));
 		const summary = {
 			elements: results.reduce((acc, result) => acc + result.componentDefinitions.length, 0),
@@ -66,8 +66,8 @@ export function testResultSnapshot(globs: string[]): void {
 				.join(", ")
 		};
 
-		t.pass("Temporary ignore snapshot testing");
+		assert.isTrue(true, "Temporary ignore snapshot testing");
 		//const resolvedResult = stripTypescriptValues(results, program.getTypeChecker());
-		//t.snapshot({ _summary: summary, results: resolvedResult });
+		//assert.snapshot({ _summary: summary, results: resolvedResult }).match();
 	});
 }

@@ -1,10 +1,10 @@
-import test from "ava";
+import { test } from "@japa/runner";
 import * as ts from "typescript";
 import { analyzeText } from '../../src/analyze/analyze-text.js';
 import { findChildren } from '../../src/analyze/util/ast-util.js';
 import { resolveNodeValue } from '../../src/analyze/util/resolve-node-value.js';
 
-test("resolveNodeValue util returns correct values", t => {
+test("resolveNodeValue util returns correct values", ({ assert }) => {
 	const {
 		analyzedSourceFiles: [sourceFile],
 		program
@@ -32,11 +32,11 @@ const g = a;
 	findChildren(sourceFile, ts.isVariableDeclaration, ({ initializer, name }) => {
 		const actualValue = resolveNodeValue(initializer, { checker, ts })?.value;
 		const expectedResult = expectedResults[name.getText()];
-		t.deepEqual(actualValue, expectedResult, `Resolved value for '${name.getText()}' is invalid`);
+		assert.deepEqual(actualValue, expectedResult, `Resolved value for '${name.getText()}' is invalid`);
 	});
 });
 
-test("resolveNodeValue resolves type literals", t => {
+test("resolveNodeValue resolves type literals", ({ assert }) => {
 	const {
 		analyzedSourceFiles: [sourceFile],
 		program
@@ -49,6 +49,6 @@ type AliasedLiteral = StringLiteral;
 
 	findChildren(sourceFile, ts.isTypeAliasDeclaration, ({ name, type }) => {
 		const actualValue = resolveNodeValue(type, { checker, ts })?.value;
-		t.is(actualValue, "popsicles", `Resolved value for '${name.getText()}' is invalid`);
+		assert.strictEqual(actualValue, "popsicles", `Resolved value for '${name.getText()}' is invalid`);
 	});
 });

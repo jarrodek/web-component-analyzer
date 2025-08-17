@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("Correctly extends interface with interface from different file", t => {
+tsTest("Correctly extends interface with interface from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -32,11 +32,11 @@ declare global {
 
 	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(1, members.length);
-	t.truthy(getComponentProp(members, "checked"));
+	assert.strictEqual(1, members.length);
+	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends interface with interface+value from different file", t => {
+tsTest("Correctly extends interface with interface+value from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -69,11 +69,11 @@ declare global {
 
 	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(1, members.length);
-	t.truthy(getComponentProp(members, "checked"));
+	assert.strictEqual(1, members.length);
+	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends class with class from different file", t => {
+tsTest("Correctly extends class with class from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -103,11 +103,11 @@ declare global {
 
 	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(1, members.length);
-	t.truthy(getComponentProp(members, "checked"));
+	assert.strictEqual(1, members.length);
+	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends interface with interface from same file", t => {
+tsTest("Correctly extends interface with interface from same file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -131,11 +131,11 @@ declare global {
 
 	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(1, members.length);
-	t.truthy(getComponentProp(members, "checked"));
+	assert.strictEqual(1, members.length);
+	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends class with class from same file", t => {
+tsTest("Correctly extends class with class from same file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -159,6 +159,6 @@ declare global {
 
 	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(1, members.length);
-	t.truthy(getComponentProp(members, "checked"));
+	assert.strictEqual(1, members.length);
+	assert.isDefined(getComponentProp(members, "checked"));
 });

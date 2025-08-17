@@ -5,7 +5,7 @@ import { assertHasMembers } from "../../helpers/util.js";
 // To run the test:
 //    yarn ava --ext ts test/flavors/lwc/member-test.ts
 
-tsTest("LWC: Discovers properties from '@api'", t => {
+tsTest("LWC: Discovers properties from '@api'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -37,12 +37,12 @@ tsTest("LWC: Discovers properties from '@api'", t => {
 				required: undefined
 			}
 		],
-		t,
+		assert,
 		checker
 	);
 });
 
-tsTest("LWC: doesn't process non-LWC element'", t => {
+tsTest("LWC: doesn't process non-LWC element'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -79,12 +79,12 @@ tsTest("LWC: doesn't process non-LWC element'", t => {
 				required: undefined
 			}
 		],
-		t,
+		assert,
 		checker
 	);
 });
 
-tsTest("LWC: Discovers properties without @api'", t => {
+tsTest("LWC: Discovers properties without @api'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -116,13 +116,13 @@ tsTest("LWC: Discovers properties without @api'", t => {
 				required: undefined
 			}
 		],
-		t,
+		assert,
 		checker
 	);
-	//t.is(members.length, 0);
+	//assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discovers properties from '@track'", t => {
+tsTest("LWC: Discovers properties from '@track'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -154,13 +154,13 @@ tsTest("LWC: Discovers properties from '@track'", t => {
 				required: undefined
 			}
 		],
-		t,
+		assert,
 		checker
 	);
-	//t.is(members.length, 0);
+	//assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Does not discover method", t => {
+tsTest("LWC: Does not discover method", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -173,10 +173,10 @@ tsTest("LWC: Does not discover method", t => {
 	}`
 	});
 	const { members } = result.componentDefinitions[0]!.declaration!;
-	t.is(members.length, 0);
+	assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discover method with @api", t => {
+tsTest("LWC: Discover method with @api", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -189,10 +189,10 @@ tsTest("LWC: Discover method with @api", t => {
 	}`
 	});
 	const { members } = result.componentDefinitions[0]!.declaration!;
-	t.is(members.length, 0);
+	assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discovers properties. all in one'", t => {
+tsTest("LWC: Discovers properties. all in one'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -342,7 +342,7 @@ tsTest("LWC: Discovers properties. all in one'", t => {
 				required: undefined
 			}
 		],
-		t,
+		assert,
 		checker
 	);
 });

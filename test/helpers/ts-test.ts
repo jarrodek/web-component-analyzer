@@ -1,13 +1,14 @@
-import test, { Implementation } from "ava";
+import { test } from "@japa/runner";
 import { dirname } from "path";
 import { createRequire } from "module";
 import * as tsModule from "typescript";
 import { fileURLToPath } from "url";
+import { TestContext } from "@japa/runner";
 
 const __filename = fileURLToPath(import.meta.url);
 const require = createRequire(__filename);
 
-type TestFunction = (title: string, implementation: Implementation<unknown[]>) => void;
+type TestFunction = (title: string, callback: (context: TestContext) => void) => void;
 
 /**
  * Returns the current ts module
@@ -24,34 +25,34 @@ export function getCurrentTsModuleDirectory(): string {
 }
 
 /**
- * Sets up an ava test with the current TypeScript version
+ * Sets up a Japa test with the current TypeScript version
  * @param testFunction
  * @param title
  * @param cb
  */
-function setupTest(testFunction: TestFunction, title: string, cb: Implementation<unknown[]>) {
+function setupTest(testFunction: TestFunction, title: string, cb: (context: TestContext) => void) {
 	// Generate title with TypeScript version
 	const version = tsModule.version;
 	const titleWithModule = `[ts${version}] ${title}`;
 
-	// Setup the ava test
+	// Setup the Japa test
 	testFunction(titleWithModule, cb);
 }
 
 /**
- * Wraps an ava test to include TypeScript version in the title
+ * Wraps a Japa test to include TypeScript version in the title
  * @param testFunction
  */
-export function wrapAvaTest(testFunction: TestFunction): TestFunction {
+export function wrapJapaTest(testFunction: TestFunction): TestFunction {
 	return (title, implementation) => {
 		return setupTest(testFunction, title, implementation);
 	};
 }
 
 /**
- * Wrap the ava test module in these helper functions
+ * Wrap the Japa test module in these helper functions
  */
-export const tsTest = Object.assign(wrapAvaTest(test), {
-	only: wrapAvaTest(test.only),
-	skip: wrapAvaTest(test.skip)
+export const tsTest = Object.assign(wrapJapaTest(test), {
+	only: wrapJapaTest(test.only),
+	skip: wrapJapaTest(test.skip)
 });

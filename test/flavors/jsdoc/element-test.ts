@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers custom elements with @element", t => {
+tsTest("jsdoc: Discovers custom elements with @element", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -12,11 +12,11 @@ tsTest("jsdoc: Discovers custom elements with @element", t => {
 	 }
 	 `);
 
-	t.is(result.componentDefinitions.length, 1);
-	t.is(result.componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(result.componentDefinitions.length, 1);
+	assert.strictEqual(result.componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("jsdoc: Discovers custom elements with @element but without tag name", t => {
+tsTest("jsdoc: Discovers custom elements with @element but without tag name", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -27,11 +27,11 @@ tsTest("jsdoc: Discovers custom elements with @element but without tag name", t 
 	 }
 	 `);
 
-	t.is(result.componentDefinitions.length, 1);
-	t.is(result.componentDefinitions[0].tagName, "");
+	assert.strictEqual(result.componentDefinitions.length, 1);
+	assert.strictEqual(result.componentDefinitions[0].tagName, "");
 });
 
-tsTest("jsdoc: Discovers custom elements with multiline @element", t => {
+tsTest("jsdoc: Discovers custom elements with multiline @element", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -43,6 +43,6 @@ tsTest("jsdoc: Discovers custom elements with multiline @element", t => {
 	 }
 	 `);
 
-	t.is(result.componentDefinitions.length, 1);
-	t.is(result.componentDefinitions[0].tagName, "my-element");
+	assert.strictEqual(result.componentDefinitions.length, 1);
+	assert.strictEqual(result.componentDefinitions[0].tagName, "my-element");
 });

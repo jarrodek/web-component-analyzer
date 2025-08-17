@@ -2,7 +2,7 @@ import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-
 import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Handle Typescript visibility modifiers", t => {
+tsTest("Handle Typescript visibility modifiers", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -31,13 +31,12 @@ tsTest("Handle Typescript visibility modifiers", t => {
 				propName: "myProp2",
 				visibility: "protected"
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });
 
-tsTest("Handle visibility for private '_' prefixed names", t => {
+tsTest("Handle visibility for private '_' prefixed names", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -54,8 +53,8 @@ tsTest("Handle visibility for private '_' prefixed names", t => {
 
 	const { members = [], methods: [method] = [] } = result.componentDefinitions[0]?.declaration || {};
 
-	t.is(method.name, "_myMethod");
-	t.is(method.visibility, "private");
+	assert.strictEqual(method.name, "_myMethod");
+	assert.strictEqual(method.visibility, "private");
 
 	assertHasMembers(
 		members,
@@ -65,8 +64,7 @@ tsTest("Handle visibility for private '_' prefixed names", t => {
 				propName: "_myProp",
 				visibility: "private"
 			}
-		],
-		t,
+		], assert,
 		checker
 	);
 });

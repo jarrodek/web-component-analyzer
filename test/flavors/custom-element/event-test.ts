@@ -2,7 +2,7 @@ import { SimpleType, typeToString } from "ts-simple-type";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
 import { tsTest } from "../../helpers/ts-test.js";
 
-tsTest("Correctly discovers dispatched events and corresponding event types", t => {
+tsTest("Correctly discovers dispatched events and corresponding event types", ({ assert }) => {
 	const {
 		results: [result],
 		program
@@ -28,14 +28,14 @@ tsTest("Correctly discovers dispatched events and corresponding event types", t 
 	const assertEvent = (name: string, typeName: string) => {
 		const event = events.find(e => e.name === name);
 		if (event == null) {
-			t.fail(`Couldn't find event with name: ${name}`);
+			assert.fail(`Couldn't find event with name: ${name}`);
 			return;
 		}
 
-		t.is(typeToString(event.type!() as SimpleType, program.getTypeChecker()), typeName);
+		assert.strictEqual(typeToString(event.type!() as SimpleType, program.getTypeChecker()), typeName);
 	};
 
-	t.is(events.length, 5);
+	assert.strictEqual(events.length, 5);
 
 	assertEvent("my-event", "CustomEvent<unknown>");
 	assertEvent("my-event-2", "CustomEvent<string>");
