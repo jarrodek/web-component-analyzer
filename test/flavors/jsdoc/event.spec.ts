@@ -1,9 +1,10 @@
 import { isAssignableToSimpleTypeKind, isAssignableToType, SimpleType, typeToString } from "ts-simple-type";
 import { getLibTypeWithName } from "../../../src/analyze/util/type-util.js";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { getCurrentTsModule, tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
+import { getCurrentTsModule } from "../../helpers/ts-test.js";
 
-tsTest("jsdoc: Discovers custom events with @fires", ({ assert }) => {
+test("jsdoc: Discovers custom events with @fires", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -22,7 +23,7 @@ tsTest("jsdoc: Discovers custom events with @fires", ({ assert }) => {
 	assert.strictEqual(events[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers the detail type of custom events with @fires", ({ assert }) => {
+test("jsdoc: Discovers the detail type of custom events with @fires", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -42,7 +43,7 @@ tsTest("jsdoc: Discovers the detail type of custom events with @fires", ({ asser
 	assert.isTrue(isAssignableToSimpleTypeKind(mySecondEvent.type!() as SimpleType, "NUMBER"));
 });
 
-tsTest("jsdoc: Discovers events declared with @fires that includes extra jsdoc information", ({ assert }) => {
+test("jsdoc: Discovers events declared with @fires that includes extra jsdoc information", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -61,7 +62,7 @@ tsTest("jsdoc: Discovers events declared with @fires that includes extra jsdoc i
 	assert.strictEqual(events[0].jsDoc?.description, "Fires when check property changes");
 });
 
-tsTest("jsdoc: Discovers and correctly parses event types", ({ assert }) => {
+test("jsdoc: Discovers and correctly parses event types", ({ assert }) => {
 	const {
 		results: [result],
 		program

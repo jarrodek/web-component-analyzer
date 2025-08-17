@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 
-tsTest("Discovers elements defined using customElements.define", ({ assert }) => {
+test("Discovers elements defined using customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -17,7 +17,7 @@ tsTest("Discovers elements defined using customElements.define", ({ assert }) =>
 	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Discovers elements defined using window.customElements.define", ({ assert }) => {
+test("Discovers elements defined using window.customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -33,7 +33,7 @@ tsTest("Discovers elements defined using window.customElements.define", ({ asser
 	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Discovers only one element defined using multiple customElements.define", ({ assert }) => {
+test("Discovers only one element defined using multiple customElements.define", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -58,7 +58,7 @@ tsTest("Discovers only one element defined using multiple customElements.define"
 	assert.strictEqual(componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("Does not discover elements defined using custom define function", ({ assert }) => {
+test("Does not discover elements defined using custom define function", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -75,7 +75,7 @@ tsTest("Does not discover elements defined using custom define function", ({ ass
 	assert.strictEqual(componentDefinitions.length, 0);
 });
 
-tsTest("Discovers elements defined using customElements.define without string literal", ({ assert }) => {
+test("Discovers elements defined using customElements.define without string literal", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`

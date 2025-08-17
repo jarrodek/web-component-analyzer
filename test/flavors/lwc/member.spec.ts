@@ -1,11 +1,11 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
 // To run the test:
 //    yarn ava --ext ts test/flavors/lwc/member-test.ts
 
-tsTest("LWC: Discovers properties from '@api'", ({ assert }) => {
+test("LWC: Discovers properties from '@api'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -42,7 +42,7 @@ tsTest("LWC: Discovers properties from '@api'", ({ assert }) => {
 	);
 });
 
-tsTest("LWC: doesn't process non-LWC element'", ({ assert }) => {
+test("LWC: doesn't process non-LWC element'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -84,7 +84,7 @@ tsTest("LWC: doesn't process non-LWC element'", ({ assert }) => {
 	);
 });
 
-tsTest("LWC: Discovers properties without @api'", ({ assert }) => {
+test("LWC: Discovers properties without @api'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -122,7 +122,7 @@ tsTest("LWC: Discovers properties without @api'", ({ assert }) => {
 	//assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discovers properties from '@track'", ({ assert }) => {
+test("LWC: Discovers properties from '@track'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -160,7 +160,7 @@ tsTest("LWC: Discovers properties from '@track'", ({ assert }) => {
 	//assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Does not discover method", ({ assert }) => {
+test("LWC: Does not discover method", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -176,7 +176,7 @@ tsTest("LWC: Does not discover method", ({ assert }) => {
 	assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discover method with @api", ({ assert }) => {
+test("LWC: Discover method with @api", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({
@@ -192,7 +192,7 @@ tsTest("LWC: Discover method with @api", ({ assert }) => {
 	assert.strictEqual(members.length, 0);
 });
 
-tsTest("LWC: Discovers properties. all in one'", ({ assert }) => {
+test("LWC: Discovers properties. all in one'", ({ assert }) => {
 	const {
 		results: [result],
 		checker

@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 
-tsTest("LitElement: Discovers elements defined using @customElement decorator", ({ assert }) => {
+test("LitElement: Discovers elements defined using @customElement decorator", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -17,7 +17,7 @@ tsTest("LitElement: Discovers elements defined using @customElement decorator", 
 });
 
 let testName = "LitElement: Discovers @customElement(stringConstant)";
-tsTest(testName, ({ assert }) => {
+test(testName, ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -34,7 +34,7 @@ tsTest(testName, ({ assert }) => {
 });
 
 testName = "LitElement: Doesn't discover @customElement(stringVariable)";
-tsTest(testName, ({ assert }) => {
+test(testName, ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`

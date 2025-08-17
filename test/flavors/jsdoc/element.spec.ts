@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 
-tsTest("jsdoc: Discovers custom elements with @element", ({ assert }) => {
+test("jsdoc: Discovers custom elements with @element", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -16,7 +16,7 @@ tsTest("jsdoc: Discovers custom elements with @element", ({ assert }) => {
 	assert.strictEqual(result.componentDefinitions[0].tagName, "my-element");
 });
 
-tsTest("jsdoc: Discovers custom elements with @element but without tag name", ({ assert }) => {
+test("jsdoc: Discovers custom elements with @element but without tag name", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -31,7 +31,7 @@ tsTest("jsdoc: Discovers custom elements with @element but without tag name", ({
 	assert.strictEqual(result.componentDefinitions[0].tagName, "");
 });
 
-tsTest("jsdoc: Discovers custom elements with multiline @element", ({ assert }) => {
+test("jsdoc: Discovers custom elements with multiline @element", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`

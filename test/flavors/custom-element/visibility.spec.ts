@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Handle Typescript visibility modifiers", ({ assert }) => {
+test("Handle Typescript visibility modifiers", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -36,7 +36,7 @@ tsTest("Handle Typescript visibility modifiers", ({ assert }) => {
 	);
 });
 
-tsTest("Handle visibility for private '_' prefixed names", ({ assert }) => {
+test("Handle visibility for private '_' prefixed names", ({ assert }) => {
 	const {
 		results: [result],
 		checker

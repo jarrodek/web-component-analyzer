@@ -1,7 +1,7 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 
-tsTest("jsdoc: Discovers slots with @slots", ({ assert }) => {
+test("jsdoc: Discovers slots with @slots", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -20,7 +20,7 @@ tsTest("jsdoc: Discovers slots with @slots", ({ assert }) => {
 	assert.strictEqual(slots[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers unnamed slots with @slots", ({ assert }) => {
+test("jsdoc: Discovers unnamed slots with @slots", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -40,7 +40,7 @@ tsTest("jsdoc: Discovers unnamed slots with @slots", ({ assert }) => {
 	assert.strictEqual(slots[0].jsDoc?.description, "This is a comment");
 });
 
-tsTest("jsdoc: Discovers permitted tag names on @slot", ({ assert }) => {
+test("jsdoc: Discovers permitted tag names on @slot", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`

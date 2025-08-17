@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("LitElement: Discovers properties from 'static get properties'", ({ assert }) => {
+test("LitElement: Discovers properties from 'static get properties'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -49,7 +49,7 @@ tsTest("LitElement: Discovers properties from 'static get properties'", ({ asser
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@property'", ({ assert }) => {
+test("LitElement: Discovers properties from '@property'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -136,7 +136,7 @@ tsTest("LitElement: Discovers properties from '@property'", ({ assert }) => {
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@internalProperty'", ({ assert }) => {
+test("LitElement: Discovers properties from '@internalProperty'", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -195,7 +195,7 @@ tsTest("LitElement: Discovers properties from '@internalProperty'", ({ assert })
 	);
 });
 
-tsTest("LitElement: Discovers properties from '@state'", ({ assert }) => {
+test("LitElement: Discovers properties from '@state'", ({ assert }) => {
 	const {
 		results: [result],
 		checker

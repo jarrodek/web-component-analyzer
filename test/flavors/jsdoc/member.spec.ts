@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("jsdoc: Discovers properties with @prop", ({ assert }) => {
+test("jsdoc: Discovers properties with @prop", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -70,7 +70,7 @@ tsTest("jsdoc: Discovers properties with @prop", ({ assert }) => {
 	);
 });
 
-tsTest("jsdoc: Discovers attributes defined on getters with @attr", ({ assert }) => {
+test("jsdoc: Discovers attributes defined on getters with @attr", ({ assert }) => {
 	const {
 		results: [result],
 		checker

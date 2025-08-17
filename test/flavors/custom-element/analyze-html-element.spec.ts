@@ -1,10 +1,11 @@
 import { join } from "path";
+import { test } from "@japa/runner";
 import { analyzeHTMLElement } from "../../../src/analyze/analyze-html-element.js";
 import { ComponentHeritageClause } from "../../../src/analyze/types/component-declaration.js";
-import { getCurrentTsModule, getCurrentTsModuleDirectory, tsTest } from "../../helpers/ts-test.js";
+import { getCurrentTsModule, getCurrentTsModuleDirectory } from "../../helpers/ts-test.js";
 import { getComponentProp } from '../../helpers/util.js';
 
-tsTest("analyzeHTMLElement returns correct result", ({ assert }) => {
+test("analyzeHTMLElement returns correct result", ({ assert }) => {
 	const tsModule = getCurrentTsModule();
 	const program = tsModule.createProgram([join(getCurrentTsModuleDirectory(), "lib.dom.d.ts")], {});
 	const result = analyzeHTMLElement(program, tsModule);

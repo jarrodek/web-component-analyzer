@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("jsDoc: Handles @readonly on members", ({ assert }) => {
+test("jsDoc: Handles @readonly on members", ({ assert }) => {
 	const {
 		results: [result],
 		checker

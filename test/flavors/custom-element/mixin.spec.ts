@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers, getAttributeNames, getComponentProp, getPropertyNames } from "../../helpers/util.js";
 
-tsTest("Handles circular inheritance", ({ assert }) => {
+test("Handles circular inheritance", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -26,7 +26,7 @@ tsTest("Handles circular inheritance", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b"]);
 });
 
-tsTest("Handles circular inheritance using mixins", ({ assert }) => {
+test("Handles circular inheritance using mixins", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -55,7 +55,7 @@ tsTest("Handles circular inheritance using mixins", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b"]);
 });
 
-tsTest("Handles mixin with variable declaration in TS declaration file", ({ assert }) => {
+test("Handles mixin with variable declaration in TS declaration file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -113,7 +113,7 @@ tsTest("Handles mixin with variable declaration in TS declaration file", ({ asse
 	);
 });
 
-tsTest("Handles simple mixin", ({ assert }) => {
+test("Handles simple mixin", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -141,7 +141,7 @@ tsTest("Handles simple mixin", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
 });
 
-tsTest("Handles mixin with local variable subclass", ({ assert }) => {
+test("Handles mixin with local variable subclass", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -179,7 +179,7 @@ tsTest("Handles mixin with local variable subclass", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
 });
 
-tsTest("Handles 2 levels of mixins", ({ assert }) => {
+test("Handles 2 levels of mixins", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -215,7 +215,7 @@ tsTest("Handles 2 levels of mixins", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "c", "d"]);
 });
 
-tsTest("Handles mixins with properties", ({ assert }) => {
+test("Handles mixins with properties", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -240,7 +240,7 @@ tsTest("Handles mixins with properties", ({ assert }) => {
 	assert.isDefined(getComponentProp(members, "mixinProperty"));
 });
 
-tsTest("Handles mixins generated with factory functions", ({ assert }) => {
+test("Handles mixins generated with factory functions", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -267,7 +267,7 @@ tsTest("Handles mixins generated with factory functions", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
 });
 
-tsTest("Handles nested mixin extends", ({ assert }) => {
+test("Handles nested mixin extends", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -301,7 +301,7 @@ tsTest("Handles nested mixin extends", ({ assert }) => {
 	assert.deepEqual(attributeNames, ["a", "b", "c"]);
 });
 
-tsTest("Handles nested mixin wrapper functions", ({ assert }) => {
+test("Handles nested mixin wrapper functions", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -377,7 +377,7 @@ tsTest("Handles nested mixin wrapper functions", ({ assert }) => {
 	assert.deepEqual(propertyNames, ["a", "b", "c", "d", "e", "f", "g"]);
 });
 
-tsTest("Handles types in declaration files that represents a component with mixins", ({ assert }) => {
+test("Handles types in declaration files that represents a component with mixins", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({

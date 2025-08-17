@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Readonly modifier is found", ({ assert }) => {
+test("Readonly modifier is found", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -33,7 +33,7 @@ tsTest("Readonly modifier is found", ({ assert }) => {
 	);
 });
 
-tsTest("Getter have readonly modifier", ({ assert }) => {
+test("Getter have readonly modifier", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -66,7 +66,7 @@ tsTest("Getter have readonly modifier", ({ assert }) => {
 	);
 });
 
-tsTest("Getter and setter become one property without readonly modifier", ({ assert }) => {
+test("Getter and setter become one property without readonly modifier", ({ assert }) => {
 	const {
 		results: [result],
 		checker

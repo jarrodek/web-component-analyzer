@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Discovers elements defined JSX.IntrinsicElements", ({ assert }) => {
+test("Discovers elements defined JSX.IntrinsicElements", ({ assert }) => {
 	const {
 		results: [result],
 		checker

@@ -1,9 +1,9 @@
 import { isAssignableToSimpleTypeKind } from "ts-simple-type";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("Polymer components are correctly picked up", ({ assert }) => {
+test("Polymer components are correctly picked up", ({ assert }) => {
 	const {
 		results: [result],
 		checker

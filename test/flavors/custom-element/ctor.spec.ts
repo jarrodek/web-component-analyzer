@@ -1,8 +1,8 @@
+import { test } from "@japa/runner";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Property assignments in the constructor are picked up", ({ assert }) => {
+test("Property assignments in the constructor are picked up", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -114,7 +114,7 @@ tsTest("Property assignments in the constructor are picked up", ({ assert }) => 
 	);
 });
 
-tsTest("Property assignments in the constructor are correctly merged", ({ assert }) => {
+test("Property assignments in the constructor are correctly merged", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -167,7 +167,7 @@ tsTest("Property assignments in the constructor are correctly merged", ({ assert
 	);
 });
 
-tsTest("Property assignments in the constructor don't overwrite Typescript modifiers", ({ assert }) => {
+test("Property assignments in the constructor don't overwrite Typescript modifiers", ({ assert }) => {
 	const {
 		results: [result],
 		checker

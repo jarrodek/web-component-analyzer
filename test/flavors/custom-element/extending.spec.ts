@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("Correctly extends interface with interface from different file", ({ assert }) => {
+test("Correctly extends interface with interface from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -36,7 +36,7 @@ declare global {
 	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends interface with interface+value from different file", ({ assert }) => {
+test("Correctly extends interface with interface+value from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -73,7 +73,7 @@ declare global {
 	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends class with class from different file", ({ assert }) => {
+test("Correctly extends class with class from different file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -107,7 +107,7 @@ declare global {
 	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends interface with interface from same file", ({ assert }) => {
+test("Correctly extends interface with interface from same file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([
@@ -135,7 +135,7 @@ declare global {
 	assert.isDefined(getComponentProp(members, "checked"));
 });
 
-tsTest("Correctly extends class with class from same file", ({ assert }) => {
+test("Correctly extends class with class from same file", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule([

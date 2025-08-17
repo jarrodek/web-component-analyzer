@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { getComponentProp } from "../../helpers/util.js";
 
-tsTest("jsDoc: Handles visibility modifier on internal event", ({ assert }) => {
+test("jsDoc: Handles visibility modifier on internal event", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(`
@@ -27,7 +27,7 @@ tsTest("jsDoc: Handles visibility modifier on internal event", ({ assert }) => {
 	assert.strictEqual(event.visibility, "private");
 });
 
-tsTest("jsDoc: Handles visibility modifier on constructor assignment", ({ assert }) => {
+test("jsDoc: Handles visibility modifier on constructor assignment", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule({

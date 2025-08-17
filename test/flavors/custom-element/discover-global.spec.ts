@@ -1,8 +1,8 @@
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 import { assertHasMembers } from "../../helpers/util.js";
 
-tsTest("Discovers global members on HTMLElement", ({ assert }) => {
+test("Discovers global members on HTMLElement", ({ assert }) => {
 	const {
 		results: [result],
 		checker
@@ -53,7 +53,7 @@ tsTest("Discovers global members on HTMLElement", ({ assert }) => {
 	);
 });
 
-tsTest("Discovers global events on HTMLElementEventMap and HTMLElement", ({ assert }) => {
+test("Discovers global events on HTMLElementEventMap and HTMLElement", ({ assert }) => {
 	const {
 		results: [result]
 	} = analyzeTextWithCurrentTsModule(

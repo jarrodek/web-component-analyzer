@@ -1,8 +1,8 @@
 import { SimpleType, typeToString } from "ts-simple-type";
 import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { tsTest } from "../../helpers/ts-test.js";
+import { test } from "@japa/runner";
 
-tsTest("Correctly discovers dispatched events and corresponding event types", ({ assert }) => {
+test("Correctly discovers dispatched events and corresponding event types", ({ assert }) => {
 	const {
 		results: [result],
 		program
