@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers' // Recommended for handling process.argv
 import { analyzeCliCommand } from './analyze/analyze-cli-command.js'

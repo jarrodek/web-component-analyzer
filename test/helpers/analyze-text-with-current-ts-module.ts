@@ -1,6 +1,6 @@
-import { analyzeText, AnalyzeTextResult, VirtualSourceFile } from "../../src/analyze/analyze-text.js";
-import { AnalyzerOptions } from "../../src/analyze/types/analyzer-options.js";
-import { getCurrentTsModule } from "./ts-test.js";
+import { analyzeText, AnalyzeTextResult, VirtualSourceFile } from '../../src/analyze/analyze-text.js'
+import { AnalyzerOptions } from '../../src/analyze/types/analyzer-options.js'
+import { getCurrentTsModule } from './ts-test.js'
 
 /**
  * Calls the "analyzeText" function, but with the current ts module
@@ -8,12 +8,12 @@ import { getCurrentTsModule } from "./ts-test.js";
  * @param config
  */
 export function analyzeTextWithCurrentTsModule(
-	inputFiles: VirtualSourceFile[] | VirtualSourceFile,
-	config: Partial<AnalyzerOptions> = {}
+  inputFiles: VirtualSourceFile[] | VirtualSourceFile,
+  config: Partial<AnalyzerOptions> = {}
 ): AnalyzeTextResult {
-	const tsModule = getCurrentTsModule();
-	return analyzeText(inputFiles, {
-		ts: tsModule,
-		...config
-	});
+  const tsModule = getCurrentTsModule()
+  return analyzeText(inputFiles, {
+    ts: tsModule,
+    ...config,
+  })
 }

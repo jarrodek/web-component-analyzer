@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { AnalyzerCliConfig } from '../analyzer-cli-config.js'
 
 /**

@@ -150,7 +150,7 @@ function getVariableDocsFromAnalyzerResult(result: AnalyzerResult, context: Tran
   const varDocs: VariableDoc[] = []
 
   // Get all export symbols in the source file
-  const symbol = context.checker.getSymbolAtLocation(result.sourceFile)!
+  const symbol = context.checker.getSymbolAtLocation(result.sourceFile)
   if (symbol == null) {
     return []
   }

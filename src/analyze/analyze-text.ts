@@ -93,6 +93,7 @@ export function analyzeText(
     rootNames: files.map((file) => file.fileName),
     options: compilerOptions,
     host: {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       writeFile: () => {},
       readFile,
       fileExists,

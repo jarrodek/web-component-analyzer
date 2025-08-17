@@ -49,15 +49,16 @@ function analyzeAndDedupeDefinitions(
   if (sourceFile == null) return new Map()
 
   // Keep a map of "tag name" ==> "definition"
-  const tagNameDefinitionMap: Map<string, ComponentDefinition> = new Map()
+  const tagNameDefinitionMap = new Map<string, ComponentDefinition>()
 
   // Keep a map of "definition" ==> "declaration nodes"
-  const definitionToDeclarationMap: Map<ComponentDefinition, Set<Node>> = new Map()
+  const definitionToDeclarationMap = new Map<ComponentDefinition, Set<Node>>()
 
   // Discover definitions using flavors
   visitDefinitions(sourceFile, context, (results) => {
     // Definitions are unique by tag name and are merged when pointing to multiple declaration nodes.
-    // This is because multiple definitions can exist side by side for the same tag name (think global TagName type definition and customElements.define)
+    // This is because multiple definitions can exist side by side for the same tag name (think global
+    // TagName type definition and customElements.define)
     for (const result of results) {
       // Find existing definition with the result name
       let definition = tagNameDefinitionMap.get(result.tagName)

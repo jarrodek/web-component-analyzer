@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { writeFileSync } from 'fs'
 import { basename, dirname, extname, relative, resolve } from 'path'
 import { Program } from 'typescript'
@@ -167,7 +166,7 @@ async function distributeResultsIntoFiles(
   }
 
   // Output files into directory
-  if (config.outDir != null) {
+  if (config.outDir) {
     // Get extension name based on the specified format.
     const extName = formatToExtension(config.format || 'markdown')
 
@@ -177,13 +176,13 @@ async function distributeResultsIntoFiles(
       if (definition == null) continue
 
       // The name of the file becomes the tagName of the first component definition in the file.
-      const path = resolve(process.cwd(), config.outDir!, `${definition.tagName}${extName}`)
+      const path = resolve(process.cwd(), config.outDir, `${definition.tagName}${extName}`)
       addToOutputPath(path, result)
     }
   }
 
   // Output all results into a single file
-  else if (config.outFile != null) {
+  else if (config.outFile) {
     // Guess format based on outFile extension
 
     config.format = config.format || extensionToFormat(config.outFile)
@@ -196,7 +195,7 @@ async function distributeResultsIntoFiles(
   }
 
   // Output all results into multiple files
-  else if (config.outFiles != null) {
+  else if (config.outFiles) {
     // Guess format based on outFile extension
 
     config.format = config.format || extensionToFormat(config.outFiles)
@@ -212,8 +211,8 @@ async function distributeResultsIntoFiles(
         // The name of the file becomes the tagName of the first component definition in the file.
         const path = resolve(
           process.cwd(),
-          config
-            .outFiles!.replace(/{dir}/g, dir)
+          config.outFiles
+            .replace(/{dir}/g, dir)
             .replace(/{filename}/g, filename)
             .replace(/{tagname}/g, definition.tagName)
         )

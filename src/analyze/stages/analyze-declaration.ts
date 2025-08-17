@@ -175,7 +175,8 @@ function shouldInvalidateCachedDeclaration(
 ): boolean {
   for (const heritageClause of componentDeclaration.heritageClauses) {
     if (heritageClause.declaration != null) {
-      // This declaration shouldn't be invalidated if the existing "node.getSourceFile()" is equal to the "program.getSourceFile(...)" with the same file name,
+      // This declaration shouldn't be invalidated if the existing "node.getSourceFile()"
+      // is equal to the "program.getSourceFile(...)" with the same file name,
       const node = heritageClause.declaration.node
       const oldSourceFile = node.getSourceFile()
       const newSourceFile = context.program.getSourceFile(oldSourceFile.fileName)

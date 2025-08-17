@@ -79,7 +79,8 @@ export function mergeModifiers(
  * @param isMergeable
  * @param merge
  */
-/*export function mergeEntries<T>(entries: T[], isMergeable: (entry: T, merged: T) => boolean, merge: (left: T, right: T) => T): T[] {
+/*export function mergeEntries<T>(entries: T[], isMergeable: (entry: T, merged: T) => boolean, merge:
+  (left: T, right: T) => T): T[] {
 	let mergedEntries: T[] = [];
 
 	for (const entry of entries) {
@@ -95,7 +96,8 @@ export function mergeModifiers(
 		if (mergeableEntry == null) {
 			newEntry = entry;
 		} else {
-			mergedEntries = mergedEntries.filter(mergedEntry => mergedEntry !== entry && mergedEntry !== mergeableEntry);
+			mergedEntries = mergedEntries.filter(mergedEntry => mergedEntry !== entry 
+			&& mergedEntry !== mergeableEntry);
 			newEntry = merge(mergeableEntry, entry);
 		}
 		mergedEntries.push(newEntry);

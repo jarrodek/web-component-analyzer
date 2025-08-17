@@ -70,14 +70,16 @@ export function getJsDoc(node: Node, ts: typeof tsModule, tagNames?: string[]): 
               }
 
               // If Typescript generated a "type expression" or "name", comment will not include those.
-              // We can't just use what typescript parsed because it doesn't include things like optional jsdoc: name notation [...]
+              // We can't just use what typescript parsed because it doesn't include things like optional
+              // jsdoc: name notation [...]
               // Therefore we need to manually get the text and remove newlines/*
               const typeExpressionPart =
                 'typeExpression' in node ? (node as JSDocTypeTag).typeExpression?.getText() : undefined
               const namePart = 'name' in node ? (node as JSDocParameterTag).name?.getText() : undefined
 
               const fullComment = typeExpressionPart?.startsWith('@')
-                ? // To make matters worse, if Typescript can't parse a certain jsdoc, it will include the rest of the jsdocs tag from there in "typeExpressionPart"
+                ? // To make matters worse, if Typescript can't parse a certain jsdoc, it will include the rest of the
+                  // jsdocs tag from there in "typeExpressionPart"
                   // Therefore we check if there are multiple jsdoc tags in the string to only take the first one
                   // This will discard the following jsdocs, but at least we don't crash :-)
                   typeExpressionPart.split(/\n\s*\*\s?@/)[0] || ''
@@ -384,7 +386,8 @@ function parseJsDocTagString(str: string): JsDocTagParsed {
       // Example: "   myname"
 
       // A name is needed some jsdoc tags making it possible to include omit "-"
-      // Therefore we don't look for "-" or line end if the name is required - in that case we only need to eat the first word to find the name.
+      // Therefore we don't look for "-" or line end if the name is required - in that case
+      // we only need to eat the first word to find the name.
       const regex = JSDOC_TAGS_WITH_REQUIRED_NAME.includes(jsDocTag.tag)
         ? /^(\s*(\S+))/
         : /^(\s*(\S+))((\s*-[\s\S]+)|\s*)($|[\r\n])/

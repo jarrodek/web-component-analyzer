@@ -13,7 +13,7 @@ import { mergeFeatures } from './merge/merge-features.js'
 export function discoverFeatures(node: Node, context: AnalyzerDeclarationVisitContext): ComponentFeatureCollection {
   // Return the result if we already found this node
   if (context.cache.featureCollection.has(node)) {
-    return context.cache.featureCollection.get(node)!
+    return context.cache.featureCollection.get(node) as ComponentFeatureCollection
   }
 
   const { collection, refineEmitMap } = prepareRefineEmitMap()

@@ -88,7 +88,7 @@ export function getLitElementPropertyDecoratorConfig(
  * @param obj
  * @param key
  */
-function hasOwnProperty<T extends string>(obj: object, key: T): obj is { [K in T]: unknown } {
+function hasOwnProperty<T extends string>(obj: object, key: T): obj is Record<T, unknown> {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 

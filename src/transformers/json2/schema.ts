@@ -18,7 +18,7 @@ export interface PackageDoc {
   /**
    * An array of the modules this package contains.
    */
-  modules: Array<ModuleDoc>
+  modules: ModuleDoc[]
 }
 
 export interface ModuleDoc {
@@ -34,7 +34,7 @@ export interface ModuleDoc {
    */
   description?: string
 
-  exports?: Array<ExportDoc>
+  exports?: ExportDoc[]
 }
 
 export type ExportDoc = ClassDoc | FunctionDoc | VariableDoc | CustomElementDefinitionDoc
@@ -200,8 +200,8 @@ export interface ClassDoc {
    */
   description?: string
   superclass?: Reference
-  mixins?: Array<Reference>
-  members?: Array<ClassMember>
+  mixins?: Reference[]
+  members?: ClassMember[]
 }
 
 export type ClassMember = FieldDoc | MethodDoc
@@ -291,7 +291,7 @@ export interface FunctionLike {
    */
   description?: string
 
-  parameters?: Array<Parameter>
+  parameters?: Parameter[]
 
   return?: {
     type?: string
