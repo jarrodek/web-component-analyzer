@@ -108,8 +108,8 @@ function clearMergeMapWithMember(member: ComponentMember, mergeMap: MergeMap) {
  * @param mergeMap
  */
 function findMemberToMerge(similar: ComponentMember, mergeMap: MergeMap): ComponentMember | undefined {
-  const attrName = similar.attrName //?.toLowerCase(); // (similar.kind === "attribute" && similar.attrName.toLowerCase()) || undefined;
-  const propName = similar.propName /*?.toLowerCase()*/ //(similar.kind === "property" && similar.propName.toLowerCase()) || undefined;
+  const attrName = similar.attrName
+  const propName = similar.propName
 
   // Return a member that matches either propName (prioritized) or attrName
   if (propName != null) {

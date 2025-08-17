@@ -105,8 +105,10 @@ function resolveStructure(node: Node, context: InheritanceAnalyzerVisitContext) 
       if (returnNode != null && returnNode.expression != null && returnNode.expression !== node) {
         const returnNodeExp = returnNode.expression
 
-        // If a function call is returned, this function call expression is followed, and the arguments are treated as heritage
-        //    Example: return MyFirstMixin(MySecondMixin(Base))   -->   MyFirstMixin is followed, and MySecondMixin + Base are inherited
+        // If a function call is returned, this function call expression is followed,
+        // and the arguments are treated as heritage
+        //    Example: return MyFirstMixin(MySecondMixin(Base))   -->   MyFirstMixin is followed,
+        // and MySecondMixin + Base are inherited
         if (ts.isCallExpression(returnNodeExp) && returnNodeExp.expression != null) {
           for (const arg of returnNodeExp.arguments) {
             resolveHeritage(undefined, arg, context)
@@ -119,7 +121,7 @@ function resolveStructure(node: Node, context: InheritanceAnalyzerVisitContext) 
       }
     }
   } else if (ts.isVariableDeclaration(node) && (node.initializer != null || node.type != null)) {
-    resolveStructure((node.initializer || node.type)!, context)
+    resolveStructure((node.initializer || node.type) as Node, context)
   } else if (ts.isIntersectionTypeNode(node)) {
     emitTypeLiteralsDeclarations(node, context)
   }
@@ -168,7 +170,9 @@ function resolveHeritage(
           let hasDeclaration = false
           resolveStructure(decl, {
             ...context,
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             emitInheritance: () => {},
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             emitDeclarationKind: () => {},
             emitDeclaration: () => {
               hasDeclaration = true

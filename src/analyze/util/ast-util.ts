@@ -126,7 +126,7 @@ export function isAliasSymbol(symbol: Symbol, ts: typeof tsModule): boolean {
  * @param ts
  */
 export function getModifiersFromNode(node: Node, ts: typeof tsModule): Set<ModifierKind> | undefined {
-  const modifiers: Set<ModifierKind> = new Set()
+  const modifiers = new Set<ModifierKind>()
 
   if (hasModifier(node, ts.SyntaxKind.ReadonlyKeyword, ts)) {
     modifiers.add('readonly')
@@ -263,7 +263,8 @@ export function isPropertyRequired(
   }
 
   // Return "not required" if the property doesn't have an initializer and no type node.
-  // In this case the type could be determined by the jsdoc @type tag but cannot be "null" union if "strictNullCheck" is false.
+  // In this case the type could be determined by the jsdoc @type tag but cannot be "null"
+  // union if "strictNullCheck" is false.
   if (property.type == null) {
     return false
   }
@@ -387,7 +388,7 @@ export function getNodeIdentifier(node: Node, context: { ts: typeof tsModule }):
  * @param node
  * @param context
  */
-export function getDecorators(node: Node, context: { ts: typeof tsModule }): ReadonlyArray<Decorator> {
+export function getDecorators(node: Node, context: { ts: typeof tsModule }): readonly Decorator[] {
   const { ts } = context
 
   return ts.canHaveDecorators(node) ? (ts.getDecorators(node) ?? []) : []

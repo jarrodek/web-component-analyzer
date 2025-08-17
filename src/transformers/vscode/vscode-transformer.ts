@@ -163,7 +163,7 @@ function typesToStringUnion(types: SimpleType[]): HtmlDataAttrValue[] {
  */
 function formatMetadata(
   doc: string | undefined | JsDoc,
-  metadata: { [key: string]: string | undefined | (string | undefined)[] }
+  metadata: Record<string, string | undefined | (string | undefined)[]>
 ): string | undefined {
   const metaText = arrayDefined(
     Object.entries(metadata).map(([key, value]) => {

@@ -1,60 +1,85 @@
-import eslint from '@eslint/js';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
-import prettier from 'eslint-config-prettier';
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+
+/**
+ * List of files that must be ignored globally
+ */
+export const GLOBAL_IGNORE_LIST = [
+  '.github/',
+  '.husky/',
+  '.vscode/',
+  'coverage/',
+  'dev/',
+  'lib/',
+  'node_modules',
+  'scripts/',
+  '*.min.*',
+  '*.d.ts',
+  'CHANGELOG.md',
+  'LICENSE*',
+  'package-lock.json',
+]
 
 export default [
-	eslint.configs.recommended,
-	{
-		files: ['**/*.{js,mjs,cjs,ts}'],
-		languageOptions: {
-			parser: tsparser,
-			parserOptions: {
-				ecmaVersion: 2022,
-				sourceType: 'module',
-			},
-		},
-		plugins: {
-			'@typescript-eslint': tseslint,
-		},
-		rules: {
-			...tseslint.configs.recommended.rules,
-			'no-console': 'error',
-			'@typescript-eslint/no-empty-function': 'off',
-			'@typescript-eslint/no-use-before-define': 'off',
-			'@typescript-eslint/explicit-function-return-type': 'off',
-			'@typescript-eslint/explicit-member-accessibility': 'off',
-			'@typescript-eslint/no-var-requires': 'off',
-			'@typescript-eslint/no-unused-vars': ['error', { 
-				argsIgnorePattern: '^_',
-				varsIgnorePattern: '^_',
-			}],
-			'@typescript-eslint/ban-types': 'off',
-			'@typescript-eslint/no-non-null-assertion': 'off',
-			'@typescript-eslint/no-empty-interface': 'off',
-			'no-dupe-class-members': 'off',
-			'@typescript-eslint/no-dupe-class-members': 'error',
-		},
-	},
-	{
-		files: ['**/*.js', '**/*.mjs'],
-		rules: {
-			'@typescript-eslint/no-var-requires': 'off',
-		},
-	},
-	prettier,
-	{
-		ignores: [
-			'node_modules',
-			'lib',
-			'coverage',
-			'**/*.d.ts',
-			'**/*.test.{js,ts}',
-			'**/*.spec.{js,ts}',
-			'**/dist',
-			'**/build',
-			'**/out',
-			'**/temp',
-		]
-	}
-];
+  pluginJs.configs.recommended,
+  ...tseslint.configs.strict,
+  ...tseslint.configs.stylistic,
+  eslintPluginPrettierRecommended,
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      sourceType: 'module',
+    },
+    rules: {
+      'no-restricted-globals': [
+        'error',
+        ...Object.keys(globals.browser).filter(
+          // Disallow Node-specific globals (unless they are shared)
+          (g) => !Object.prototype.hasOwnProperty.call(globals.node, g)
+        ),
+      ],
+      'max-len': [
+        'error',
+        {
+          code: 120,
+          comments: 120,
+          ignoreUrls: true,
+          ignoreTemplateLiterals: true,
+        },
+      ],
+      'no-unreachable': ['error'],
+      'no-multi-spaces': ['error'],
+      'no-console': ['error'],
+      'no-redeclare': ['error'],
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['test/**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.node, // Enable Node.js globals for these files
+      },
+    },
+    rules: {
+      'no-restricted-globals': [
+        'error',
+        ...Object.keys(globals.browser).filter(
+          // Disallow Node-specific globals (unless they are shared)
+          (g) => !Object.prototype.hasOwnProperty.call(globals.node, g)
+        ),
+      ],
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+      'no-console': ['warn'],
+    },
+  },
+  {
+    ignores: GLOBAL_IGNORE_LIST,
+  },
+]

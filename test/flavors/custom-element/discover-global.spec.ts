@@ -1,15 +1,15 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { test } from "@japa/runner";
-import { assertHasMembers } from "../../helpers/util.js";
+import { analyzeTextWithCurrentTsModule } from '../../helpers/analyze-text-with-current-ts-module.js'
+import { test } from '@japa/runner'
+import { assertHasMembers } from '../../helpers/util.js'
 
-test("Discovers global members on HTMLElement", ({ assert }) => {
-	const {
-		results: [result],
-		checker
-	} = analyzeTextWithCurrentTsModule(
-		{
-			fileName: "test.d.ts",
-			text: `
+test('Discovers global members on HTMLElement', ({ assert }) => {
+  const {
+    results: [result],
+    checker,
+  } = analyzeTextWithCurrentTsModule(
+    {
+      fileName: 'test.d.ts',
+      text: `
 	declare global {
 	  /**
 	   * @attr anAttr
@@ -20,46 +20,47 @@ test("Discovers global members on HTMLElement", ({ assert }) => {
 		myProp: boolean;
 	  }
 	}
-	 `
-		},
-		{ config: { analyzeGlobalFeatures: true } }
-	);
+	 `,
+    },
+    { config: { analyzeGlobalFeatures: true } }
+  )
 
-	const { globalFeatures } = result;
+  const { globalFeatures } = result
 
-	assertHasMembers(
-		globalFeatures?.members || [],
-		[
-			{
-				kind: "property",
-				propName: "mdc-dialog-action",
-				type: () => ({ kind: "STRING" })
-			},
-			{
-				kind: "property",
-				propName: "myProp",
-				type: () => ({ kind: "BOOLEAN" })
-			},
-			{
-				kind: "property",
-				propName: "aProp"
-			},
-			{
-				kind: "attribute",
-				attrName: "anAttr"
-			}
-		], assert,
-		checker
-	);
-});
+  assertHasMembers(
+    globalFeatures?.members || [],
+    [
+      {
+        kind: 'property',
+        propName: 'mdc-dialog-action',
+        type: () => ({ kind: 'STRING' }),
+      },
+      {
+        kind: 'property',
+        propName: 'myProp',
+        type: () => ({ kind: 'BOOLEAN' }),
+      },
+      {
+        kind: 'property',
+        propName: 'aProp',
+      },
+      {
+        kind: 'attribute',
+        attrName: 'anAttr',
+      },
+    ],
+    assert,
+    checker
+  )
+})
 
-test("Discovers global events on HTMLElementEventMap and HTMLElement", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(
-		{
-			fileName: "test.d.ts",
-			text: `
+test('Discovers global events on HTMLElementEventMap and HTMLElement', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(
+    {
+      fileName: 'test.d.ts',
+      text: `
 	declare global {
 	  /**
 	   * @fires update
@@ -70,14 +71,14 @@ test("Discovers global events on HTMLElementEventMap and HTMLElement", ({ assert
         'change': CustomEvent;
        }
 	}
-	 `
-		},
-		{ config: { analyzeGlobalFeatures: true } }
-	);
+	 `,
+    },
+    { config: { analyzeGlobalFeatures: true } }
+  )
 
-	const { globalFeatures } = result;
+  const { globalFeatures } = result
 
-	assert.strictEqual(globalFeatures?.events.length, 2);
-	assert.strictEqual(globalFeatures?.events[0].name, "update");
-	assert.strictEqual(globalFeatures?.events[1].name, "change");
-});
+  assert.strictEqual(globalFeatures?.events.length, 2)
+  assert.strictEqual(globalFeatures?.events[0].name, 'update')
+  assert.strictEqual(globalFeatures?.events[1].name, 'change')
+})

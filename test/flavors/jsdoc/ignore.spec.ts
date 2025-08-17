@@ -1,10 +1,10 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { test } from "@japa/runner";
+import { analyzeTextWithCurrentTsModule } from '../../helpers/analyze-text-with-current-ts-module.js'
+import { test } from '@japa/runner'
 
-test("jsDoc: Handles @ignore jsdoc tag", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('jsDoc: Handles @ignore jsdoc tag', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		/**
 		 * @element
 	     */
@@ -24,11 +24,11 @@ test("jsDoc: Handles @ignore jsdoc tag", ({ assert }) => {
 			 */
 			foo = "bar";
 		}
-	 `);
+	 `)
 
-	const { events, methods, members } = result.componentDefinitions[0].declaration!;
+  const { events, methods, members } = result.componentDefinitions[0].declaration!
 
-	assert.strictEqual(events.length, 0);
-	assert.strictEqual(members.length, 0);
-	assert.strictEqual(methods.length, 0);
-});
+  assert.strictEqual(events.length, 0)
+  assert.strictEqual(members.length, 0)
+  assert.strictEqual(methods.length, 0)
+})

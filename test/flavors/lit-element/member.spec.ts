@@ -1,12 +1,12 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { test } from "@japa/runner";
-import { assertHasMembers } from "../../helpers/util.js";
+import { analyzeTextWithCurrentTsModule } from '../../helpers/analyze-text-with-current-ts-module.js'
+import { test } from '@japa/runner'
+import { assertHasMembers } from '../../helpers/util.js'
 
 test("LitElement: Discovers properties from 'static get properties'", ({ assert }) => {
-	const {
-		results: [result],
-		checker
-	} = analyzeTextWithCurrentTsModule(`
+  const {
+    results: [result],
+    checker,
+  } = analyzeTextWithCurrentTsModule(`
 	/**
 	 * @element
 	 */
@@ -22,38 +22,39 @@ test("LitElement: Discovers properties from 'static get properties'", ({ assert 
 	        }
 	    }
 	 }
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assertHasMembers(
-		members,
-		[
-			{
-				kind: "property",
-				propName: "myProp",
-				attrName: "myProp",
-				jsDoc: {
-					description: "This is a comment"
-				},
-				default: "hello 123",
-				typeHint: "String",
-				type: () => ({ kind: "STRING" }),
-				visibility: undefined,
-				reflect: "to-property",
-				deprecated: undefined,
-				required: undefined
-			}
-		], assert,
-		checker
-	);
-});
+  assertHasMembers(
+    members,
+    [
+      {
+        kind: 'property',
+        propName: 'myProp',
+        attrName: 'myProp',
+        jsDoc: {
+          description: 'This is a comment',
+        },
+        default: 'hello 123',
+        typeHint: 'String',
+        type: () => ({ kind: 'STRING' }),
+        visibility: undefined,
+        reflect: 'to-property',
+        deprecated: undefined,
+        required: undefined,
+      },
+    ],
+    assert,
+    checker
+  )
+})
 
 test("LitElement: Discovers properties from '@property'", ({ assert }) => {
-	const {
-		results: [result],
-		checker
-	} = analyzeTextWithCurrentTsModule(`
+  const {
+    results: [result],
+    checker,
+  } = analyzeTextWithCurrentTsModule(`
 	const configVariable = {type: Number};
 	/**
 	 * @element
@@ -70,77 +71,78 @@ test("LitElement: Discovers properties from '@property'", ({ assert }) => {
 
 			@property(configVariable) myProp4;
 	 }
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assertHasMembers(
-		members,
-		[
-			{
-				kind: "property",
-				propName: "myProp",
-				attrName: "my-prop",
-				jsDoc: {
-					description: "This is a comment"
-				},
-				default: "hello",
-				type: () => ({ kind: "STRING" }),
-				visibility: "public",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					type: { kind: "STRING" },
-					attribute: "my-prop"
-				}
-			},
-			{
-				kind: "property",
-				propName: "myProp2",
-				attrName: undefined,
-				default: undefined,
-				type: () => ({ kind: "NUMBER" }),
-				visibility: "protected",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					attribute: false
-				}
-			},
-			{
-				kind: "property",
-				propName: "myProp3",
-				attrName: "myProp3",
-				default: undefined,
-				type: () => ({ kind: "ANY" }),
-				visibility: "public",
-				deprecated: undefined,
-				required: undefined,
-				meta: {}
-			},
-			{
-				kind: "property",
-				propName: "myProp4",
-				attrName: "myProp4",
-				default: undefined,
-				type: () => ({ kind: "NUMBER" }),
-				visibility: "public",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					type: { kind: "NUMBER" }
-				}
-			}
-		], assert,
-		checker
-	);
-});
+  assertHasMembers(
+    members,
+    [
+      {
+        kind: 'property',
+        propName: 'myProp',
+        attrName: 'my-prop',
+        jsDoc: {
+          description: 'This is a comment',
+        },
+        default: 'hello',
+        type: () => ({ kind: 'STRING' }),
+        visibility: 'public',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          type: { kind: 'STRING' },
+          attribute: 'my-prop',
+        },
+      },
+      {
+        kind: 'property',
+        propName: 'myProp2',
+        attrName: undefined,
+        default: undefined,
+        type: () => ({ kind: 'NUMBER' }),
+        visibility: 'protected',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          attribute: false,
+        },
+      },
+      {
+        kind: 'property',
+        propName: 'myProp3',
+        attrName: 'myProp3',
+        default: undefined,
+        type: () => ({ kind: 'ANY' }),
+        visibility: 'public',
+        deprecated: undefined,
+        required: undefined,
+        meta: {},
+      },
+      {
+        kind: 'property',
+        propName: 'myProp4',
+        attrName: 'myProp4',
+        default: undefined,
+        type: () => ({ kind: 'NUMBER' }),
+        visibility: 'public',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          type: { kind: 'NUMBER' },
+        },
+      },
+    ],
+    assert,
+    checker
+  )
+})
 
 test("LitElement: Discovers properties from '@internalProperty'", ({ assert }) => {
-	const {
-		results: [result],
-		checker
-	} = analyzeTextWithCurrentTsModule(`
+  const {
+    results: [result],
+    checker,
+  } = analyzeTextWithCurrentTsModule(`
 	/**
 	 * @element
 	 */
@@ -152,54 +154,55 @@ test("LitElement: Discovers properties from '@internalProperty'", ({ assert }) =
 	    
 	    @internalProperty() private myProp2: number!;
 	 }
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assertHasMembers(
-		members,
-		[
-			{
-				kind: "property",
-				propName: "myProp",
-				attrName: undefined,
-				jsDoc: {
-					description: "This is a comment"
-				},
-				default: "hello",
-				type: () => ({ kind: "STRING" }),
-				visibility: "public",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					attribute: false,
-					state: true
-				}
-			},
-			{
-				kind: "property",
-				propName: "myProp2",
-				attrName: undefined,
-				default: undefined,
-				type: () => ({ kind: "NUMBER" }),
-				visibility: "private",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					attribute: false,
-					state: true
-				}
-			}
-		], assert,
-		checker
-	);
-});
+  assertHasMembers(
+    members,
+    [
+      {
+        kind: 'property',
+        propName: 'myProp',
+        attrName: undefined,
+        jsDoc: {
+          description: 'This is a comment',
+        },
+        default: 'hello',
+        type: () => ({ kind: 'STRING' }),
+        visibility: 'public',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          attribute: false,
+          state: true,
+        },
+      },
+      {
+        kind: 'property',
+        propName: 'myProp2',
+        attrName: undefined,
+        default: undefined,
+        type: () => ({ kind: 'NUMBER' }),
+        visibility: 'private',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          attribute: false,
+          state: true,
+        },
+      },
+    ],
+    assert,
+    checker
+  )
+})
 
 test("LitElement: Discovers properties from '@state'", ({ assert }) => {
-	const {
-		results: [result],
-		checker
-	} = analyzeTextWithCurrentTsModule(`
+  const {
+    results: [result],
+    checker,
+  } = analyzeTextWithCurrentTsModule(`
 	/**
 	 * @element
 	 */
@@ -211,45 +214,46 @@ test("LitElement: Discovers properties from '@state'", ({ assert }) => {
 
 	    @state() private myProp2: number!;
 	 }
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assertHasMembers(
-		members,
-		[
-			{
-				kind: "property",
-				propName: "myProp",
-				attrName: undefined,
-				jsDoc: {
-					description: "This is a comment"
-				},
-				default: "hello",
-				type: () => ({ kind: "STRING" }),
-				visibility: "public",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					attribute: false,
-					state: true
-				}
-			},
-			{
-				kind: "property",
-				propName: "myProp2",
-				attrName: undefined,
-				default: undefined,
-				type: () => ({ kind: "NUMBER" }),
-				visibility: "private",
-				deprecated: undefined,
-				required: undefined,
-				meta: {
-					attribute: false,
-					state: true
-				}
-			}
-		], assert,
-		checker
-	);
-});
+  assertHasMembers(
+    members,
+    [
+      {
+        kind: 'property',
+        propName: 'myProp',
+        attrName: undefined,
+        jsDoc: {
+          description: 'This is a comment',
+        },
+        default: 'hello',
+        type: () => ({ kind: 'STRING' }),
+        visibility: 'public',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          attribute: false,
+          state: true,
+        },
+      },
+      {
+        kind: 'property',
+        propName: 'myProp2',
+        attrName: undefined,
+        default: undefined,
+        type: () => ({ kind: 'NUMBER' }),
+        visibility: 'private',
+        deprecated: undefined,
+        required: undefined,
+        meta: {
+          attribute: false,
+          state: true,
+        },
+      },
+    ],
+    assert,
+    checker
+  )
+})

@@ -1,11 +1,11 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { test } from "@japa/runner";
-import { inspect } from "util";
+import { analyzeTextWithCurrentTsModule } from '../../helpers/analyze-text-with-current-ts-module.js'
+import { test } from '@japa/runner'
+import { inspect } from 'util'
 
-test("jsdoc: Correctly discovers the description in the jsdoc", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('jsdoc: Correctly discovers the description in the jsdoc', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 	/**
 	 * layout to full document height as follows:
 	 * \`\`\`
@@ -20,13 +20,13 @@ test("jsdoc: Correctly discovers the description in the jsdoc", ({ assert }) => 
 	 */
 	 class MyElement extends HTMLElement {
 	 }
-	 `);
+	 `)
 
-	const declaration = result.componentDefinitions[0].declaration!;
+  const declaration = result.componentDefinitions[0].declaration!
 
-	const description = declaration.jsDoc?.description ?? "";
-	const allowed = new Set<string>([
-		`layout to full document height as follows:
+  const description = declaration.jsDoc?.description ?? ''
+  const allowed = new Set<string>([
+    `layout to full document height as follows:
 \`\`\`
 @media screen {
   html, body {
@@ -35,7 +35,7 @@ test("jsdoc: Correctly discovers the description in the jsdoc", ({ assert }) => 
 }
 \`\`\`
 This is an example`,
-		`layout to full document height as follows:
+    `layout to full document height as follows:
 \`\`\`
 @media screen {
    html, body {
@@ -43,7 +43,7 @@ This is an example`,
    }
 }
 \`\`\`
-This is an example`
-	]);
-	assert.isTrue(allowed.has(description), `Expected ${inspect(description)} to be one of ${inspect(allowed)}`);
-});
+This is an example`,
+  ])
+  assert.isTrue(allowed.has(description), `Expected ${inspect(description)} to be one of ${inspect(allowed)}`)
+})

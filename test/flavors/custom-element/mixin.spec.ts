@@ -1,11 +1,11 @@
-import { analyzeTextWithCurrentTsModule } from "../../helpers/analyze-text-with-current-ts-module.js";
-import { test } from "@japa/runner";
-import { assertHasMembers, getAttributeNames, getComponentProp, getPropertyNames } from "../../helpers/util.js";
+import { analyzeTextWithCurrentTsModule } from '../../helpers/analyze-text-with-current-ts-module.js'
+import { test } from '@japa/runner'
+import { assertHasMembers, getAttributeNames, getComponentProp, getPropertyNames } from '../../helpers/util.js'
 
-test("Handles circular inheritance", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles circular inheritance', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		class MyElement extends MyElement {
 		}
 		
@@ -17,19 +17,19 @@ test("Handles circular inheritance", ({ assert }) => {
 				return ["a", "b"];
 			}
 		}
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const attributeNames = getAttributeNames(members);
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "b"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'b'])
+})
 
-test("Handles circular inheritance using mixins", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles circular inheritance using mixins', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		const Mixin1 = (Base) => {
 			return class Mixin1 extends Mixin2(Base) {}
 		}
@@ -46,22 +46,22 @@ test("Handles circular inheritance using mixins", ({ assert }) => {
 				return ["a", "b"];
 			}
 		}
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const attributeNames = getAttributeNames(members);
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "b"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'b'])
+})
 
-test("Handles mixin with variable declaration in TS declaration file", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule([
-		{
-			fileName: "main.js",
-			text: `
+test('Handles mixin with variable declaration in TS declaration file', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule([
+    {
+      fileName: 'main.js',
+      text: `
 		import { Mixin1 } from './mixins.js';
 		/**
 		 * @element
@@ -69,11 +69,11 @@ test("Handles mixin with variable declaration in TS declaration file", ({ assert
 		class MyElement extends Mixin1(HTMLElement) {
 			c: number;
 		}	
-		`
-		},
-		{
-			fileName: "mixins.d.ts",
-			text: `
+		`,
+    },
+    {
+      fileName: 'mixins.d.ts',
+      text: `
 	declare type Constructor<T = object> = new (...args: any[]) => T;
 	export interface MyInterface {
 		a: number;
@@ -87,36 +87,36 @@ test("Handles mixin with variable declaration in TS declaration file", ({ assert
 
 		
 		`,
-			analyze: false
-		}
-	]);
+      analyze: false,
+    },
+  ])
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assertHasMembers(
-		members,
-		[
-			{
-				kind: "property",
-				propName: "a"
-			},
-			{
-				kind: "property",
-				propName: "b"
-			},
-			{
-				kind: "property",
-				propName: "c"
-			}
-		],
-		assert
-	);
-});
+  assertHasMembers(
+    members,
+    [
+      {
+        kind: 'property',
+        propName: 'a',
+      },
+      {
+        kind: 'property',
+        propName: 'b',
+      },
+      {
+        kind: 'property',
+        propName: 'c',
+      },
+    ],
+    assert
+  )
+})
 
-test("Handles simple mixin", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles simple mixin', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		const MyMixin = (Base) => {
 			return class Mixin extends Base {
 				static get observedAttributes() {
@@ -132,19 +132,19 @@ test("Handles simple mixin", ({ assert }) => {
 		}
 		
 		customElements.define("my-element", MyElement);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const attributeNames = getAttributeNames(members);
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'b', 'c', 'd'])
+})
 
-test("Handles mixin with local variable subclass", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles mixin with local variable subclass', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		const ExtraMixin = (Base) => {
 			return class ExtraMixinClass extends Base {
 				static get observedAttributes() {
@@ -170,19 +170,19 @@ test("Handles mixin with local variable subclass", ({ assert }) => {
 		}
 		
 		customElements.define("my-element", MyElement);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const attributeNames = getAttributeNames(members);
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'b', 'c', 'd'])
+})
 
-test("Handles 2 levels of mixins", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles 2 levels of mixins', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		const MyMixin1 = (Base) => {
 			return class Mixin extends Base {
 				static get observedAttributes() {
@@ -206,19 +206,19 @@ test("Handles 2 levels of mixins", ({ assert }) => {
 		}
 		
 		customElements.define("my-element", MyElement);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const attributeNames = getAttributeNames(members);
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "c", "d"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'c', 'd'])
+})
 
-test("Handles mixins with properties", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles mixins with properties', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		type Constructor<T = {}> = new (...args: any[]) => T;
 		const SomeMixin = <C extends Constructor<HTMLElement>>(Base: C) => {
 			class Mixin extends Base {
@@ -231,19 +231,19 @@ test("Handles mixins with properties", ({ assert }) => {
 		class SomeElement extends SomeMixin(LitElement) {
 			@property({ type: String }) elementProperty: string;
 		}
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	assert.strictEqual(members.length, 2);
-	assert.isDefined(getComponentProp(members, "elementProperty"));
-	assert.isDefined(getComponentProp(members, "mixinProperty"));
-});
+  assert.strictEqual(members.length, 2)
+  assert.isDefined(getComponentProp(members, 'elementProperty'))
+  assert.isDefined(getComponentProp(members, 'mixinProperty'))
+})
 
-test("Handles mixins generated with factory functions", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles mixins generated with factory functions', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		export const FieldCustomMixin = dedupeMixin(superclass =>
 			class FieldCustomMixin extends superclass {
 				static get observedAttributes() { 
@@ -259,18 +259,18 @@ test("Handles mixins generated with factory functions", ({ assert }) => {
 		}
 		
 		customElements.define("my-element", SomeElement);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
-	const attributeNames = getAttributeNames(members);
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
+  const attributeNames = getAttributeNames(members)
 
-	assert.deepEqual(attributeNames, ["a", "b", "c", "d"]);
-});
+  assert.deepEqual(attributeNames, ['a', 'b', 'c', 'd'])
+})
 
-test("Handles nested mixin extends", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles nested mixin extends', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 		const MyMixin1 = (Base) => {
 			return class Mixin1 extends Base {
 				static get observedAttributes() {
@@ -294,17 +294,17 @@ test("Handles nested mixin extends", ({ assert }) => {
 		}
 		
 		customElements.define("my-element", MyElement);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
-	const attributeNames = getAttributeNames(members);
-	assert.deepEqual(attributeNames, ["a", "b", "c"]);
-});
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
+  const attributeNames = getAttributeNames(members)
+  assert.deepEqual(attributeNames, ['a', 'b', 'c'])
+})
 
-test("Handles nested mixin wrapper functions", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule(`
+test('Handles nested mixin wrapper functions', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule(`
 
 	/* =============== Mixin 1 ===================== */
 	export function AtFormItemMixin<A>(base: A) {
@@ -369,20 +369,20 @@ test("Handles nested mixin wrapper functions", ({ assert }) => {
 	}
 	
 	customElements.define("at-text-field", AtTextField);
-	 `);
+	 `)
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const propertyNames = getPropertyNames(members);
-	assert.deepEqual(propertyNames, ["a", "b", "c", "d", "e", "f", "g"]);
-});
+  const propertyNames = getPropertyNames(members)
+  assert.deepEqual(propertyNames, ['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+})
 
-test("Handles types in declaration files that represents a component with mixins", ({ assert }) => {
-	const {
-		results: [result]
-	} = analyzeTextWithCurrentTsModule({
-		fileName: "element.d.ts",
-		text: `
+test('Handles types in declaration files that represents a component with mixins', ({ assert }) => {
+  const {
+    results: [result],
+  } = analyzeTextWithCurrentTsModule({
+    fileName: 'element.d.ts',
+    text: `
 		import { LitElement } from "lit-element";
 import { TemplateResult } from "lit-html";
 declare const AtButton_base: {
@@ -414,12 +414,12 @@ declare global {
         "at-button": AtButton;
     }
 }
-	 `
-	});
+	 `,
+  })
 
-	const { members = [] } = result.componentDefinitions[0]?.declaration || {};
+  const { members = [] } = result.componentDefinitions[0]?.declaration || {}
 
-	const propNames = getPropertyNames(members);
+  const propNames = getPropertyNames(members)
 
-	assert.deepEqual(propNames, ["color", "size", "fab", "flat", "$formItem", "min", "max"]);
-});
+  assert.deepEqual(propNames, ['color', 'size', 'fab', 'flat', '$formItem', 'min', 'max'])
+})

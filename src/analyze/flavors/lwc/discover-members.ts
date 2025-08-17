@@ -96,7 +96,7 @@ function parsePropertyDecorator(
   return undefined
 }
 
-const HTMLAttrs: { [name: string]: string } = {
+const HTMLAttrs: Record<string, string> = {
   accessKey: 'accesskey',
   bgColor: 'bgcolor',
   colSpan: 'colspan',
