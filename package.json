@@ -1,6 +1,6 @@
 {
 	"name": "@jarrodek/web-component-analyzer",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "CLI that analyzes web components",
 	"type": "module",
 	"main": "lib/api.js",

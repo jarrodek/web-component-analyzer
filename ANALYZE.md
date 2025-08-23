@@ -6,9 +6,9 @@ This library is designed to analyze components no matter where they are found. T
 
 As you can see we loose a lot of information when the element is defined in a typescript definition file.
 
-### Custom Elements
+## Custom Elements
 
-#### In your own code
+### In your own code
 
 <!-- prettier-ignore -->
 ```javascript
@@ -31,7 +31,7 @@ customElements.define("my-element", MyElement);
 - **Properties**: `value`, `myProp (String)`
 - **Attributes**: `attr1`, `attr2`
 
-#### In typescript definition files
+### In typescript definition files
 
 <!-- prettier-ignore -->
 ```javascript
@@ -54,7 +54,7 @@ declare global {
 
 ## [LitElement](https://lit-element.polymer-project.org/guide)
 
-#### In your own code
+### In your own code
 
 <!-- prettier-ignore -->
 ```javascript
@@ -82,7 +82,7 @@ export class MyElement extends LitElement {
 - **Properties**: `myProp (String)`, `prop1 (String)`, `prop2 (Number)`, `prop3 (Boolean)`, `prop4 (String)`, `prop5 (Boolean)`
 - **Attributes**: `prop1 (String)`, `prop-two (Number)`, `prop4 (String)`, `prop-5 (Boolean)`,
 
-#### In typescript definition files
+### In typescript definition files
 
 <!-- prettier-ignore -->
 ```typescript

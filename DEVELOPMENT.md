@@ -4,11 +4,11 @@ This is an overview of the architecture. When analyzing a file, the analyzer goe
 
 <img src="https://user-images.githubusercontent.com/5372940/69460288-09342080-0d74-11ea-822e-2194f986115d.png" />
 
-# Flavors
+## Flavors
 
 Each flavor finds features on components. Features can be "properties", "attributes", "slot", eg. Flavors can be toggled on/off, but all are run as default.
 
-# Analyzing and Merging
+## Analyzing and Merging
 
 Multiple features can be emitted per property (eg. if you have both a constructor assignment and a class field that reference the same property). Here are some highlights of feature merging.
 

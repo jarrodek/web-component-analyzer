@@ -6,7 +6,7 @@ import { DefinitionNodeResult } from '../analyzer-flavor.js'
 
 /**
  * Visits lit-element related definitions.
- * Specifically it finds the usage of the @customElement decorator.
+ * Specifically it finds the usage of the `@customElement` decorator.
  * @param node
  * @param context
  */
