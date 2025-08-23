@@ -54,6 +54,11 @@ function isLWCComponent(component: ComponentFeatureBase, context: AnalyzerVisitC
 }
 
 export const refineFeature: AnalyzerFlavor['refineFeature'] = {
+  /**
+   * Refines a member feature.
+   * @param member The member to refine.
+   * @param context The context to use for the refinement.
+   */
   member: (member: ComponentMember, context: AnalyzerVisitContext): ComponentMember | undefined => {
     if (isLWCComponent(member, context)) {
       const visibility = hasApiDecorator(member.node, context) ? 'public' : 'protected'
@@ -64,6 +69,11 @@ export const refineFeature: AnalyzerFlavor['refineFeature'] = {
     }
     return member
   },
+  /**
+   * Refines a method feature.
+   * @param method The method to refine.
+   * @param context The context to use for the refinement.
+   */
   method: (method: ComponentMethod, context: AnalyzerVisitContext): ComponentMethod | undefined => {
     if (isLWCComponent(method, context)) {
       const visibility = hasApiDecorator(method.node, context) ? 'public' : 'protected'

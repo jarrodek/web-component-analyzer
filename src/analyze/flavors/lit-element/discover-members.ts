@@ -28,8 +28,9 @@ import {
 /**
  * Parses lit-related declaration members.
  * This is primary by looking at the "@property" decorator and the "static get properties()".
- * @param node
- * @param context
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered members.
  */
 export function discoverMembers(node: Node, context: AnalyzerDeclarationVisitContext): ComponentMember[] | undefined {
   const { ts } = context

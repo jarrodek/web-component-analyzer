@@ -25,8 +25,9 @@ export interface AstContext {
 
 /**
  * Resolves all relevant declarations of a specific node.
- * @param node
- * @param context
+ * @param node The node to resolve the declarations for.
+ * @param context The AST context.
+ * @returns An array of declarations.
  */
 export function resolveDeclarations(node: Node, context: { checker: TypeChecker; ts: typeof tsModule }): Declaration[] {
   if (node == null) return []
@@ -40,8 +41,9 @@ export function resolveDeclarations(node: Node, context: { checker: TypeChecker;
 /**
  * Returns the symbol of a node.
  * This function follows aliased symbols.
- * @param node
- * @param context
+ * @param node The node to get the symbol for.
+ * @param context The AST context.
+ * @returns The symbol of the node.
  */
 export function getSymbol(node: Node, context: { checker: TypeChecker; ts: typeof tsModule }): Symbol | undefined {
   if (node == null) return undefined
@@ -66,7 +68,8 @@ export function getSymbol(node: Node, context: { checker: TypeChecker; ts: typeo
 
 /**
  * Resolves the declarations of a symbol. A valueDeclaration is always the first entry in the array
- * @param symbol
+ * @param symbol The symbol to resolve the declarations for.
+ * @returns An array of declarations.
  */
 export function resolveSymbolDeclarations(symbol: Symbol): Declaration[] {
   // Filters all declarations
@@ -83,8 +86,9 @@ export function resolveSymbolDeclarations(symbol: Symbol): Declaration[] {
 
 /**
  * Resolve a declaration by trying to find the real value by following assignments.
- * @param node
- * @param context
+ * @param node The node to resolve the declarations for.
+ * @param context The AST context.
+ * @returns An array of declarations.
  */
 export function resolveDeclarationsDeep(node: Node, context: { checker: TypeChecker; ts: typeof tsModule }): Node[] {
   const declarations: Node[] = []
@@ -113,8 +117,9 @@ export function resolveDeclarationsDeep(node: Node, context: { checker: TypeChec
 
 /**
  * Returns if the symbol has "alias" flag
- * @param symbol
- * @param ts
+ * @param symbol The symbol to check.
+ * @param ts The TypeScript module.
+ * @returns True if the symbol has the "alias" flag.
  */
 export function isAliasSymbol(symbol: Symbol, ts: typeof tsModule): boolean {
   return hasFlag(symbol.flags, ts.SymbolFlags.Alias)
@@ -122,8 +127,9 @@ export function isAliasSymbol(symbol: Symbol, ts: typeof tsModule): boolean {
 
 /**
  * Returns a set of modifiers on a node
- * @param node
- * @param ts
+ * @param node The node to get the modifiers from.
+ * @param ts The TypeScript module.
+ * @returns A set of modifiers.
  */
 export function getModifiersFromNode(node: Node, ts: typeof tsModule): Set<ModifierKind> | undefined {
   const modifiers = new Set<ModifierKind>()
@@ -145,8 +151,9 @@ export function getModifiersFromNode(node: Node, ts: typeof tsModule): Set<Modif
 
 /**
  * Returns if a number has a flag
- * @param num
- * @param flag
+ * @param num The number to check.
+ * @param flag The flag to check for.
+ * @returns True if the number has the flag.
  */
 export function hasFlag(num: number, flag: number): boolean {
   return (num & flag) !== 0
@@ -154,8 +161,10 @@ export function hasFlag(num: number, flag: number): boolean {
 
 /**
  * Returns if a node has a specific modifier.
- * @param node
- * @param modifierKind
+ * @param node The node to check.
+ * @param modifierKind The modifier to check for.
+ * @param ts The TypeScript module.
+ * @returns True if the node has the modifier.
  */
 export function hasModifier(node: Node, modifierKind: SyntaxKind, ts: typeof tsModule): boolean {
   if (!ts.canHaveModifiers(node)) {
@@ -168,6 +177,9 @@ export function hasModifier(node: Node, modifierKind: SyntaxKind, ts: typeof tsM
 
 /**
  * Returns the visibility of a node
+ * @param node The node to get the visibility from.
+ * @param ts The TypeScript module.
+ * @returns The visibility of the node.
  */
 export function getMemberVisibilityFromNode(
   node: PropertyDeclaration | PropertySignature | SetAccessorDeclaration | Node,
@@ -190,8 +202,9 @@ export function getMemberVisibilityFromNode(
 
 /**
  * Returns all keys and corresponding interface/class declarations for keys in an interface.
- * @param interfaceDeclaration
- * @param context
+ * @param interfaceDeclaration The interface declaration to get the keys from.
+ * @param context The AST context.
+ * @returns An array of keys and their corresponding declarations.
  */
 export function getInterfaceKeys(
   interfaceDeclaration: InterfaceDeclaration,
@@ -230,6 +243,13 @@ export function getInterfaceKeys(
   return extensions
 }
 
+/**
+ * Checks if a property is required.
+ * @param property The property to check.
+ * @param checker The type checker.
+ * @param ts The TypeScript module.
+ * @returns True if the property is required.
+ */
 // noinspection JSUnusedGlobalSymbols
 export function isPropertyRequired(
   property: PropertySignature | PropertyDeclaration,
@@ -274,8 +294,9 @@ export function isPropertyRequired(
 
 /**
  * Find a node recursively walking up the tree using parent nodes.
- * @param node
- * @param test
+ * @param node The node to start from.
+ * @param test A function to test each node.
+ * @returns The found node or undefined.
  */
 export function findParent<T extends Node = Node>(
   node: Node | undefined,
@@ -287,8 +308,9 @@ export function findParent<T extends Node = Node>(
 
 /**
  * Find a node recursively walking down the children of the tree. Depth first search.
- * @param node
- * @param test
+ * @param node The node to start from.
+ * @param test A function to test each node.
+ * @returns The found node or undefined.
  */
 export function findChild<T extends Node = Node>(
   node: Node | undefined,
@@ -301,9 +323,9 @@ export function findChild<T extends Node = Node>(
 
 /**
  * Find multiple children by walking down the children of the tree. Depth first search.
- * @param node
- * @param test
- * @param emit
+ * @param node The node to start from.
+ * @param test A function to test each node.
+ * @param emit A function to call for each found node.
  */
 export function findChildren<T extends Node = Node>(
   node: Node | undefined,
@@ -319,7 +341,8 @@ export function findChildren<T extends Node = Node>(
 
 /**
  * Returns the language of the node's source file
- * @param node
+ * @param node The node to get the source file language from.
+ * @returns The language of the node's source file.
  */
 export function getNodeSourceFileLang(node: Node): 'js' | 'ts' {
   return node.getSourceFile().fileName.endsWith('ts') ? 'ts' : 'js'
@@ -327,7 +350,8 @@ export function getNodeSourceFileLang(node: Node): 'js' | 'ts' {
 
 /**
  * Returns if a node is in a declaration file
- * @param node
+ * @param node The node to check.
+ * @returns True if the node is in a declaration file.
  */
 export function isNodeInDeclarationFile(node: Node): boolean {
   return node.getSourceFile().isDeclarationFile
@@ -335,8 +359,9 @@ export function isNodeInDeclarationFile(node: Node): boolean {
 
 /**
  * Returns the leading comment for a given node
- * @param node
- * @param ts
+ * @param node The node to get the leading comment for.
+ * @param ts The TypeScript module.
+ * @returns The leading comment for the node.
  */
 export function getLeadingCommentForNode(node: Node, ts: typeof tsModule): string | undefined {
   const sourceFileText = node.getSourceFile().text
@@ -352,8 +377,9 @@ export function getLeadingCommentForNode(node: Node, ts: typeof tsModule): strin
 
 /**
  * Returns the declaration name of a given node if possible.
- * @param node
- * @param context
+ * @param node The node to get the name from.
+ * @param context The AST context.
+ * @returns The name of the node.
  */
 export function getNodeName(node: Node, context: { ts: typeof tsModule }): string | undefined {
   return getNodeIdentifier(node, context)?.getText()
@@ -361,8 +387,9 @@ export function getNodeName(node: Node, context: { ts: typeof tsModule }): strin
 
 /**
  * Returns the declaration name of a given node if possible.
- * @param node
- * @param context
+ * @param node The node to get the identifier from.
+ * @param context The AST context.
+ * @returns The identifier of the node.
  */
 export function getNodeIdentifier(node: Node, context: { ts: typeof tsModule }): Identifier | undefined {
   if (context.ts.isIdentifier(node)) {
@@ -385,8 +412,9 @@ export function getNodeIdentifier(node: Node, context: { ts: typeof tsModule }):
 
 /**
  * Returns all decorators in either the node's `decorators` or `modifiers`.
- * @param node
- * @param context
+ * @param node The node to get the decorators from.
+ * @param context The AST context.
+ * @returns An array of decorators.
  */
 export function getDecorators(node: Node, context: { ts: typeof tsModule }): readonly Decorator[] {
   const { ts } = context

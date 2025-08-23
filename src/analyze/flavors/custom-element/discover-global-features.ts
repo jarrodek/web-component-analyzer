@@ -11,6 +11,11 @@ import { AnalyzerFlavor } from '../analyzer-flavor.js'
  * Discovers global feature defined on "HTMLElementEventMap" or "HTMLElement"
  */
 export const discoverGlobalFeatures: AnalyzerFlavor['discoverGlobalFeatures'] = {
+  /**
+   * Discovers global events.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   event: (node: Node, context: AnalyzerVisitContext): ComponentEvent[] | undefined => {
     const { ts, checker } = context
 
@@ -41,6 +46,11 @@ export const discoverGlobalFeatures: AnalyzerFlavor['discoverGlobalFeatures'] = 
     }
     return undefined
   },
+  /**
+   * Discovers global members.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   member: (node: Node, context: AnalyzerVisitContext): ComponentMember[] | undefined => {
     const { ts } = context
 

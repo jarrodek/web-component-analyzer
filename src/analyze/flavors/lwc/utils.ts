@@ -17,6 +17,12 @@ interface LwcClassDeclaration extends ClassDeclaration {
   [LWCCACHE]: ComponentRef | undefined
 }
 
+/**
+ * Returns the LWC component reference for a given node.
+ * @param node The node to get the component reference for.
+ * @param context The context to use for the visit.
+ * @returns The component reference.
+ */
 export function getLwcComponent(node: Node, context: AnalyzerVisitContext): ComponentRef | undefined {
   const { ts } = context
   if (ts.isClassDeclaration(node)) {

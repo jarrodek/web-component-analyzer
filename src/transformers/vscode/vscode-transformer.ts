@@ -13,9 +13,10 @@ import { HtmlDataAttr, HtmlDataAttrValue, HtmlDataTag, VscodeHtmlData } from './
 
 /**
  * Vscode json output format transformer.
- * @param results
- * @param program
- * @param _config
+ * @param results The results to transform.
+ * @param program The program to use.
+ * @param _config The config to use.
+ * @returns The transformed results.
  */
 export const vscodeTransformer: TransformerFunction = (
   results: AnalyzerResult[],
@@ -40,6 +41,12 @@ export const vscodeTransformer: TransformerFunction = (
   return JSON.stringify(vscodeJson, null, 2)
 }
 
+/**
+ * Transforms a component definition to a html data tag.
+ * @param definition The definition to transform.
+ * @param checker The type checker to use.
+ * @returns The transformed html data tag.
+ */
 function definitionToHtmlDataTag(definition: ComponentDefinition, checker: TypeChecker): HtmlDataTag {
   const declaration = definition.declaration
 
@@ -87,6 +94,12 @@ function definitionToHtmlDataTag(definition: ComponentDefinition, checker: TypeC
   }
 }
 
+/**
+ * Transforms a component event to a vscode attribute.
+ * @param event The event to transform.
+ * @param checker The type checker to use.
+ * @returns The transformed vscode attribute.
+ */
 function componentEventToVscodeAttr(event: ComponentEvent, checker: TypeChecker): HtmlDataAttr | undefined {
   return {
     name: `on${event.name}`,
@@ -94,6 +107,12 @@ function componentEventToVscodeAttr(event: ComponentEvent, checker: TypeChecker)
   }
 }
 
+/**
+ * Transforms a component member to a vscode attribute.
+ * @param member The member to transform.
+ * @param checker The type checker to use.
+ * @returns The transformed vscode attribute.
+ */
 function componentMemberToVscodeAttr(member: ComponentMember, checker: TypeChecker): HtmlDataAttr | undefined {
   if (member.attrName == null) {
     return undefined

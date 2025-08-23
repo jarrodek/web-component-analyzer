@@ -3,8 +3,9 @@ import { ComponentDeclaration } from '../../types/component-declaration.js'
 
 /**
  * Refines a component declaration by using jsdoc tags
- * @param declaration
- * @param context
+ * @param declaration The declaration to refine.
+ * @param _context The context to use for the refinement.
+ * @returns The refined declaration.
  */
 export function refineDeclaration(
   declaration: ComponentDeclaration,

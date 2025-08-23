@@ -3,6 +3,12 @@ import { AnalyzerVisitContext } from '../../analyzer-visit-context.js'
 import { DefinitionNodeResult } from '../analyzer-flavor.js'
 import { getLwcComponent } from './utils.js'
 
+/**
+ * Discovers LWC definitions.
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered definitions.
+ */
 export function discoverDefinitions(node: Node, context: AnalyzerVisitContext): DefinitionNodeResult[] | undefined {
   const { ts } = context
   if (ts.isClassDeclaration(node)) {

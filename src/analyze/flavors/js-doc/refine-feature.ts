@@ -11,6 +11,11 @@ import { AnalyzerFlavor } from '../analyzer-flavor.js'
  * Refines features by looking at the jsdoc tags on the feature
  */
 export const refineFeature: AnalyzerFlavor['refineFeature'] = {
+  /**
+   * Refines an event feature.
+   * @param event The event to refine.
+   * @param context The context to use for the refinement.
+   */
   event: (event, context) => {
     if (event.jsDoc == null || event.jsDoc.tags == null) return event
 
@@ -24,6 +29,11 @@ export const refineFeature: AnalyzerFlavor['refineFeature'] = {
       event
     )
   },
+  /**
+   * Refines a method feature.
+   * @param method The method to refine.
+   * @param context The context to use for the refinement.
+   */
   method: (method, context) => {
     if (method.jsDoc == null || method.jsDoc.tags == null) return method
 
@@ -39,6 +49,11 @@ export const refineFeature: AnalyzerFlavor['refineFeature'] = {
 
     return method
   },
+  /**
+   * Refines a member feature.
+   * @param member The member to refine.
+   * @param context The context to use for the refinement.
+   */
   member: (member, context) => {
     // Return right away if the member doesn't have jsdoc
     if (member.jsDoc == null || member.jsDoc.tags == null) return member

@@ -17,6 +17,11 @@ import { FeatureDiscoverVisitMap } from '../analyzer-flavor.js'
 import { parseJsDocForNode } from './parse-js-doc-for-node.js'
 
 export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitContext>> = {
+  /**
+   * Discovers css parts from jsdoc.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   csspart: (node: Node, context: AnalyzerVisitContext): ComponentCssPart[] | undefined => {
     if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
       return parseJsDocForNode(
@@ -36,6 +41,11 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
     }
     return undefined
   },
+  /**
+   * Discovers css properties from jsdoc.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   cssproperty: (node: Node, context: AnalyzerVisitContext): ComponentCssProperty[] | undefined => {
     if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
       return parseJsDocForNode(
@@ -57,6 +67,11 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
     }
     return undefined
   },
+  /**
+   * Discovers events from jsdoc.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   event: (node: Node, context: AnalyzerVisitContext): ComponentEvent[] | undefined => {
     if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
       return parseJsDocForNode(
@@ -80,6 +95,11 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
     }
     return undefined
   },
+  /**
+   * Discovers slots from jsdoc.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   slot: (node: Node, context: AnalyzerVisitContext): ComponentSlot[] | undefined => {
     if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
       return parseJsDocForNode(
@@ -122,6 +142,11 @@ export const discoverFeatures: Partial<FeatureDiscoverVisitMap<AnalyzerVisitCont
     }
     return undefined
   },
+  /**
+   * Discovers members from jsdoc.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   member: (node: Node, context: AnalyzerVisitContext): ComponentMember[] | undefined => {
     if (context.ts.isInterfaceDeclaration(node) || context.ts.isClassDeclaration(node)) {
       const priority = getNodeSourceFileLang(node) === 'js' ? 'high' : 'medium'

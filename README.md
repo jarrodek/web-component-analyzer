@@ -15,6 +15,18 @@
 
 Try the online playground [here](https://runem.github.io/web-component-analyzer/)
 
+## ➤ Why this library exists
+
+This library was created to make it easy to document web components. It provides a simple CLI and a programmatic API to analyze your components and generate documentation in various formats. This can be useful for generating documentation for your own use, or for integrating with other tools like Storybook or VSCode.
+
+This tool is especially useful for:
+- 📖 Generating documentation for your component library
+- 🔨 Integrating with other tools like Storybook or Catalog
+- Δ Generating `custom-elements.json` for your components
+- ✔️ Linting your components for missing documentation
+
+## ➤ Supported Libraries
+
 In addition to [vanilla web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) this tool supports web components built with the following libraries:
 
 - [lit-element](https://github.com/Polymer/lit-element)
@@ -107,6 +119,28 @@ wca analyze src --format vscode --outFile vscode-html-custom-data.json
 
 VSCode supports a JSON format called [vscode custom data](https://github.com/microsoft/vscode-custom-data) for the built in html editor which is set using `html.customData` vscode setting. Web Component Analyzer can output this format.
 
+## ➤ How to integrate with other tools
+
+### VSCode
+
+You can get rich intellisense for your custom elements in VSCode by generating a `vscode-html-custom-data.json` file and pointing to it in your `.vscode/settings.json`.
+
+**1. Generate the file**
+<!-- prettier-ignore -->
+```bash
+wca analyze src --format vscode --outFile vscode-html-custom-data.json
+```
+
+**2. Point to the file in your `.vscode/settings.json`**
+<!-- prettier-ignore -->
+```json
+{
+  "html.customData": [
+    "./vscode-html-custom-data.json"
+  ]
+}
+```
+
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#how-does-this-tool-analyze-my-components)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#how-to-document-your-components-using-jsdoc)
@@ -185,6 +219,15 @@ class MyElement extends HTMLElement {
 | `@cssprop` or `@cssproperty` | Documents a css custom property on your component.                                                                                           |
 | `@csspart`                   | Documents a css shadow part on your component.                                                                                               |
 
+## ➤ Best Practices
+- Use `@element` to specify the tag name of your component.
+- Use `@fires` to document the events that your component fires.
+- Use `@slot` to document the slots that your component has.
+- Use `@cssprop` and `@csspart` to document the CSS custom properties and shadow parts that your component uses.
+- Use `@attr` and `@prop` to document the attributes and properties of your component.
+- Add a description to all your JSDoc tags.
+- Use `@deprecated` to mark properties, methods, and events as deprecated.
+
 ## ➤ How does this tool analyze my components?
 
 This tool extract information about your components by looking at your code directly and by looking at your JSDoc comments.
@@ -197,8 +240,7 @@ This tool extract information about your components by looking at your code dire
 
 You can also directly use the underlying functionality of this tool if you don't want to use the CLI. Web Component Analyzer analyzes Typescript source files, so you will have to include the Typescript parser. Here are some examples of how to use the API.
 
-### Analyze Typescript source file
-
+### analyzeSourceFile
 <!-- prettier-ignore -->
 ```typescript
 import { analyzeSourceFile } from "web-component-analyzer";
@@ -206,8 +248,17 @@ import { analyzeSourceFile } from "web-component-analyzer";
 const result = analyzeSourceFile(sourceFile, { checker });
 ```
 
-### Analyze text
+`analyzeSourceFile` analyzes a single Typescript `SourceFile` and returns an `AnalyzerResult`.
 
+- `sourceFile`: The Typescript `SourceFile` to analyze.
+- `options`: An `AnalyzerOptions` object.
+  - `program`: The Typescript `Program` object.
+  - `ts`: The Typescript module.
+  - `flavors`: An array of `AnalyzerFlavor`s to use.
+  - `analyzeGlobalFeatures`: Whether to analyze global features.
+  - `analyzeAllDeclarations`: Whether to analyze all declarations.
+
+### analyzeText
 <!-- prettier-ignore -->
 ```javascript
 import { analyzeText } from "web-component-analyzer";
@@ -230,8 +281,12 @@ const { results, program } = analyzeText([
 // each result in "results" is the result of analyzing the corresponding text where "analyze" is not false
 ```
 
-### Transform the result
+`analyzeText` analyzes a string of code or an array of virtual source files. It returns an object with the `results`, the Typescript `program`, the `checker`, and the `analyzedSourceFiles`.
 
+- `inputFiles`: A string of code or an array of `VirtualSourceFile`s.
+- `config`: An `AnalyzerOptions` object.
+
+### transformAnalyzerResult
 <!-- prettier-ignore -->
 ```javascript
 import { transformAnalyzerResult } from "web-component-analyzer";
@@ -244,6 +299,17 @@ const output = transformAnalyzerResult(format, result, program);
 
 // "output" is now a string containing the result of the "markdown" transformer
 ```
+
+`transformAnalyzerResult` transforms an `AnalyzerResult` or an array of `AnalyzerResult`s to a string.
+
+- `kind`: The format to transform to. Can be `markdown`, `json`, `vscode`, or `debug`.
+- `results`: An `AnalyzerResult` or an array of `AnalyzerResult`s.
+- `program`: The Typescript `Program` object.
+- `config`: A `TransformerConfig` object.
+  - `visibility`: The minimum visibility to include.
+  - `features`: The features to include.
+
+For more detailed examples, see [EXAMPLES.md](EXAMPLES.md).
 
 ## ➤ Contributors
 

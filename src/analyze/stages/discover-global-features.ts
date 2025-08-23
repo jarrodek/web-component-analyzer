@@ -8,8 +8,9 @@ import { mergeFeatures } from './merge/merge-features.js'
 
 /**
  * Discover all global features using flavors
- * @param node
- * @param context
+ * @param node The node to discover global features for.
+ * @param context The context to use for the discovery.
+ * @returns A collection of discovered global features.
  */
 export function discoverGlobalFeatures(node: Node, context: AnalyzerVisitContext): ComponentFeatures {
   const { collection, refineEmitMap } = prepareRefineEmitMap()

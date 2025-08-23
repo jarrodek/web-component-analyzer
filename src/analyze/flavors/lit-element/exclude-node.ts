@@ -2,6 +2,12 @@ import { Node } from 'typescript'
 import { AnalyzerVisitContext } from '../../analyzer-visit-context.js'
 import { getNodeName } from '../../util/ast-util.js'
 
+/**
+ * Excludes nodes from lit-element if analyzeDependencies is false.
+ * @param node The node to check.
+ * @param context The context to use for the check.
+ * @returns True if the node should be excluded.
+ */
 export function excludeNode(node: Node, context: AnalyzerVisitContext): boolean | undefined {
   if (context.config.analyzeDependencies) {
     return undefined

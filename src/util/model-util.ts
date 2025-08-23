@@ -8,8 +8,9 @@ const VISIBILITY_NUMBER_MAP: Record<VisibilityKind, number> = {
 
 /**
  * Removes all items from an array with visibilities that are less visible than "visibility".
- * @param visibility
- * @param array
+ * @param visibility The visibility to filter by.
+ * @param array The array to filter.
+ * @returns The filtered array.
  */
 export function filterVisibility<T extends { visibility?: VisibilityKind }>(
   visibility: VisibilityKind = 'public',

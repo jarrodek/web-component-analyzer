@@ -6,9 +6,9 @@ import { DefinitionNodeResult } from '../analyzer-flavor.js'
 
 /**
  * Visits custom element definitions.
- * @param node
- * @param ts
- * @param checker
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered definitions.
  */
 export function discoverDefinitions(
   node: Node,

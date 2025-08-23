@@ -9,8 +9,9 @@ import { getLibTypeWithName } from './type-util.js'
 
 /**
  * Returns typescript jsdoc node for a given node
- * @param node
- * @param ts
+ * @param node The node to get the jsdoc for.
+ * @param ts The typescript module.
+ * @returns The jsdoc node.
  */
 function getJSDocNode(node: Node, ts: typeof tsModule): JSDoc | undefined {
   const parent = ts.getJSDocTags(node)?.[0]?.parent
@@ -24,9 +25,10 @@ function getJSDocNode(node: Node, ts: typeof tsModule): JSDoc | undefined {
 
 /**
  * Returns jsdoc for a given node.
- * @param node
- * @param ts
- * @param tagNames
+ * @param node The node to get the jsdoc for.
+ * @param ts The typescript module.
+ * @param tagNames The tag names to filter by.
+ * @returns The jsdoc.
  */
 export function getJsDoc(node: Node, ts: typeof tsModule, tagNames?: string[]): JsDoc | undefined {
   const jsDocNode = getJSDocNode(node, ts)
@@ -104,8 +106,9 @@ export function getJsDoc(node: Node, ts: typeof tsModule, tagNames?: string[]): 
  * Converts a given string to a SimpleType
  * Defaults to ANY
  * See http://usejsdoc.org/tags-type.html
- * @param str
- * @param context
+ * @param str The string to parse.
+ * @param context The context to use for parsing.
+ * @returns The parsed simple type.
  */
 export function parseSimpleJsDocTypeExpression(
   str: string,
@@ -254,8 +257,9 @@ export function parseSimpleJsDocTypeExpression(
 
 /**
  * Finds a @type jsdoc tag in the jsdoc and returns the corresponding simple type
- * @param jsDoc
- * @param context
+ * @param jsDoc The jsdoc to get the type from.
+ * @param context The context to use for parsing.
+ * @returns The parsed simple type.
  */
 export function getJsDocType(jsDoc: JsDoc, context: { program: Program; ts: typeof tsModule }): SimpleType | undefined {
   if (jsDoc.tags != null) {
@@ -277,7 +281,8 @@ const JSDOC_TAGS_WITH_REQUIRED_NAME: string[] = ['param', 'fires', '@element', '
 
 /**
  * Takes a string that represents a value in jsdoc and transforms it to a javascript value
- * @param value
+ * @param value The value to parse.
+ * @returns The parsed value.
  */
 function parseJsDocValue(value: string | undefined): unknown {
   if (value == null) {
@@ -312,7 +317,8 @@ function parseJsDocValue(value: string | undefined): unknown {
 
 /**
  * Parses "@tag {type} name description" or "@tag name {type} description"
- * @param str
+ * @param str The string to parse.
+ * @returns The parsed jsdoc tag.
  */
 function parseJsDocTagString(str: string): JsDocTagParsed {
   const jsDocTag: JsDocTagParsed = {
@@ -440,7 +446,8 @@ function parseJsDocTagString(str: string): JsDocTagParsed {
 
 /**
  * Parses an entire jsdoc string
- * @param doc
+ * @param doc The jsdoc string to parse.
+ * @returns The parsed jsdoc.
  */
 function parseJsDocString(doc: string): JsDoc | undefined {
   // Prepare lines
@@ -529,7 +536,8 @@ function parseJsDocString(doc: string): JsDoc | undefined {
 /**
  * Certain characters as "@" can be escaped in order to prevent Typescript from
  * parsing it as a jsdoc tag. This function unescapes these characters.
- * @param str
+ * @param str The string to unescape.
+ * @returns The unescaped string.
  */
 function unescapeJSDoc(str: string): string {
   return str.replace(/\\@/, '@')

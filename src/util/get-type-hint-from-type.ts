@@ -5,9 +5,10 @@ import { TransformerConfig } from '../transformers/transformer-config.js'
 /**
  * Returns a "type hint" from a type
  * The type hint is an easy to read representation of the type and is not made for being parsed.
- * @param type
- * @param checker
- * @param config
+ * @param type The type to get the hint from.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The type hint.
  */
 export function getTypeHintFromType(
   type: string | Type | SimpleType | undefined,
@@ -51,7 +52,8 @@ export function getTypeHintFromType(
 
 /**
  * Checks if a type is a type alias simple type
- * @param simpleType
+ * @param simpleType The type to check.
+ * @returns True if the type is a union type alias.
  */
 function isUnionTypeAlias(simpleType: SimpleType): simpleType is SimpleTypeAlias {
   return simpleType.kind === 'ALIAS' && simpleType.target.kind === 'UNION'

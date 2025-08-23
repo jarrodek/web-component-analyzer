@@ -9,6 +9,11 @@ import { AnalyzerFlavor } from '../analyzer-flavor.js'
  * Discovers members declared on "IntrinsicAttributes"
  */
 export const discoverGlobalFeatures: AnalyzerFlavor['discoverGlobalFeatures'] = {
+  /**
+   * Discovers global members.
+   * @param node The node to visit.
+   * @param context The context to use for the visit.
+   */
   member: (node: Node, context: AnalyzerVisitContext): ComponentMember[] | undefined => {
     const { ts } = context
 

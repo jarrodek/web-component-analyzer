@@ -11,8 +11,9 @@ import { AnalyzerDeclarationVisitContext } from '../analyzer-flavor.js'
 
 /**
  * Discovers members based on standard vanilla custom element rules
- * @param node
- * @param context
+ * @param node The node to discover members from.
+ * @param context The context to use for the discovery.
+ * @returns The discovered members.
  */
 export function discoverMembers(node: Node, context: AnalyzerDeclarationVisitContext): ComponentMember[] | undefined {
   const { ts, checker } = context

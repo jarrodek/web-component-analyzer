@@ -38,8 +38,9 @@ export interface CompileResult {
 
 /**
  * Compiles an array of file paths using typescript.
- * @param filePaths
- * @param options
+ * @param filePaths The file paths to compile.
+ * @param options The compiler options to use.
+ * @returns The compile result.
  */
 export function compileTypescript(
   filePaths: string | string[],

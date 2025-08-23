@@ -7,8 +7,9 @@ import { DefinitionNodeResult } from '../analyzer-flavor.js'
 /**
  * Visits lit-element related definitions.
  * Specifically it finds the usage of the `@customElement` decorator.
- * @param node
- * @param context
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered definitions.
  */
 export function discoverDefinitions(node: Node, context: AnalyzerVisitContext): DefinitionNodeResult[] | undefined {
   const { ts, checker } = context

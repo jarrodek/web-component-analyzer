@@ -6,10 +6,11 @@ import { AnalyzerVisitContext } from '../../analyzer-visit-context.js'
 
 /**
  * Transforms jsdoc tags to a T array using a "transform"
- * @param node
- * @param tagNames
- * @param transform
- * @param context
+ * @param node The node to parse jsdoc for.
+ * @param tagNames The tag names to parse.
+ * @param transform The function to transform the parsed jsdoc tag.
+ * @param context The context to use for the visit.
+ * @returns The transformed jsdoc tags.
  */
 export function parseJsDocForNode<T>(
   node: Node,

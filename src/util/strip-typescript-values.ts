@@ -16,6 +16,10 @@ function isTypescriptType(value: any): value is Type {
 
 /**
  * Returns a representation of the input that can be JSON stringified
+ * @param input The input to strip.
+ * @param checker The type checker to use.
+ * @param seenValues The seen values.
+ * @returns The stripped input.
  */
 export function stripTypescriptValues(input: unknown, checker: TypeChecker, seenValues = new Set<any>()): unknown {
   if (seenValues.has(input)) {

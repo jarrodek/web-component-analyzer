@@ -7,6 +7,9 @@ import { getTypeHintFromType } from './get-type-hint-from-type.js'
  * The resulting type takes jsdoc into account.
  * I couldn't find a way for Typescript to return the signature string taking jsdoc into account
  *   so therefore I had to do some regex-magic in this method.
+ * @param method The method to get the type hint from.
+ * @param checker The type checker to use.
+ * @returns The type hint.
  */
 export function getTypeHintFromMethod(method: ComponentMethod, checker: TypeChecker): string | undefined {
   let signature = getTypeHintFromType(method.type?.(), checker, {}) || ''

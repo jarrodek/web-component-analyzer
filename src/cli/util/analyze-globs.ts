@@ -21,9 +21,10 @@ export interface AnalyzeGlobsContext {
 
 /**
  * Parses and analyses all globs and calls some callbacks while doing it.
- * @param globs
- * @param config
- * @param context
+ * @param globs The globs to analyze.
+ * @param config The config to use for the analysis.
+ * @param context The context to use for the analysis.
+ * @returns The results of the analysis.
  */
 export async function analyzeGlobs(
   globs: string[],

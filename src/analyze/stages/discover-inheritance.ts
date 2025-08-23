@@ -6,9 +6,10 @@ import { visitInheritance } from './flavor/visit-inheritance.js'
 
 /**
  * Uses flavors in order to discover inheritance from one of more nodes.
- * @param startNode
- * @param visitedNodes
- * @param context
+ * @param startNode The node to start discovering inheritance from.
+ * @param visitedNodes A set of already visited nodes.
+ * @param context The context to use for the discovery.
+ * @returns The discovered inheritance.
  */
 export function discoverInheritance(
   startNode: Node | Node[],

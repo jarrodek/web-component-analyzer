@@ -2,9 +2,10 @@ import { TransformerConfig } from '../transformer-config.js'
 
 /**
  * Returns a markdown header with a specific level taking global start title level into account.
- * @param title
- * @param level
- * @param config
+ * @param title The title of the header.
+ * @param level The level of the header.
+ * @param config The config to use.
+ * @returns The markdown header.
  */
 export function markdownHeader(title: string, level: number, config: TransformerConfig): string {
   level = level - 1 + (config.markdown?.headerLevel || config.markdown?.titleLevel || 1)
@@ -14,8 +15,9 @@ export function markdownHeader(title: string, level: number, config: Transformer
 /**
  * Returns a markdown table representation of the rows.
  * Strips unused columns.
- * @param rows
- * @param removeEmptyColumns
+ * @param rows The rows to transform.
+ * @param options The options to use.
+ * @returns The markdown table.
  */
 export function markdownTable(rows: string[][], { removeEmptyColumns } = { removeEmptyColumns: true }): string {
   // Constants for pretty printing the markdown tables
@@ -66,7 +68,8 @@ ${rows
 
 /**
  * Escape a text so it can be used in a markdown table
- * @param text
+ * @param text The text to escape.
+ * @returns The escaped text.
  */
 export function markdownEscapeTableCell(text: string): string {
   return text.replace(/\n/g, '<br />').replace(/\|/g, '\\|')
@@ -74,7 +77,8 @@ export function markdownEscapeTableCell(text: string): string {
 
 /**
  * Highlights some text
- * @param text
+ * @param text The text to highlight.
+ * @returns The highlighted text.
  */
 export function markdownHighlight(text: string | undefined): string {
   if (text == null || text.length === 0) return ''
@@ -83,9 +87,10 @@ export function markdownHighlight(text: string | undefined): string {
 
 /**
  * Creates padding around some text with a target width.
- * @param text
- * @param width
- * @param paddingStart
+ * @param text The text to pad.
+ * @param width The target width.
+ * @param paddingStart The padding to add to the start.
+ * @returns The padded text.
  */
 export function fillWidth(text: string, width: number, paddingStart: number): string {
   return ' '.repeat(paddingStart) + text + ' '.repeat(Math.max(1, width - text.length - paddingStart))

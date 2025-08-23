@@ -2,10 +2,11 @@ import { AnalyzerVisitContext } from '../analyzer-visit-context.js'
 
 /**
  * Executes functions in a function map until some function returns a non-undefined value.
- * @param functionMaps
- * @param keys
- * @param arg
- * @param context
+ * @param functionMaps An array of function maps.
+ * @param keys The keys to execute in the function maps.
+ * @param arg The argument to pass to the functions.
+ * @param context The context to pass to the functions.
+ * @returns The result of the first function that returns a non-undefined value.
  */
 export function executeFunctionsUntilMatch<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
