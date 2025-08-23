@@ -185,13 +185,11 @@ class MyElement extends HTMLElement {
 | `@cssprop` or `@cssproperty` | Documents a css custom property on your component.                                                                                           |
 | `@csspart`                   | Documents a css shadow part on your component.                                                                                               |
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributors)
-
 ## ➤ How does this tool analyze my components?
 
 This tool extract information about your components by looking at your code directly and by looking at your JSDoc comments.
 
-**Code**: Web Component Analyzer supports multiple libraries. [Click here](https://github.com/runem/web-component-analyzer/blob/master/ANALYZE.md) for an overview of how each library is analyzed.
+**Code**: Web Component Analyzer supports multiple libraries. [Read an overview](ANALYZE.md) of how each library is analyzed.
 
 **JSDoc**: Read next section to learn more about how JSDoc is analyzed.
 
@@ -247,15 +245,11 @@ const output = transformAnalyzerResult(format, result, program);
 // "output" is now a string containing the result of the "markdown" transformer
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#how-does-this-tool-analyze-my-components)
-
 ## ➤ Contributors
 
 | [<img alt="Rune Mehlsen" src="https://avatars0.githubusercontent.com/u/5372940?s=400&u=43d97899257af3c47715679512919eadb07eab26&v=4" width="100">](https://github.com/runem) |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                   [Rune Mehlsen](https://github.com/runem)                                                                   |
-
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
 
 ## ➤ License
 
