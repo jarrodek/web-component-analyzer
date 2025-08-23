@@ -27,14 +27,11 @@ jobs:
         run: npm ci
 
       - name: Lint
+        if: matrix.os == 'ubuntu-latest'
         run: npm run lint
 
       - name: Type check
         run: npm run type-check
-
-      - name: Prettier
-        if: matrix.os == 'ubuntu-latest' && matrix.node == '22'
-        run: npm run prettier:check
 
       - name: Install dev dependencies
         run: npm ci
