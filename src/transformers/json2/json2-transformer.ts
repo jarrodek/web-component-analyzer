@@ -50,9 +50,10 @@ interface TransformerContext {
 
 /**
  * Transforms results to json using the schema found in the PR at https://github.com/webcomponents/custom-elements-json/pull/9
- * @param results
- * @param program
- * @param config
+ * @param results The results to transform.
+ * @param program The program to use.
+ * @param config The config to use.
+ * @returns The transformed results.
  */
 export const json2Transformer: TransformerFunction = (
   results: AnalyzerResult[],
@@ -82,8 +83,9 @@ export const json2Transformer: TransformerFunction = (
 
 /**
  * Transforms an analyzer result into a module doc
- * @param result
- * @param context
+ * @param result The result to transform.
+ * @param context The context to use.
+ * @returns The transformed module doc.
  */
 function analyzerResultToModuleDoc(result: AnalyzerResult, context: TransformerContext): ModuleDoc {
   // Get all export docs from the analyzer result
@@ -97,8 +99,9 @@ function analyzerResultToModuleDoc(result: AnalyzerResult, context: TransformerC
 
 /**
  * Returns ExportDocs in an analyzer result
- * @param result
- * @param context
+ * @param result The result to get the exports from.
+ * @param context The context to use.
+ * @returns The exports.
  */
 function getExportsDocsFromAnalyzerResult(result: AnalyzerResult, context: TransformerContext): ExportDoc[] {
   // Return all class- and variable-docs
@@ -112,14 +115,21 @@ function getExportsDocsFromAnalyzerResult(result: AnalyzerResult, context: Trans
 
 /**
  * Returns FunctionDocs in an analyzer result
- * @param _result
- * @param _context
+ * @param _result The result to get the functions from.
+ * @param _context The context to use.
+ * @returns The functions.
  */
 function getFunctionDocsFromAnalyzerResult(_result: AnalyzerResult, _context: TransformerContext): FunctionDoc[] {
   // TODO: support function exports
   return []
 }
 
+/**
+ * Returns CustomElementDefinitionDocs in an analyzer result
+ * @param result The result to get the definitions from.
+ * @param context The context to use.
+ * @returns The definitions.
+ */
 function getDefinitionDocsFromAnalyzerResult(
   result: AnalyzerResult,
   context: TransformerContext
@@ -143,8 +153,9 @@ function getDefinitionDocsFromAnalyzerResult(
 
 /**
  * Returns VariableDocs in an analyzer result
- * @param result
- * @param context
+ * @param result The result to get the variables from.
+ * @param context The context to use.
+ * @returns The variables.
  */
 function getVariableDocsFromAnalyzerResult(result: AnalyzerResult, context: TransformerContext): VariableDoc[] {
   const varDocs: VariableDoc[] = []
@@ -187,8 +198,9 @@ function getVariableDocsFromAnalyzerResult(result: AnalyzerResult, context: Tran
 
 /**
  * Returns ClassDocs in an analyzer result
- * @param result
- * @param context
+ * @param result The result to get the classes from.
+ * @param context The context to use.
+ * @returns The classes.
  */
 function getClassDocsFromAnalyzerResult(
   result: AnalyzerResult,
@@ -209,9 +221,10 @@ function getClassDocsFromAnalyzerResult(
 
 /**
  * Converts a component declaration to ClassDoc, CustomElementDoc or MixinDoc
- * @param declaration
- * @param result
- * @param context
+ * @param declaration The declaration to convert.
+ * @param result The result to use.
+ * @param context The context to use.
+ * @returns The converted doc.
  */
 function getExportsDocFromDeclaration(
   declaration: ComponentDeclaration,
@@ -273,8 +286,9 @@ function getExportsDocFromDeclaration(
 
 /**
  * Returns event docs for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the event docs from.
+ * @param context The context to use.
+ * @returns The event docs.
  */
 function getEventDocsFromDeclaration(declaration: ComponentDeclaration, context: TransformerContext): EventDoc[] {
   return filterVisibility(context.config.visibility, declaration.events).map((event) => {
@@ -300,8 +314,9 @@ function getEventDocsFromDeclaration(declaration: ComponentDeclaration, context:
 
 /**
  * Returns slot docs for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the slot docs from.
+ * @param context The context to use.
+ * @returns The slot docs.
  */
 function getSlotDocsFromDeclaration(declaration: ComponentDeclaration, context: TransformerContext): SlotDoc[] {
   return declaration.slots.map((slot) => ({
@@ -313,8 +328,9 @@ function getSlotDocsFromDeclaration(declaration: ComponentDeclaration, context: 
 
 /**
  * Returns css properties for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the css properties from.
+ * @param context The context to use.
+ * @returns The css properties.
  */
 function getCSSPropertyDocsFromDeclaration(
   declaration: ComponentDeclaration,
@@ -331,8 +347,9 @@ function getCSSPropertyDocsFromDeclaration(
 
 /**
  * Returns css parts for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the css parts from.
+ * @param context The context to use.
+ * @returns The css parts.
  */
 function getCSSPartDocsFromDeclaration(declaration: ComponentDeclaration, context: TransformerContext): CSSPartDoc[] {
   return declaration.cssParts.map((cssPart) => ({
@@ -344,8 +361,9 @@ function getCSSPartDocsFromDeclaration(declaration: ComponentDeclaration, contex
 
 /**
  * Returns attribute docs for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the attribute docs from.
+ * @param context The context to use.
+ * @returns The attribute docs.
  */
 function getAttributeDocsFromDeclaration(
   declaration: ComponentDeclaration,
@@ -371,8 +389,9 @@ function getAttributeDocsFromDeclaration(
 
 /**
  * Returns class member docs for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the class member docs from.
+ * @param context The context to use.
+ * @returns The class member docs.
  */
 function getClassMemberDocsFromDeclaration(
   declaration: ComponentDeclaration,
@@ -383,8 +402,9 @@ function getClassMemberDocsFromDeclaration(
 
 /**
  * Returns method docs for a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the method docs from.
+ * @param context The context to use.
+ * @returns The method docs.
  */
 function getMethodDocsFromDeclaration(declaration: ComponentDeclaration, context: TransformerContext): MethodDoc[] {
   const methodDocs: MethodDoc[] = []
@@ -444,8 +464,9 @@ function getMethodDocsFromDeclaration(declaration: ComponentDeclaration, context
 
 /**
  * Returns field docs from a declaration
- * @param declaration
- * @param context
+ * @param declaration The declaration to get the field docs from.
+ * @param context The context to use.
+ * @returns The field docs.
  */
 function getFieldDocsFromDeclaration(declaration: ComponentDeclaration, context: TransformerContext): FieldDoc[] {
   const fieldDocs: FieldDoc[] = []
@@ -469,6 +490,13 @@ function getFieldDocsFromDeclaration(declaration: ComponentDeclaration, context:
   return fieldDocs
 }
 
+/**
+ * Returns a reference to the declaration that a feature is inherited from.
+ * @param onDeclaration The declaration to get the reference on.
+ * @param feature The feature to get the reference for.
+ * @param context The context to use.
+ * @returns The reference.
+ */
 function getInheritedFromReference(
   onDeclaration: ComponentDeclaration,
   feature: ComponentFeatureBase,
@@ -483,8 +511,9 @@ function getInheritedFromReference(
 
 /**
  * Returns a Reference to a node
- * @param node
- * @param context
+ * @param node The node to get the reference for.
+ * @param context The context to use.
+ * @returns The reference.
  */
 function getReferenceForNode(node: Node, context: TransformerContext): Reference {
   const sourceFile = node.getSourceFile()
@@ -519,7 +548,8 @@ function getReferenceForNode(node: Node, context: TransformerContext): Reference
 
 /**
  * Returns the name of the package (if any)
- * @param sourceFile
+ * @param sourceFile The source file to get the package name from.
+ * @returns The package name.
  */
 function getPackageName(sourceFile: SourceFile): string | undefined {
   // TODO: Make it possible to access the ModuleResolutionHost
@@ -536,8 +566,9 @@ function getPackageName(sourceFile: SourceFile): string | undefined {
 
 /**
  * Returns a relative path based on "cwd" in the config
- * @param fullPath
- * @param context
+ * @param fullPath The full path to get the relative path from.
+ * @param context The context to use.
+ * @returns The relative path.
  */
 function getRelativePath(fullPath: string, context: TransformerContext) {
   return context.config.cwd != null ? `./${relative(context.config.cwd, fullPath)}` : basename(fullPath)
@@ -545,8 +576,9 @@ function getRelativePath(fullPath: string, context: TransformerContext) {
 
 /**
  * Returns description and typeHint based on jsdoc for a specific parameter name
- * @param name
- * @param jsDoc
+ * @param name The name of the parameter to get the info for.
+ * @param jsDoc The jsdoc to get the info from.
+ * @returns The description and type hint.
  */
 function getParameterFromJsDoc(name: string, jsDoc: JsDoc | undefined): { description?: string; typeHint?: string } {
   if (jsDoc?.tags == undefined) {
@@ -566,7 +598,8 @@ function getParameterFromJsDoc(name: string, jsDoc: JsDoc | undefined): { descri
 
 /**
  * Get return description and return typeHint from jsdoc
- * @param jsDoc
+ * @param jsDoc The jsdoc to get the info from.
+ * @returns The description and type hint.
  */
 function getReturnFromJsDoc(jsDoc: JsDoc | undefined): { description?: string; typeHint?: string } {
   const tag = jsDoc?.tags?.find((tag) => ['returns', 'return'].includes(tag.tag))
@@ -581,8 +614,9 @@ function getReturnFromJsDoc(jsDoc: JsDoc | undefined): { description?: string; t
 
 /**
  * Converts a heritage clause into a reference
- * @param heritage
- * @param context
+ * @param heritage The heritage clause to convert.
+ * @param context The context to use.
+ * @returns The reference.
  */
 function getReferenceFromHeritageClause(
   heritage: ComponentHeritageClause,
@@ -613,7 +647,8 @@ function getReferenceFromHeritageClause(
 
 /**
  * Flatten all analyzer results with inherited declarations
- * @param results
+ * @param results The results to flatten.
+ * @returns The flattened results.
  */
 function flattenAnalyzerResults(results: AnalyzerResult[]): AnalyzerResult[] {
   // Keep track of declarations in each source file
@@ -662,7 +697,8 @@ function flattenAnalyzerResults(results: AnalyzerResult[]): AnalyzerResult[] {
 
 /**
  * Returns the content of the summary jsdoc tag if any
- * @param jsDoc
+ * @param jsDoc The jsdoc to get the summary from.
+ * @returns The summary.
  */
 function getSummaryFromJsDoc(jsDoc: JsDoc | undefined): string | undefined {
   const summaryTag = jsDoc?.tags?.find((tag) => tag.tag === 'summary')

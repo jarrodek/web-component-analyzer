@@ -7,8 +7,9 @@ import { AnalyzerDeclarationVisitContext } from '../analyzer-flavor.js'
 
 /**
  * Discovers methods
- * @param node
- * @param context
+ * @param node The node to discover methods from.
+ * @param context The context to use for the discovery.
+ * @returns The discovered methods.
  */
 export function discoverMethods(node: Node, context: AnalyzerDeclarationVisitContext): ComponentMethod[] | undefined {
   const { ts } = context

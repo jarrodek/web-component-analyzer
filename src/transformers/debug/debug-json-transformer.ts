@@ -7,9 +7,10 @@ import { TransformerFunction } from '../transformer-function.js'
 
 /**
  * Transforms results to json.
- * @param results
- * @param program
- * @param _config
+ * @param results The results to transform.
+ * @param program The program to use.
+ * @param _config The config to use.
+ * @returns The transformed results.
  */
 export const debugJsonTransformer: TransformerFunction = (
   results: AnalyzerResult[],

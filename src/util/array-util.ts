@@ -1,7 +1,8 @@
 /**
  * Flattens an array.
  * Use this function to keep support for node 10
- * @param items
+ * @param items The items to flatten.
+ * @returns The flattened array.
  */
 export function arrayFlat<T>(items: (T[] | T)[]): T[] {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,7 +24,8 @@ export function arrayFlat<T>(items: (T[] | T)[]): T[] {
 
 /**
  * Filters an array returning only defined items
- * @param array
+ * @param array The array to filter.
+ * @returns The filtered array.
  */
 export function arrayDefined<T>(array: (T | undefined)[]): T[] {
   return array.filter((item): item is NonNullable<typeof item> => item != null)
@@ -31,7 +33,8 @@ export function arrayDefined<T>(array: (T | undefined)[]): T[] {
 
 /**
  * Filters an array returning only unique itesm
- * @param array
+ * @param array The array to filter.
+ * @returns The filtered array.
  */
 export function arrayDedupe<T>(array: T[]): T[] {
   const uniqueItems: T[] = []

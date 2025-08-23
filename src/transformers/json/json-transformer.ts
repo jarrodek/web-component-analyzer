@@ -27,9 +27,10 @@ import {
 
 /**
  * Transforms results to json.
- * @param results
- * @param program
- * @param config
+ * @param results The results to transform.
+ * @param program The program to use.
+ * @param config The config to use.
+ * @returns The transformed results.
  */
 export const jsonTransformer: TransformerFunction = (
   results: AnalyzerResult[],
@@ -52,6 +53,13 @@ export const jsonTransformer: TransformerFunction = (
   return JSON.stringify(htmlData, null, 2)
 }
 
+/**
+ * Transforms a component definition to a html data tag.
+ * @param definition The definition to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The transformed html data tag.
+ */
 function definitionToHtmlDataTag(
   definition: ComponentDefinition,
   checker: TypeChecker,
@@ -108,6 +116,12 @@ function definitionToHtmlDataTag(
   }
 }
 
+/**
+ * Transforms a component css property to a html css property.
+ * @param prop The property to transform.
+ * @param _checker The type checker to use.
+ * @returns The transformed html css property.
+ */
 function componentCssPropToHtmlCssProp(
   prop: ComponentCssProperty,
   _checker: TypeChecker
@@ -120,6 +134,12 @@ function componentCssPropToHtmlCssProp(
   }
 }
 
+/**
+ * Transforms a component css part to a html css part.
+ * @param part The part to transform.
+ * @param _checker The type checker to use.
+ * @returns The transformed html css part.
+ */
 function componentCssPartToHtmlCssPart(part: ComponentCssPart, _checker: TypeChecker): HtmlDataCssPart | undefined {
   return {
     name: part.name || '',
@@ -127,6 +147,12 @@ function componentCssPartToHtmlCssPart(part: ComponentCssPart, _checker: TypeChe
   }
 }
 
+/**
+ * Transforms a component slot to a html data slot.
+ * @param slot The slot to transform.
+ * @param _checker The type checker to use.
+ * @returns The transformed html data slot.
+ */
 function componentSlotToHtmlDataSlot(slot: ComponentSlot, _checker: TypeChecker): HtmlDataSlot | undefined {
   return {
     name: slot.name || '',
@@ -134,6 +160,12 @@ function componentSlotToHtmlDataSlot(slot: ComponentSlot, _checker: TypeChecker)
   }
 }
 
+/**
+ * Transforms a component event to a html data event.
+ * @param event The event to transform.
+ * @param _checker The type checker to use.
+ * @returns The transformed html data event.
+ */
 function componentEventToHtmlDataEvent(event: ComponentEvent, _checker: TypeChecker): HtmlDataEvent | undefined {
   return {
     name: event.name,
@@ -143,6 +175,13 @@ function componentEventToHtmlDataEvent(event: ComponentEvent, _checker: TypeChec
   }
 }
 
+/**
+ * Transforms a component member to a html data attribute.
+ * @param member The member to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The transformed html data attribute.
+ */
 function componentMemberToHtmlDataAttribute(
   member: ComponentMember,
   checker: TypeChecker,
@@ -162,6 +201,13 @@ function componentMemberToHtmlDataAttribute(
   }
 }
 
+/**
+ * Transforms a component member to a html data property.
+ * @param member The member to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The transformed html data property.
+ */
 function componentMemberToHtmlDataProperty(
   member: ComponentMember,
   checker: TypeChecker,
@@ -182,6 +228,11 @@ function componentMemberToHtmlDataProperty(
   }
 }
 
+/**
+ * Returns the description from a jsdoc.
+ * @param jsDoc The jsdoc to get the description from.
+ * @returns The description.
+ */
 function getDescriptionFromJsDoc(jsDoc: JsDoc | undefined): string | undefined {
   return jsDoc?.description
 }

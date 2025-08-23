@@ -6,8 +6,9 @@ import { parseJsDocForNode } from './parse-js-doc-for-node.js'
 
 /**
  * Discovers definitions using "@customElement" or "@element" jsdoc
- * @param node
- * @param context
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered definitions.
  */
 export function discoverDefinitions(node: Node, context: AnalyzerVisitContext): DefinitionNodeResult[] | undefined {
   // /** @customElement my-element */ myClass extends HTMLElement { ... }

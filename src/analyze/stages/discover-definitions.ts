@@ -7,9 +7,10 @@ import { visitDefinitions } from './flavor/visit-definitions.js'
 
 /**
  * Visits the source file and finds all component definitions using flavors
- * @param sourceFile
- * @param context
- * @param analyzeDeclaration
+ * @param sourceFile The source file to visit.
+ * @param context The context to use for the visit.
+ * @param analyzeDeclaration A function to analyze the declaration of a component.
+ * @returns An array of component definitions.
  */
 export function discoverDefinitions(
   sourceFile: SourceFile,

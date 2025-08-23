@@ -12,9 +12,10 @@ import { mergeFeatures } from './merge/merge-features.js'
 
 /**
  * Discovers features on component declaration nodes
- * @param initialDeclarationNodes
- * @param baseContext
- * @param options
+ * @param initialDeclarationNodes The initial declaration nodes to analyze.
+ * @param baseContext The base context to use for the analysis.
+ * @param options An options object to configure the analysis.
+ * @returns The analyzed component declaration.
  */
 export function analyzeComponentDeclaration(
   initialDeclarationNodes: Node[],

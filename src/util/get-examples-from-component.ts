@@ -9,7 +9,8 @@ export interface Example {
 
 /**
  * Parses and returns examples for a component.
- * @param declaration
+ * @param declaration The declaration to get the examples from.
+ * @returns The examples.
  */
 export function getExamplesFromComponent(declaration: ComponentDeclaration): Example[] {
   const examples = declaration.jsDoc?.tags?.filter((tag) => tag.tag === 'example' || tag.tag === 'demo') || []
@@ -18,7 +19,8 @@ export function getExamplesFromComponent(declaration: ComponentDeclaration): Exa
 
 /**
  * Returns an example based on a jsdoc tag
- * @param tag
+ * @param tag The tag to get the example from.
+ * @returns The example.
  */
 function exampleFromJsDocTag(tag: JsDocTag): Example {
   const { code, lang, description } = discoverCodeFromExampleText(tag.comment || '')
@@ -32,7 +34,8 @@ function exampleFromJsDocTag(tag: JsDocTag): Example {
 
 /**
  * Parses some text and returns the first found example
- * @param text
+ * @param text The text to parse.
+ * @returns The parsed example.
  */
 function discoverCodeFromExampleText(text: string): { code: string; lang?: string; description?: string } {
   // Check if there is a code example already like this: ```code here ```
@@ -52,7 +55,8 @@ function discoverCodeFromExampleText(text: string): { code: string; lang?: strin
 
 /**
  * Returns the language of some code based on assumptions
- * @param code
+ * @param code The code to discover the language from.
+ * @returns The discovered language.
  */
 function discoverLanguageFromExampleText(code: string): string {
   if (code.includes('html`')) {

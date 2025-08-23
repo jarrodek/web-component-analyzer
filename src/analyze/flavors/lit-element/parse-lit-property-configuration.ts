@@ -16,8 +16,9 @@ export const LIT_ELEMENT_PROPERTY_DECORATOR_KINDS: LitElementPropertyDecoratorKi
 
 /**
  * Returns a potential lit element property decorator.
- * @param node
- * @param context
+ * @param node The node to get the decorator from.
+ * @param context The context to use for the visit.
+ * @returns The decorator and its kind.
  */
 export function getLitElementPropertyDecorator(
   node: Node,
@@ -44,8 +45,9 @@ export function getLitElementPropertyDecorator(
 
 /**
  * Returns a potential lit property decorator configuration.
- * @param node
- * @param context
+ * @param node The node to get the configuration from.
+ * @param context The context to use for the visit.
+ * @returns The configuration.
  */
 export function getLitElementPropertyDecoratorConfig(
   node: Node,
@@ -95,8 +97,9 @@ function hasOwnProperty<T extends string>(obj: object, key: T): obj is Record<T,
 /**
  * Computes the correct type for a given node for use in lit property
  * configuration.
- * @param ts
- * @param node
+ * @param ts The typescript module.
+ * @param node The node to get the type from.
+ * @returns The simple type.
  */
 export function getLitPropertyType(ts: typeof tsModule, node: Node): SimpleType | string {
   const value = ts.isIdentifier(node) ? node.text : undefined
@@ -125,9 +128,11 @@ export function getLitPropertyType(ts: typeof tsModule, node: Node): SimpleType 
 
 /**
  * Parses an object literal expression and returns a lit property configuration.
- * @param node
- * @param existingConfig
- * @param context
+ * @param node The node to parse.
+ * @param object The object to parse.
+ * @param context The context to use for the visit.
+ * @param existingConfig The existing configuration.
+ * @returns The parsed configuration.
  */
 export function getLitPropertyOptions(
   node: Node,

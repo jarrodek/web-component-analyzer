@@ -12,8 +12,9 @@ export interface Context {
 /**
  * Takes a node and tries to resolve a constant value from it.
  * Returns undefined if no constant value can be resolved.
- * @param node
- * @param context
+ * @param node The node to resolve the value from.
+ * @param context The context to use for resolving the value.
+ * @returns The resolved value and the node that produced it.
  */
 export function resolveNodeValue(node: Node | undefined, context: Context): { value: unknown; node: Node } | undefined {
   if (node == null) return undefined

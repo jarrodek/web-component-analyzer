@@ -6,8 +6,9 @@ import { analyzeComponentDeclaration } from './analyze-declaration.js'
 
 /**
  * Visits the source file and finds all component definitions using flavors
- * @param sourceFile
- * @param context
+ * @param sourceFile The source file to visit.
+ * @param context The context to use for the visit.
+ * @returns An array of component declarations.
  */
 export function discoverDeclarations(sourceFile: SourceFile, context: AnalyzerVisitContext): ComponentDeclaration[] {
   const declarations: ComponentDeclaration[] = []

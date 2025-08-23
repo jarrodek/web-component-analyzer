@@ -7,8 +7,9 @@ import { mergeFeatures } from './merge/merge-features.js'
 
 /**
  * Discovers features for a given node using flavors
- * @param node
- * @param context
+ * @param node The node to discover features for.
+ * @param context The context to use for the discovery.
+ * @returns A collection of discovered features.
  */
 export function discoverFeatures(node: Node, context: AnalyzerDeclarationVisitContext): ComponentFeatureCollection {
   // Return the result if we already found this node

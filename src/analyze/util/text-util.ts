@@ -1,6 +1,7 @@
 /**
  * Converts from snake case to camel case
- * @param str
+ * @param str The string to convert.
+ * @returns The converted string.
  */
 export function dashToCamelCase(str: string): string {
   return str.replace(/(-\w)/g, (m) => m[1].toUpperCase())
@@ -8,7 +9,8 @@ export function dashToCamelCase(str: string): string {
 
 /**
  * Converts from camel case to snake case
- * @param str
+ * @param str The string to convert.
+ * @returns The converted string.
  */
 export function camelToDashCase(str: string): string {
   return str.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)
@@ -16,7 +18,8 @@ export function camelToDashCase(str: string): string {
 
 /**
  * Returns if a name is private (starts with "_" or "#");
- * @param name	 * @param name
+ * @param name The name to check.
+ * @returns True if the name is private.
  */
 export function isNamePrivate(name: string): boolean {
   return name.startsWith('_') || name.startsWith('#')

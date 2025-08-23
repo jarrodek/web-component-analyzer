@@ -3,9 +3,9 @@ import { AnalyzerCliConfig } from '../analyzer-cli-config.js'
 /**
  * Logs to the console with a specific level.
  * This function takes the config into account
- * @param text
- * @param config
- * @param level
+ * @param text The text to log.
+ * @param config The config to use.
+ * @param level The log level.
  */
 export function log(
   text: unknown | (() => string),
@@ -38,8 +38,8 @@ export function log(
 
 /**
  * Logs only if verbose is set to true in the config
- * @param text
- * @param config
+ * @param text The text to log.
+ * @param config The config to use.
  */
 export function logVerbose(text: () => unknown, config: AnalyzerCliConfig): void {
   log(text, config, 'verbose')

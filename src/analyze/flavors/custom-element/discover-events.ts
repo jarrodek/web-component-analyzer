@@ -28,8 +28,9 @@ const EVENT_NAMES = [
 
 /**
  * Discovers events dispatched
- * @param node
- * @param context
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered events.
  */
 export function discoverEvents(node: Node, context: AnalyzerVisitContext): ComponentEvent[] | undefined {
   const { ts, checker } = context

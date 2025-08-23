@@ -10,8 +10,9 @@ import { ComponentDeclaration, ComponentFeatures } from './types/component-decla
 
 /**
  * Analyzes all components in a source file.
- * @param sourceFile
- * @param options
+ * @param sourceFile The source file to analyze.
+ * @param options An options object to configure the analysis.
+ * @returns The results of the analysis.
  */
 export function analyzeSourceFile(sourceFile: SourceFile, options: AnalyzerOptions): AnalyzerResult {
   // Create a new context

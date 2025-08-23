@@ -3,6 +3,7 @@ import { RefineFeatureEmitMap } from '../stages/flavor/refine-feature.js'
 
 /**
  * Prepares a map of component features and a callback map that adds to the component feature map.
+ * @returns An object with the collection and the refineEmitMap.
  */
 export function prepareRefineEmitMap(): {
   collection: ComponentFeatureCollection

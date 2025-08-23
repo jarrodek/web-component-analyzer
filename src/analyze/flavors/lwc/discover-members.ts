@@ -17,8 +17,9 @@ import { hasLwcApiPropertyDecorator } from './utils.js'
 /**
  * Parses LWC related declaration members.
  * This is primary by looking at the "@api" decorator
- * @param node
- * @param context
+ * @param node The node to visit.
+ * @param context The context to use for the visit.
+ * @returns The discovered members.
  */
 export function discoverMembers(node: Node, context: AnalyzerDeclarationVisitContext): ComponentMember[] | undefined {
   const { ts } = context

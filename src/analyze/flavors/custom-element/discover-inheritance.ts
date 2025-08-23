@@ -10,8 +10,9 @@ import { InheritanceResult } from '../analyzer-flavor.js'
 
 /**
  * Discovers inheritance from a node by looking at "extends" and "implements"
- * @param node
- * @param baseContext
+ * @param node The node to discover inheritance from.
+ * @param baseContext The base context to use for the discovery.
+ * @returns The discovered inheritance.
  */
 export function discoverInheritance(node: Node, baseContext: AnalyzerVisitContext): InheritanceResult | undefined {
   let declarationKind: ComponentDeclarationKind | undefined = undefined

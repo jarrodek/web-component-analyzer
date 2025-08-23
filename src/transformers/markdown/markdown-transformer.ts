@@ -19,9 +19,10 @@ import { markdownHeader, markdownHighlight, markdownTable } from './markdown-uti
 
 /**
  * Transforms the component results to markdown
- * @param results
- * @param program
- * @param config
+ * @param results The results to transform.
+ * @param program The program to use.
+ * @param config The config to use.
+ * @returns The transformed results.
  */
 export const markdownTransformer: TransformerFunction = (
   results: AnalyzerResult[],
@@ -131,8 +132,9 @@ export const markdownTransformer: TransformerFunction = (
 
 /**
  * Returns a markdown table with css props
- * @param cssProperties
- * @param config
+ * @param cssProperties The css properties to transform.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function cssPropSection(cssProperties: ComponentCssProperty[], config: TransformerConfig): string {
   const rows: string[][] = [['Property', 'Type', 'Default', 'Description']]
@@ -153,8 +155,9 @@ function cssPropSection(cssProperties: ComponentCssProperty[], config: Transform
 
 /**
  * Returns a markdown table with css parts
- * @param cssPart
- * @param config
+ * @param cssPart The css parts to transform.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function cssPartSection(cssPart: ComponentCssPart[], config: TransformerConfig): string {
   const rows: string[][] = [['Part', 'Description']]
@@ -166,9 +169,10 @@ function cssPartSection(cssPart: ComponentCssPart[], config: TransformerConfig):
 
 /**
  * Returns a markdown table with methods
- * @param methods
- * @param checker
- * @param config
+ * @param methods The methods to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function methodSection(methods: ComponentMethod[], checker: TypeChecker, config: TransformerConfig): string {
   const showVisibility = shouldShowVisibility(methods, config)
@@ -200,9 +204,10 @@ function methodSection(methods: ComponentMethod[], checker: TypeChecker, config:
 
 /**
  * Returns a markdown table with events
- * @param events
- * @param config
- * @param checker
+ * @param events The events to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function eventSection(events: ComponentEvent[], checker: TypeChecker, config: TransformerConfig): string {
   const showVisibility = shouldShowVisibility(events, config)
@@ -221,8 +226,9 @@ function eventSection(events: ComponentEvent[], checker: TypeChecker, config: Tr
 
 /**
  * Returns a markdown table with slots
- * @param slots
- * @param config
+ * @param slots The slots to transform.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function slotSection(slots: ComponentSlot[], config: TransformerConfig): string {
   const rows: string[][] = [['Name', 'Permitted Tag Names', 'Description']]
@@ -238,9 +244,10 @@ function slotSection(slots: ComponentSlot[], config: TransformerConfig): string 
 
 /**
  * Returns a markdown table with attributes.
- * @param members
- * @param checker
- * @param config
+ * @param members The members to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function memberAttributeSection(
   members: ComponentMemberAttribute[],
@@ -267,9 +274,10 @@ function memberAttributeSection(
 
 /**
  * Returns a markdown table with properties
- * @param members
- * @param checker
- * @param config
+ * @param members The members to transform.
+ * @param checker The type checker to use.
+ * @param config The config to use.
+ * @returns The markdown table.
  */
 function memberPropertySection(
   members: ComponentMemberProperty[],
@@ -297,6 +305,12 @@ function memberPropertySection(
   return markdownHeader('Properties', 2, config) + '\n' + markdownTable(rows)
 }
 
+/**
+ * Returns if the visibility column should be shown.
+ * @param items The items to check.
+ * @param config The config to use.
+ * @returns True if the visibility column should be shown.
+ */
 function shouldShowVisibility<T extends { visibility?: VisibilityKind }>(
   items: T[],
   config: TransformerConfig

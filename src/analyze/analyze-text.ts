@@ -32,8 +32,9 @@ export interface AnalyzeTextResult {
 
 /**
  * Analyzes components in code
- * @param {IVirtualSourceFile[]|VirtualSourceFile} inputFiles
- * @param config
+ * @param inputFiles The files to analyze.
+ * @param config An options object to configure the analysis.
+ * @returns The results of the analysis.
  */
 export function analyzeText(
   inputFiles: VirtualSourceFile[] | VirtualSourceFile,

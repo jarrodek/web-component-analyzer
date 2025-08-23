@@ -5,7 +5,8 @@ import { Node, Program } from 'typescript'
 /**
  * Relax the type so that for example "string literal" become "string" and "function" become "any"
  * This is used for javascript files to provide type checking with Typescript type inferring
- * @param type
+ * @param type The type to relax.
+ * @returns The relaxed type.
  */
 export function relaxType(type: SimpleType): SimpleType {
   switch (type.kind) {

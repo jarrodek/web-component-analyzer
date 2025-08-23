@@ -19,11 +19,12 @@ const transformerFunctionMap: Record<TransformerKind, TransformerFunction> = {
 }
 
 /**
- * Transforms the analyzer results into a string representation based on the transformer kind
- * @param kind
- * @param results
- * @param program
- * @param config
+ * Transforms the analyzer results into a string representation based on the transformer kind.
+ * @param kind The kind of transformer to use.
+ * @param results The results of the analysis.
+ * @param program The typescript program.
+ * @param config An options object to configure the transformer.
+ * @returns The transformed results as a string.
  */
 export function transformAnalyzerResult(
   kind: TransformerKind,
